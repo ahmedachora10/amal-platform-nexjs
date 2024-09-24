@@ -1,24 +1,14 @@
 import OpenBox from "@/components/ui/open_box";
-import Image1 from "../images/about/1.png";
-import Image2 from "../images/about/2.png";
-import Mask from "../images/about/mask.png";
-import Image4 from "../images/about/4.png";
 import girlDoingHomework1 from "../images/about/girl-doing-homework1.png";
 import girlDoingHomework2 from "../images/about/girl-doing-homework2.png";
 import YellowTrue from "../images/about/yellow-true.png";
 import Image from "next/image";
+import UserPositionSection from "@/components/sections/user_position_section";
 
 export default function AboutPage() {
     return (
         <div className="flex flex-col gap-10 overflow-hidden">
-            <section className="flex flex-col gap-3 justify-center items-center bg-[#F2F7FD] w-screen min-h-[15vh] relative">
-                <Image src={Image2} className="absolute max-w-[2rem] top-[25%] left-[10%]" draggable={false} />
-                <Image src={Mask} className="absolute max-w-[2rem] top-[25%] left-[10%] z-50 opacity-40 -translate-x-1 -translate-y-1" draggable={false} />
-                <Image src={Image2} className="absolute max-w-[2rem] bottom-[25%] right-[7%]" draggable={false} />
-                <Image src={Image4} className="absolute max-w-[5rem] top-0 right-0 z-50 opacity-40 -translate-x-[0%] translate-y-1" draggable={false} />
-                <h2 className="text-2xl">About Us</h2>
-                <p className="text-xs">Home | About Us</p>
-            </section>
+            <UserPositionSection pageName="About Us" position="Home | About Us" />
 
             <section className="flex flex-col gap-7 sm:flex-row justify-between items-center w-screen container mx-7 sm:mx-auto">
                 <div className="sm:w-[29.48vw]">
