@@ -20,22 +20,23 @@ export default function AboutPage() {
                 <p className="text-xs">Home | About Us</p>
             </section>
 
-            <section className="flex justify-between items-center w-screen container mx-auto">
-                <div className="w-[29.48vw]">
+            <section className="flex flex-col gap-7 sm:flex-row justify-between items-center w-screen container mx-7 sm:mx-auto">
+                <div className="sm:w-[29.48vw]">
                     <h1 className="text-2xl">Welcome to</h1>
                     <h1 className="text-2xl">Arabic <span className="text-[#03A9F5]">Essentials</span></h1>
+
                     <p>
                         Morbi vel augue et metus pellentesque lacinia eu non odio. Sed id purus urna. Maecenas ultrices ligula a nisi dictum tristique. Suspendisse potenti. Curabitur egestas ultrices sem, eu vestibulum leo sagittis et.
                         Morbi vel augue et metus pellentesque lacinia eu non odio. Sed id purus urna. Maecenas ultrices ligula a nisi dictum tristique. Suspendisse potenti. Curabitur egestas ultrices sem, eu vestibulum leo sagittis et.
                     </p>
                 </div>
 
-                <Image src={girlDoingHomework1} className="w-[29.48%]" />
+                <Image src={girlDoingHomework1} className="sm:w-[29.48%]" />
             </section>
 
-            <section className="flex flex-row-reverse justify-between items-center w-screen container mx-auto">
+            <section className="flex flex-col gap-7 sm:flex-row justify-between items-center w-screen container mx-7 sm:mx-auto">
                 <div className="flex flex-col gap-7">
-                    <div className="w-[29.48vw]">
+                    <div className="sm:w-[29.48vw]">
                         <h1 className="text-2xl">Our Mission</h1>
 
                         <p>
@@ -61,11 +62,11 @@ export default function AboutPage() {
                         </p>
                     </div>
                 </div>
-                <Image src={girlDoingHomework2} className="w-[29.48%]" />
+                <Image src={girlDoingHomework2} className="sm:w-[29.48%]" />
             </section>
 
-            <section className="flex justify-between items-center w-screen container mx-auto">
-                <div className="w-[20.89%]">
+            <section className="flex flex-col sm:flex-row gap-7 justify-between items-center w-screen container mx-7 sm:mx-auto">
+                <div className="sm:w-[20.89%]">
                     <h1 className="text-2xl">FAQs</h1>
 
                     <p className="text-sm">
@@ -74,7 +75,7 @@ export default function AboutPage() {
 
                 </div>
 
-                <div className="w-[45.21%] flex flex-col gap-3">
+                <div className="sm:w-[45.21%] flex flex-col gap-3 w-full">
                     <OpenBox title="01.  What does you do?" content="hello world 1" />
                     <OpenBox title="02.  What does you do?" />
                     <OpenBox title="03.  Why we are the best?" />
