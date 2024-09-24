@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
  */
 export default function CourseFeatures(features) {
     return (
-        <div className="py-4 border border-[#CBD6E2] min-w-[18.91vw] max-w-[18.91vw] flex flex-col gap-4">
+        <div className="py-4 border border-[#CBD6E2] md:w-[18.91vw] md:min-w-[18.91vw] md:max-w-[18.91vw] w-full flex flex-col gap-4">
 
             <div className="mx-4 flex flex-col">
                 <h2 className="font-bold text-xl ">Course Features</h2>
