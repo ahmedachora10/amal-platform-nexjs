@@ -1,4 +1,5 @@
 import CourseFeatures from "@/components/cards/CourseFeatures";
+import ReviewsCounts from "../../../components/cards/RatingCounts";
 import TextSection from "@/components/sections/text_section";
 import UserPositionSection from "@/components/sections/user_position_section";
 
@@ -52,6 +53,18 @@ export default function CourseDetailsPage() {
             <TextSection title="Overview" content={data.overview} isContainer></TextSection>
             <TextSection title="Overview" content={data.overview} isContainer></TextSection>
             <TextSection title="Overview" content={data.overview} isContainer></TextSection>
+            <div className="container mx-auto">
+
+                <ReviewsCounts counts={{
+                    1: 0,
+                    2: 0,
+                    3: 0,
+                    4: 0,
+                    5: 3,
+                }}
+                    averageRating={"5.0"}
+                />
+            </div>
         </div>
     )
 }
