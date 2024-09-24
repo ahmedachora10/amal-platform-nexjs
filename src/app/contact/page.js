@@ -3,7 +3,6 @@ import ContactIcons from "@/components/ui/contact_icons";
 import { Button } from "@/components/ui/button";
 import MaskGroup15 from "../images/contact/Mask Group 15.png";
 import Image from "next/image";
-import Footer from "@/components/sections/Footer";
 import ContactPeaces from "@/components/cards/Contact_peaces";
 
 export default function ContactPage() {
@@ -35,8 +34,6 @@ export default function ContactPage() {
             </section>
 
             <Image src={MaskGroup15} draggable={false} />
-
-            <Footer />
         </div>
     )
 }

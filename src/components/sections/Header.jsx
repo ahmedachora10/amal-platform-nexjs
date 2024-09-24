@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Button } from "../ui/button";
+import MainLinks from "../ui/main-links";
 
 export default function Header() {
     return (
@@ -10,13 +11,7 @@ export default function Header() {
                 <div className="flex items-center justify-between">
                     <div className="logo">Logo</div>
                     <div className="menu">
-                        <ul className="flex items-center justify-center">
-                            <li className="mx-3"><Link href="/">Home</Link></li>
-                            <li className="mx-3"><Link href="/">Courses</Link></li>
-                            <li className="mx-3"><Link href="/">About Us</Link></li>
-                            <li className="mx-3"><Link href="/">Contact Us</Link></li>
-                            <li className="mx-3"><Link href="/student/profile">Profile</Link></li>
-                        </ul>
+                        <MainLinks />
                     </div>
                     <div className="auth">
                         <div className="flex items-center justify-start">

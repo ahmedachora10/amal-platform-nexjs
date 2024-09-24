@@ -1,4 +1,4 @@
-import Group5 from "@/app/images/sections/Group 5.png";
+import Group5 from "@/app/images/components/Group 5.png";
 import ContactIcons from "../ui/contact_icons";
 import Image from "next/image";
 
