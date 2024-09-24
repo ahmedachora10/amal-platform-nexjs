@@ -1,19 +1,19 @@
 import UserPositionSection from "@/components/sections/user_position_section";
 import ContactPeace from "@/components/ui/contact_peace";
-import Image1 from "../../app/images/about/1.png";
 import ContactIcons from "@/components/ui/contact_icons";
 import { Button } from "@/components/ui/button";
 import MaskGroup15 from "../images/contact/Mask Group 15.png";
 import Image from "next/image";
+import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function ContactPage() {
     return (
         <div className="flex flex-col gap-10 overflow-hidden">
             <UserPositionSection pageName="Contact Us" position="Home | Contact Us" />
             <section className="container sm:mx-auto mx-7 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3">
-                <ContactPeace title="Our Phone" content="000 2324 39493" image={Image1} />
-                <ContactPeace title="Our Email" content="name@website.com" image={Image1} />
-                <ContactPeace title="Our Address" content="2 St, Loskia sripur, amukara." image={Image1} />
+                <ContactPeace title="Our Phone" content="000 2324 39493" imageNode={<Phone />} />
+                <ContactPeace title="Our Email" content="name@website.com" imageNode={<Mail />} />
+                <ContactPeace title="Our Address" content="2 St, Loskia sripur, amukara." imageNode={<MapPin />} />
             </section>
 
             <section className="flex flex-col sm:flex-row justify-between items-center gap-10 container sm:mx-auto mx-7">
@@ -36,7 +36,7 @@ export default function ContactPage() {
                 </div>
             </section>
 
-            <Image src={MaskGroup15} />
+            <Image src={MaskGroup15} draggable={false} />
         </div>
     )
 }
