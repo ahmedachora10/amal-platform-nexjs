@@ -13,8 +13,6 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import profile from "@/actions/profile";
 
 export default function Profile() {
     return (
