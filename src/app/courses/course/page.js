@@ -1,4 +1,5 @@
 import CourseFeatures from "@/components/cards/CourseFeatures";
+import TextSection from "@/components/sections/text_section";
 import UserPositionSection from "@/components/sections/user_position_section";
 
 export default function CourseDetailsPage() {
@@ -42,11 +43,15 @@ export default function CourseDetailsPage() {
     }
 
     return (
-        <div className="overflow-hidden">
+        <div className="overflow-hidden flex flex-col gap-7">
             <UserPositionSection pageName="Course Details" position="Home | Course Details" />
-            <div className="md:container md:mx-auto mx-4 mt-7">
+            {/* <div className="md:container md:mx-auto mx-4 mt-7">
                 <CourseFeatures enrolled={1200} duration={2} lectures={8} categories={["Technology"]} tags={["Android", "Javascript"]} instructorName="Hubert Franck" price={54} />
-            </div>
+            </div> */}
+
+            <TextSection title="Overview" content={data.overview} isContainer></TextSection>
+            <TextSection title="Overview" content={data.overview} isContainer></TextSection>
+            <TextSection title="Overview" content={data.overview} isContainer></TextSection>
         </div>
     )
 }
