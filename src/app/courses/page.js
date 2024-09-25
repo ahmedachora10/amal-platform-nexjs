@@ -42,7 +42,7 @@ export default function CoursesPage() {
                             <Button className="md:hidden bg-[#03A9F5] hover:bg-[#03a8f5d7]" onClick={() => setFilterOpen(true)}>
                                 <Filter />
                             </Button>
-                            <div className="hidden md:block">
+                            <div className="hidden md:flex gap-3 items-center">
                                 <BackForwardButtons />
                             </div>
                         </div>
