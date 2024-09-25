@@ -196,9 +196,27 @@ export default function Home() {
               <h1 className="text-3xl">What our clients say</h1>
             </div>
 
-            <div className="flex grow gap-4 justify-evenly flex-col lg:flex-row z-10">
+            <div className="hidden md:flex grow gap-4 justify-evenly flex-col lg:flex-row z-10">
               <ClientReview imageComponent={<Image src={Bg1} />} name="Eugene Freeman" subtitle="Tincidunt" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
               <ClientReview imageComponent={<Image src={Bg1} />} name="Kelly Coleman" subtitle="Nulla nec" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
+            </div>
+
+            <div className="flex md:block">
+              <Carousel className="flex">
+                <CarouselContent>
+
+                  <CarouselItem>
+                    <ClientReview imageComponent={<Image src={Bg1} />} name="Eugene Freeman" subtitle="Tincidunt" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
+                  </CarouselItem>
+
+                  <CarouselItem>
+                    <ClientReview imageComponent={<Image src={Bg1} />} name="Kelly Coleman" subtitle="Nulla nec" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
+                  </CarouselItem>
+                </CarouselContent>
+
+                <CarouselPrevious />
+                <CarouselNext />
+              </Carousel>
             </div>
           </div>
 
