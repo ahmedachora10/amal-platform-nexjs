@@ -201,7 +201,7 @@ export default function Home() {
               <ClientReview imageComponent={<Image src={Bg1} />} name="Kelly Coleman" subtitle="Nulla nec" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
             </div>
 
-            <div className="flex md:block">
+            <div className="block md:hidden">
               <Carousel className="flex">
                 <CarouselContent>
 
