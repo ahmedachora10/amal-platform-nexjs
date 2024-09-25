@@ -1,9 +1,9 @@
 import OpenBox from "@/components/ui/open_box";
 import girlDoingHomework1 from "../images/about/girl-doing-homework1.png";
 import girlDoingHomework2 from "../images/about/girl-doing-homework2.png";
-import YellowTrue from "../images/about/yellow-true.png";
 import Image from "next/image";
 import UserPositionSection from "@/components/sections/user_position_section";
+import TextWithYelloTrue from "@/components/yellow_true_txt";
 
 export default function AboutPage() {
     return (
@@ -36,20 +36,9 @@ export default function AboutPage() {
                     </div>
 
                     <div className={"[&>p]:flex [&>p]:gap-3 flex flex-col gap-7"}>
-                        <p>
-                            <Image src={YellowTrue} />
-                            <span>Etiam ante nisl, maximus vitae sem non, dignissim</span>
-                        </p>
-
-                        <p>
-                            <Image src={YellowTrue} />
-                            <span>Donec blandit, sapien eu porttitor blandit</span>
-                        </p>
-
-                        <p>
-                            <Image src={YellowTrue} />
-                            <span>Sed at urna at massa viverra feugiat non </span>
-                        </p>
+                        <TextWithYelloTrue text="Etiam ante nisl, maximus vitae sem non, dignissim" />
+                        <TextWithYelloTrue text="Donec blandit, sapien eu porttitor blandit" />
+                        <TextWithYelloTrue text="Sed at urna at massa viverra feugiat non" />
                     </div>
                 </div>
                 <Image src={girlDoingHomework2} className="sm:w-[29.48%]" />

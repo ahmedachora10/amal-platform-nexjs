@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import MaskGroup15 from "../images/contact/Mask Group 15.png";
 import Image from "next/image";
 import ContactPeaces from "@/components/cards/Contact_peaces";
+import TitleWithLine from "@/components/title_with_line";
 
 export default function ContactPage() {
     return (
@@ -15,7 +16,7 @@ export default function ContactPage() {
 
             <section className="flex flex-col sm:flex-row justify-between items-center gap-10 container sm:mx-auto mx-7">
                 <div className="flex flex-col gap-7 font-sans sm:w-[19.27%]">
-                    <p className="flex items-center gap-5">GET IN TOUCH <hr className="w-8 border border-[#002147]" /></p>
+                    <TitleWithLine title="GET IN TOUCH" />
                     <h1 className="text-3xl font-bold">Write Us a Message</h1>
                     <p className="text-sm">The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog,</p>
                     <ContactIcons />
