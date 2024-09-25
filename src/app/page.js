@@ -8,6 +8,7 @@ import Course from "@/components/cards/Course";
 import BestSellingCourses from "@/components/sections/BestSellingCourses";
 import Bg1 from "./images/home/bg-1.png";
 import Bg2 from "./images/home/bg-2.png";
+import Bg3 from "./images/home/clients-reviews-section-bg.svg";
 import ScienceImg from "./images/home/Science.png";
 import ScholarImg from "./images/home/Scholar.png";
 import BookGroupImg from "./images/home/Group 13428.png";
@@ -22,6 +23,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Link from "next/link";
+import ClientReview from "@/components/cards/ClientReview";
 
 export default function Home() {
   return (
@@ -175,6 +177,32 @@ export default function Home() {
           <BestSellingCourses />
         </section>
 
+
+        <section className="bg-[#EBF3FF] px pt-7 pb-50 lg:pb-52 mb-[50%] lg:mb-0 relative">
+
+          <div className="flex justify-center items-center overflow-hidden absolute w-full h-full">
+            <Image draggable={false} src={Bg3} className="max-w-[100vw] w-[116.93%]" />
+          </div>
+
+          <div className="flex flex-col gap-9 w-full mt-10 p-7">
+
+            <div className="flex grow flex-col items-center gap-7">
+
+              <div className="flex gap-4">
+                <TitleWithLine />
+                <TitleWithLine title="Client Testimonials" />
+              </div>
+
+              <h1 className="text-3xl">What our clients say</h1>
+            </div>
+
+            <div className="flex grow gap-4 justify-evenly flex-col lg:flex-row z-10">
+              <ClientReview imageComponent={<Image src={Bg1} />} name="Eugene Freeman" subtitle="Tincidunt" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
+              <ClientReview imageComponent={<Image src={Bg1} />} name="Kelly Coleman" subtitle="Nulla nec" reviewText="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos" />
+            </div>
+          </div>
+
+        </section>
       </div>
     </div>
   );
