@@ -5,7 +5,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="flex flex-col lg:flex-row justify-evenly p-4">
+        <footer className="flex flex-col lg:flex-row justify-evenly p-4 mt-52">
             <div className="-translate-y-[25%] grow flex justify-center"><Contact /></div>
 
             <div className="flex flex-grow-[2] gap-28 lg:flex-row flex-col items-center lg:items-start">

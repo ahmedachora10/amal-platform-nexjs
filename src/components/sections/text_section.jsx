@@ -5,7 +5,7 @@ export default function TextSection({ title = "", content = "", id = "", isConta
     return (
         <div className={"flex flex-col gap-5" + (isContainer ? " sm:container sm:mx-auto mx-4" : "")} id={id}>
             <h1 className="text-lg font-bold">{title}</h1>
-            <p>{content}</p>
+            <p className="text-sm">{content}</p>
         </div>
     )
 }
