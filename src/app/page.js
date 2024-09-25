@@ -14,6 +14,13 @@ import BookGroupImg from "./images/home/Group 13428.png";
 import TextSection from "@/components/sections/text_section";
 import TitleWithLine from "@/components/title_with_line";
 import TextWithYelloTrue from "@/components/yellow_true_txt";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import Link from "next/link";
 
 export default function Home() {
@@ -99,20 +106,66 @@ export default function Home() {
 
         </section>
 
-        <div className="flex">
-          <div className="col-3 mx-3">
-            <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+        <section>
+          <TitleWithLine title="Features" />
+
+          <div className="lg:hidden">
+            <Carousel className="flex">
+              <CarouselContent>
+
+                <CarouselItem>
+                  <div className="col-3 mx-3">
+                    <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+                  </div>
+                </CarouselItem>
+
+                <CarouselItem>
+                  <div className="col-3 mx-3">
+                    <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+                  </div>
+                </CarouselItem>
+
+                <CarouselItem>
+                  <div className="col-3 mx-3">
+                    <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+                  </div>
+                </CarouselItem>
+
+                <CarouselItem>
+                  <div className="col-3 mx-3">
+                    <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
-          <div className="col-3 mx-3">
-            <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+
+          <div className="hidden lg:flex">
+
+            <div className="col-3 mx-3">
+              <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+            </div>
+
+            <div className="col-3 mx-3">
+              <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+            </div>
+
+            <div className="col-3 mx-3">
+              <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+            </div>
+
+            <div className="col-3 mx-3">
+              <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
+            </div>
+
           </div>
-          <div className="col-3 mx-3">
-            <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
-          </div>
-          <div className="col-3 mx-3">
-            <Feature icon={icon} title="Global Certificate" description=" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo" />
-          </div>
-        </div>
+
+
+
+        </section>
 
         <section className="container mx-auto bg-[#EBF3FF] p-7">
           <div className="flex justify-between">
