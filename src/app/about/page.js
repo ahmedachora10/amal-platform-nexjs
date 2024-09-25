@@ -24,7 +24,7 @@ export default function AboutPage() {
                 <Image src={girlDoingHomework1} className="sm:w-[29.48%]" />
             </section>
 
-            <section className="flex flex-col gap-7 sm:flex-row justify-between items-center w-screen container mx-7 sm:mx-auto">
+            <section className="flex flex-col gap-7 sm:flex-row-reverse justify-between items-center w-screen container mx-7 sm:mx-auto">
                 <div className="flex flex-col gap-7">
                     <div className="sm:w-[29.48vw]">
                         <h1 className="text-2xl">Our Mission</h1>
