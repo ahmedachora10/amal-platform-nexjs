@@ -5,7 +5,7 @@ import TextWithYelloTrue from "@/components/yellow_true_txt";
  */
 export default function AboutSection({ data, reverse = false }) {
     return (
-        <section className={`flex flex-col gap-7 sm:flex-row${reverse ? "-reverse" : ""} justify-between items-center w-screen container mx-7 sm:mx-auto`}>
+        <section className={`flex flex-col gap-7 ${reverse ? "sm:flex-row-reverse" : "sm:flex-row"} justify-between items-center w-screen container mx-7 sm:mx-auto`}>
             <div className="flex flex-col gap-7">
                 <div className="sm:w-[29.48vw]">
                     <h1 className="text-2xl">{data.title}</h1>
