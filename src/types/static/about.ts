@@ -1,3 +1,5 @@
+import { Faq } from "./global"
+
 export interface About {
     id: 1,
     image: string,
@@ -10,8 +12,8 @@ export interface About {
     updated_at: Date
 }
 
-export interface AboutFaq { id: number, question: string, answer: string }
+
 export interface AboutPageData {
-    faqs: AboutFaq[],
+    faqs: Faq[],
     about: About[]
 }

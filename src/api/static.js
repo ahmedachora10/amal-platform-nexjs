@@ -54,4 +54,267 @@ export class StaticPagesApi {
 
         return data;
     }
+
+
+    /**
+     * 
+     * @returns {import("@/types/static/home").HomePageData}
+     */
+    static async home() {
+        /**
+         * @type {import("@/types/static/home").HomePageData}
+         */
+        const data = {
+            "sliders": [
+                {
+                    "id": 1,
+                    "image": "http://localhost:8000/storage/images/sliders/66cdf9840b96c_2024-08-27-16-06-28.jpg",
+                    "icon": "https://th.bing.com/th/id/OIP.g1K70P37u_RLgGQe4Ii5RQHaHa?w=192&h=192&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                },
+                {
+                    "id": 3,
+                    "image": "http://localhost:8000/storage/images/sliders/66cdf9247d67b_2024-08-27-16-04-52.jpg",
+                    "icon": "http://localhost:8000/storage/images/sliders/66ecc5a7e028c_2024-09-20-00-45-27.jpg"
+                },
+                {
+                    "id": 5,
+                    "image": "http://localhost:8000/storage/images/sliders/66ecc496dd0f8_2024-09-20-00-40-54.jpg",
+                    "icon": "http://localhost:8000/storage/images/sliders/66ecc496e05a6_2024-09-20-00-40-54.jpeg"
+                }
+            ],
+            "faqs": [
+                {
+                    "id": 2,
+                    "question": "Consectetur earum n",
+                    "answer": "Quia consequatur dis"
+                },
+                {
+                    "id": 3,
+                    "question": "Eius sit a magna do",
+                    "answer": "Elit sunt lorem mag"
+                },
+                {
+                    "id": 4,
+                    "question": "Expedita rem ex vel",
+                    "answer": "Fugit placeat dolo"
+                }
+            ],
+            "categories": [
+                {
+                    "id": 1,
+                    "name": "Arabic",
+                    "description": null
+                },
+                {
+                    "id": 2,
+                    "name": "English",
+                    "description": "Velit labore hic fac"
+                }
+            ],
+            "levels": [
+                {
+                    "id": 1,
+                    "name": "Karleigh Hayes"
+                }
+            ],
+            "about": [
+                {
+                    "created_at": new Date(),
+                    "updated_at": new Date,
+                    "description": "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph,",
+                    "title": "Education in continuing a proud tradition.",
+                    "properties": [
+                        "Metus interdum metus",
+                        "Nec dapibus sit",
+                        "Ligula curabitur maecenas",
+                        "Vivamus quisque gravida",
+                        "Pellentesque sodales rhoncus",
+                    ],
+                    "image": "https://i.ibb.co/xXthxxz/Group-13428.png"
+                }
+            ],
+            "bestSellingListCourses": [
+                {
+                    "id": 3,
+                    "level": {
+                        "id": 1,
+                        "name": "Karleigh Hayes"
+                    },
+                    "category": {
+                        "id": 2,
+                        "name": "English",
+                        "description": "Velit labore hic fac"
+                    },
+                    "thumbnail": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "name": "Abdul Galloway",
+                    "description": "Enim pariatur Quos",
+                    "overview": "Quae ut fugiat dese",
+                    "properties": null,
+                    "duration": 85,
+                    "instructor": "Non aliquam consecte",
+                    "oldPrice": 938,
+                    "price": 982,
+                    "status": 1,
+                    "best_selling_list": true,
+                    "top_of_list": true,
+                    "subscriptions_count": 0,
+                    "lessons_count": null,
+                    "videos_count": null
+                },
+                {
+                    "id": 4,
+                    "level": {
+                        "id": 1,
+                        "name": "Karleigh Hayes"
+                    },
+                    "category": {
+                        "id": 2,
+                        "name": "English",
+                        "description": "Velit labore hic fac"
+                    },
+                    "thumbnail": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "name": "Gwendolyn Finley",
+                    "description": "Inventore quaerat qu",
+                    "overview": "Aut in Nam quasi eli",
+                    "properties": [
+                        "Ad iste veniam culp",
+                        "qfqfqf",
+                        "qsfqfqfq"
+                    ],
+                    "duration": 46,
+                    "instructor": "Vero dolore officiis",
+                    "oldPrice": 972,
+                    "price": 805,
+                    "status": 1,
+                    "best_selling_list": true,
+                    "top_of_list": true,
+                    "subscriptions_count": 0,
+                    "lessons_count": null,
+                    "videos_count": null
+                }
+            ],
+            "topOfListCourses": [
+                {
+                    "id": 3,
+                    "level": {
+                        "id": 1,
+                        "name": "Karleigh Hayes"
+                    },
+                    "category": {
+                        "id": 2,
+                        "name": "English",
+                        "description": "Velit labore hic fac"
+                    },
+                    "thumbnail": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "name": "Abdul Galloway",
+                    "description": "Enim pariatur Quos",
+                    "overview": "Quae ut fugiat dese",
+                    "properties": null,
+                    "duration": 85,
+                    "instructor": "Non aliquam consecte",
+                    "oldPrice": 938,
+                    "price": 982,
+                    "status": 1,
+                    "best_selling_list": true,
+                    "top_of_list": true,
+                    "subscriptions_count": 0,
+                    "lessons_count": null,
+                    "videos_count": null
+                },
+                {
+                    "id": 4,
+                    "level": {
+                        "id": 1,
+                        "name": "Karleigh Hayes"
+                    },
+                    "category": {
+                        "id": 2,
+                        "name": "English",
+                        "description": "Velit labore hic fac"
+                    },
+                    "thumbnail": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "name": "Gwendolyn Finley",
+                    "description": "Inventore quaerat qu",
+                    "overview": "Aut in Nam quasi eli",
+                    "properties": [
+                        "Ad iste veniam culp",
+                        "qfqfqf",
+                        "qsfqfqfq"
+                    ],
+                    "duration": 46,
+                    "instructor": "Vero dolore officiis",
+                    "oldPrice": 972,
+                    "price": 805,
+                    "status": 1,
+                    "best_selling_list": true,
+                    "top_of_list": true,
+                    "subscriptions_count": 0,
+                    "lessons_count": null,
+                    "videos_count": null
+                }
+            ],
+            "features": [
+                {
+                    "id": 3,
+                    "image": "https://i.ibb.co/2hgnrpq/test.jpg",
+                    "name": "Hollee Horton",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:22:03.000000Z",
+                    "updated_at": "2024-09-10T12:22:03.000000Z"
+                },
+                {
+                    "id": 4,
+                    "image": "https://i.ibb.co/2hgnrpq/test.jpg",
+                    "name": "Hollee Horton",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:22:03.000000Z",
+                    "updated_at": "2024-09-10T12:22:03.000000Z"
+                },
+                {
+                    "id": 5,
+                    "image": "https://i.ibb.co/2hgnrpq/test.jpg",
+                    "name": "Hollee Horton",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:22:03.000000Z",
+                    "updated_at": "2024-09-10T12:22:03.000000Z"
+                },
+                {
+                    "id": 6,
+                    "image": "https://i.ibb.co/2hgnrpq/test.jpg",
+                    "name": "Hollee Horton",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:22:03.000000Z",
+                    "updated_at": "2024-09-10T12:22:03.000000Z"
+                },
+            ],
+            "testimonials": [
+                {
+                    "id": 2,
+                    "image": "https://i.ibb.co/Vjvsw9C/Science.png",
+                    "name": "Declan Bradford sfsf",
+                    "profession": "Tincidunt",
+                    "comment": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:24:54.000000Z",
+                    "updated_at": "2024-09-10T12:27:43.000000Z"
+                },
+                {
+                    "id": 2,
+                    "image": "https://i.ibb.co/Vjvsw9C/Science.png",
+                    "name": "Declan Bradford sfsf",
+                    "profession": "Tincidunt",
+                    "comment": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos",
+                    "status": 1,
+                    "created_at": "2024-09-10T12:24:54.000000Z",
+                    "updated_at": "2024-09-10T12:27:43.000000Z"
+                },
+            ]
+        }
+
+        return data;
+    }
 }
