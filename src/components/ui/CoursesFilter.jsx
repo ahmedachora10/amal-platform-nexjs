@@ -82,7 +82,7 @@ export default function CoursesFilter({ onChange }) {
                 <h1 className="text-3xl">Level</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
                     {levels.map((level, i) => (
-                        <div onClick={() => setFilterData({ ...filterData, level })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level == filterData.level ? "border-sky-600" : "border-[#F0F4F9]")}>{level}</div>
+                        <div key={i} onClick={() => setFilterData({ ...filterData, level })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level == filterData.level ? "border-sky-600" : "border-[#F0F4F9]")}>{level}</div>
                     ))}
                 </div>
             </section>
