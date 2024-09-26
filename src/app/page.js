@@ -20,12 +20,13 @@ import AboutUs from "@/components/sections/home/AboutUs";
 import Features from "@/components/sections/home/features";
 import Reviews from "@/components/sections/home/reviews";
 import Courses from "@/components/sections/home/courses";
+import Sliders from "@/components/cards/sliders";
 
 export default async function Home() {
   const data = await StaticPagesApi.home();
   return (
     <div>
-      <div className='container mx-auto flex flex-col gap-14'>
+      <div className='container md:mx-auto px-2 flex flex-col gap-14'>
 
         <main>
           <section className="container mx-auto justify-between flex flex-col xl:flex-row relative">
@@ -40,7 +41,9 @@ export default async function Home() {
             </div>
 
             <div className="xl:w-[41.72%] z-10 xl:translate-y-[20%] flex justify-center">
-              <Image src={Bg2} draggable={false} />
+              {/* <Image src={Bg2} draggable={false} /> */}
+              <Sliders data={data.sliders} />
+
             </div>
           </section>
 

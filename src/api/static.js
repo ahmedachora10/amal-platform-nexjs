@@ -68,18 +68,23 @@ export class StaticPagesApi {
             "sliders": [
                 {
                     "id": 1,
-                    "image": "http://localhost:8000/storage/images/sliders/66cdf9840b96c_2024-08-27-16-06-28.jpg",
-                    "icon": "https://th.bing.com/th/id/OIP.g1K70P37u_RLgGQe4Ii5RQHaHa?w=192&h=192&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    "image": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "icon": "https://i.ibb.co/Vjvsw9C/Science.png"
                 },
                 {
                     "id": 3,
-                    "image": "http://localhost:8000/storage/images/sliders/66cdf9247d67b_2024-08-27-16-04-52.jpg",
-                    "icon": "http://localhost:8000/storage/images/sliders/66ecc5a7e028c_2024-09-20-00-45-27.jpg"
+                    "image": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "icon": "https://i.ibb.co/Vjvsw9C/Science.png"
                 },
                 {
                     "id": 5,
-                    "image": "http://localhost:8000/storage/images/sliders/66ecc496dd0f8_2024-09-20-00-40-54.jpg",
-                    "icon": "http://localhost:8000/storage/images/sliders/66ecc496e05a6_2024-09-20-00-40-54.jpeg"
+                    "image": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "icon": "https://i.ibb.co/Vjvsw9C/Science.png"
+                },
+                {
+                    "id": 5,
+                    "image": "https://i.ibb.co/xXthxxz/Group-13428.png",
+                    "icon": "https://i.ibb.co/Vjvsw9C/Science.png"
                 }
             ],
             "faqs": [
