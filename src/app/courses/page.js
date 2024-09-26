@@ -5,10 +5,33 @@ import icon from "@/app/test.jpeg";
 import { Button } from "@/components/ui/button";
 import CoursesFilter from "@/components/ui/CoursesFilter";
 import { Filter, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { getCourses } from "../_actions/getCourses";
 
 export default function CoursesPage() {
     const [filterOpen, setFilterOpen] = useState(false);
+    const params = useSearchParams();
+    /**
+     * @type {import("@/types/CourseFilter").CourseFilter}
+     */
+    const filterData = {
+        level: params.get("level"),
+        search: params.get("search"),
+        categories: [params.get("category1"), params.get("category2")]
+    };
+
+    const coursesState = useState([]);
+    /** @type {import("@/types/static/global").Course[]} */
+    const courses = coursesState[0];
+    const setCourses = coursesState[1];
+
+
+    useEffect(() => {
+        getCourses(filterData).then(response => {
+            setCourses(response);
+        })
+    }, [params]);
 
     return (
         <div className="flex flex-col mb-52">
@@ -59,9 +82,9 @@ export default function CoursesPage() {
                     </div>
 
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-                        {Array.from({ length: 20 }).map((_, index) => (
+                        {courses.map((course, index) => (
                             <div className="p-4 mx-auto" key={index}>
-                                <Course title="The comprehensive course - Learn " category="Arabic language" image={icon} subscriptions={3} link="/" price={28.25} rating={4.4} />
+                                <Course title={course.name} category={course.category.name} image={icon} subscriptions={3} link={`/courses/${course.id}`} price={course.price} rating={4.4} />
                             </div>
                         ))}
                     </div>

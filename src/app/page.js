@@ -1,20 +1,9 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import BestSellingCourses from "@/components/sections/BestSellingCourses";
 import Bg1 from "./images/home/bg-1.png";
-import Bg2 from "./images/home/bg-2.png";
 import ScienceImg from "./images/home/Science.png";
 import ScholarImg from "./images/home/Scholar.png";
 import TextSection from "@/components/sections/text_section";
-
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import ClientReview from "@/components/cards/ClientReview";
 import { StaticPagesApi } from "@/api/static";
 import AboutUs from "@/components/sections/home/AboutUs";
 import Features from "@/components/sections/home/features";
@@ -41,9 +30,7 @@ export default async function Home() {
             </div>
 
             <div className="xl:w-[41.72%] z-10 xl:translate-y-[20%] flex justify-center">
-              {/* <Image src={Bg2} draggable={false} /> */}
               <Sliders data={data.sliders} />
-
             </div>
           </section>
 

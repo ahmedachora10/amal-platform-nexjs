@@ -35,6 +35,7 @@ export interface Course {
     subscriptions_count: number,
     lessons_count: null | number,
     videos_count: null | number,
+    relatedCourses: Course[] | null;
 }
 
 export interface Feature {
