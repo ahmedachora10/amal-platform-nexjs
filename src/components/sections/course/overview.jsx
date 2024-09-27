@@ -2,11 +2,16 @@ import { ChevronUp, CirclePlay, Clock9Icon, File } from "lucide-react";
 import Link from "next/link";
 import TextSection from "../text_section";
 
+/**
+ * 
+ * @param {{data: import("@/types/static/global").Course}} param0 
+ * @returns 
+ */
 export default function CourseOverviewSection({ data }) {
     return (
         <section className="w-full">
             <div>
-                <TextSection title="Overview" id="overview" content={"The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab"} />
+                <TextSection title="Overview" id="overview" content={data.overview} />
             </div>
 
 
@@ -20,12 +25,12 @@ export default function CourseOverviewSection({ data }) {
                     <div className="flex items-center gap-4">
                         <div className="flex text-sm gap-2 items-center">
                             <CirclePlay className="text-xs" />
-                            <p>3 lectures</p>
+                            <p>{data.lessons_count || 0} lectures</p>
                         </div>
 
                         <div className="flex text-sm gap-2 items-center">
                             <Clock9Icon className="text-xs" />
-                            <p>12 min</p>
+                            <p>{data.duration} min</p>
                         </div>
                     </div>
                 </thead>

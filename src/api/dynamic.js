@@ -561,6 +561,7 @@ export default class DynamicPagesApi {
             },
         ];
 
+        if (filter.id) return [data[0]];
         return data;
     }
 }

@@ -24,7 +24,7 @@ export interface Course {
     name: string;
     description: string,
     overview: string,
-    properties: string,
+    properties: string[],
     duration: number,
     instructor: string,
     oldPrice: number,

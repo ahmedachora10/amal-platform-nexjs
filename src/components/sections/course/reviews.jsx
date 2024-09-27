@@ -4,6 +4,13 @@ import TextSection from "../text_section";
 import Image from "next/image";
 
 export default function ReviewsSection({ data }) {
+    const defaultCounts = {
+        1: 0,
+        2: 0,
+        3: 0,
+        4: 0,
+        5: 0,
+    };
     return (
         <section className="w-full">
 
@@ -12,7 +19,7 @@ export default function ReviewsSection({ data }) {
             </div>
 
             <div className="w-full">
-                <ReviewsCounts counts={data.rates} />
+                <ReviewsCounts counts={data.rates || defaultCounts} averageRating={data.averageRating || 0} />
             </div>
 
             <div>
@@ -20,7 +27,7 @@ export default function ReviewsSection({ data }) {
             </div>
 
             <div className="p-7 border-2 border-[#F0F4F9] w-full rounded-md">
-                {data.reviews.map(review => (
+                {data.reviews?.map(review => (
                     <ClientReview noMaxWidth name={review.name} reviewText={review.text} rate={review.rate} key={review.rate + review.text + review.name} imageComponent={<Image src={data.img} />} />
                 ))}
             </div>

@@ -19,8 +19,8 @@ export default function CourseFeatures(features) {
                 <p>Enrolled: {features.enrolled} students</p>
                 <p>Duration: {features.duration} hours</p>
                 <p>Lectures: {features.lectures}</p>
-                <p>Categories: {features.categories.join(", ")}</p>
-                <p>Tags: {features.tags.join(", ")}</p>
+                {/* <p>Categories: {features.categories.join(", ")}</p> */}
+                {/* <p>Tags: {features.tags.join(", ")}</p> */}
                 <p>instructor: {features.instructorName}</p>
 
                 <div className="px-4 py-8 bg-[#F2F7FD] flex flex-col justify-center items-center gap-7">
