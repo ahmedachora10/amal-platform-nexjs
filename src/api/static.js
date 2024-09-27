@@ -1,11 +1,11 @@
-import axios from "axios";
+import { axios } from "./axios";
 
 export class StaticPagesApi {
     /**
      * @returns {import("@/types/static/about").AboutPageData}
      */
     static async about() {
-        const data = (await axios.get("http://localhost:8000/api/about")).data
+        const data = (await axios.get("/api/about")).data
         return data;
     }
 
@@ -15,7 +15,7 @@ export class StaticPagesApi {
      * @returns {import("@/types/static/home").HomePageData}
      */
     static async home() {
-        const data = (await axios.get("http://localhost:8000/api/home")).data
+        const data = (await axios.get("/api/home")).data
         return data;
     }
 }

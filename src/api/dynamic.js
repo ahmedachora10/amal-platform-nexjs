@@ -1,4 +1,4 @@
-import axios from "axios";
+import { axios } from "./axios";
 
 export default class DynamicPagesApi {
     /**
@@ -8,10 +8,10 @@ export default class DynamicPagesApi {
     static async courses(filter) {
         let data = null;
         if (filter.id) {
-            data = [(await axios.get(`http://localhost:8000/api/courses/${filter.id}/details`)).data];
+            data = [(await axios.get(`/api/courses/${filter.id}/details`)).data];
         }
         else {
-            data = await axios.get("http://localhost:8000/api/courses?page=1");
+            data = await axios.get("/api/courses?page=1");
         }
         return data;
     }
