@@ -9,6 +9,7 @@ import ReviewsSection from "@/components/sections/course/reviews";
 import CourseOverviewSection from "@/components/sections/course/overview";
 import CourseDescriptionSection from "@/components/sections/course/description";
 import DynamicPagesApi from "@/api/dynamic";
+import Courses from "@/components/sections/home/courses";
 
 export default async function CourseDetailsPage({ params }) {
     // const virtualCourseRequiredData = {
@@ -94,7 +95,7 @@ export default async function CourseDetailsPage({ params }) {
 
                     <div className="w-full">
                         <h1 className="text-3xl">Related Courses</h1>
-                        <BestSellingCourses />
+                        <Courses data={virtualCourseRequiredData.relatedCourses || []} />
                     </div>
 
                 </div>
