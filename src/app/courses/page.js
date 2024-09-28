@@ -4,10 +4,11 @@ import UserPositionSection from "@/components/sections/user_position_section";
 import icon from "@/app/test.jpeg";
 import { Button } from "@/components/ui/button";
 import CoursesFilter from "@/components/ui/CoursesFilter";
-import { Filter, X } from "lucide-react";
+import { Filter } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getCourses } from "../_actions/getCourses";
+import Modal from "@/components/Modal";
 
 export default function CoursesPage() {
     const [filterOpen, setFilterOpen] = useState(false);
@@ -48,14 +49,9 @@ export default function CoursesPage() {
 
                 {
                     filterOpen ? (
-                        <div className="fixed top-0 left-0 w-screen h-screen bg-gray-100 bg-opacity-30 z-50">
-                            <div className="flex flex-col bg-white">
-                                <Button className="w-fit m-7 bg-red-600 hover:bg-red-700" onClick={() => setFilterOpen(false)}>
-                                    <X />
-                                </Button>
-                                <CoursesFilter />
-                            </div>
-                        </div>
+                        <Modal onClose={() => setFilterOpen(false)}>
+                            <CoursesFilter />
+                        </Modal>
                     ) : undefined
                 }
                 <div className="flex flex-col grow-[4]">
