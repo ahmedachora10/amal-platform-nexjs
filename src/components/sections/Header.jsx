@@ -26,7 +26,7 @@ export default function Header() {
                         </div>
                     </div>
                     {
-                        user.image ? (
+                        user?.image ? (
                             <LoggedInOnly noRedirect>
                                 <div className="hidden md:block">
                                     <img src={user.image} className="max-w-16 max-h-16 rounded-full" draggable={false} />
