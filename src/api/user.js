@@ -65,6 +65,32 @@ export class User {
         }
 
     }
+
+    /**
+     * 
+     * @param {string} oldPassword 
+     * @param {string} newPassword 
+     * @param {string} newPasswordConfirmation 
+     * @returns {Promise<{status: boolean,message?: string}>}
+     */
+    static async changePassword(oldPassword, newPassword, newPasswordConfirmation) {
+        const form = new FormData();
+        form.append("old_password", oldPassword);
+        form.append("new_password", newPassword);
+        form.append("new_password_confirmation", newPasswordConfirmation);
+        try {
+            return (await axios.post("/api/student/password")).data
+        }
+        catch (err) {
+            console.log("An Error Occured When Trying to change the password");
+            console.log(err);
+            return {
+                message: "there is unknown problem with this change password method, please try again",
+                status: false
+            }
+        }
+    }
+
     /**
      * 
      * @param {import("@/types/User").RequiredRegisterData} data 

@@ -20,4 +20,18 @@ export default class DynamicPagesApi {
         }
         return data;
     }
+
+    /**
+     * 
+     * @returns {Promise<import("@/types/static/global").Course[]>}
+     */
+    static async studentCourses() {
+        try {
+            const data = await axios.get("/api/student/courses");
+            return data.data;
+        }
+        catch (err) {
+            return [];
+        }
+    }
 }

@@ -25,21 +25,22 @@ export default function useAuth() {
     }
 
     return {
-        // user: {
-        //     id: 5,
-        //     name: "user name",
-        //     email: "user email",
-        //     phone: "user phone",
-        //     emailVerifiedAt: new Date(),
-        //     role: "Student",
-        //     isBlocked: false,
-        //     image: "https://example.com/photo.png",
-        // },
-        user,
+        user: {
+            id: 5,
+            name: "user name",
+            email: "user email",
+            phone: "user phone",
+            emailVerifiedAt: new Date(),
+            role: "Student",
+            isBlocked: false,
+            image: "https://example.com/photo.png",
+        },
+        // user,
         login: User.login,
         logout: User.logout,
         csrf: User.csrf,
         changeInfo,
+        changePassword: User.changePassword,
         isLoading,
     };
 
