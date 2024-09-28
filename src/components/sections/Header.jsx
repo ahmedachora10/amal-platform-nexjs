@@ -5,9 +5,12 @@ import AuthButtons from "../AuthButtons";
 import { useState } from "react";
 import { Menu } from "lucide-react";
 import Modal from "../Modal";
+import useAuth from "@/app/_hook/useAuth";
+import LoggedInOnly from "../LoggedInOnly";
 
 export default function Header() {
     const [isOpened, setIsOpened] = useState(false);
+    const { user } = useAuth();
 
     return (
         <header className="bg-white py-3">
@@ -22,6 +25,15 @@ export default function Header() {
                             <AuthButtons />
                         </div>
                     </div>
+                    {
+                        user.image ? (
+                            <LoggedInOnly noRedirect>
+                                <div className="hidden md:block">
+                                    <img src={user.image} className="max-w-16 max-h-16 rounded-full" draggable={false} />
+                                </div>
+                            </LoggedInOnly>
+                        ) : null
+                    }
                 </div>
             </div>
 
