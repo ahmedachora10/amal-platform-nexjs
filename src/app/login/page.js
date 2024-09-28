@@ -7,17 +7,23 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import useAuth from "../_hook/useAuth";
 import { useRouter } from "next/navigation";
+import { axios } from "@/api/axios";
 
 export default function Login() {
     const router = useRouter();
     const [err, setErr] = useState("");
     const { isLoading, user } = useAuth();
 
+    
+    // console.log(User.getUser());
+    
+
     useEffect(() => {
         if (!isLoading && user) {
             router.push('/');
         }
     }, [isLoading]);
+
     /**
      * 
      * @param {FormData} form 
@@ -26,10 +32,19 @@ export default function Login() {
         const username = form.get("username"), password = form.get("password");
         if (!username || !username.length) return setErr("username is required");
         if (!password || !password.length) return setErr("password is required");
+
+        await User.csrf();
+
         const res = await User.login(username, password);
+
+        console.log(res);
+        
+
         if (!res.status) {
             setErr(res.message || "there is unknown a problem with this login, please try again..");
         }
+
+        return res;
     }
 
     return (

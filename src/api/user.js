@@ -1,5 +1,6 @@
 import FormData from "form-data";
 import { axios } from "./axios";
+import { getCookie } from "@/utils/helpers";
 
 export class User {
     /**
@@ -20,7 +21,7 @@ export class User {
             // send the request to the server using axios
             return (await axios.post('/login', formData, {
                 headers: {
-                    'X-XSRF-TOKEN': await this.csrf(),
+                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
                     // 'Referer': 'http://localhost:3000'
                 }
             })).data;
