@@ -5,19 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
-import useAuth from "../_hook/useAuth";
+import { useState } from "react";
 
 export default function Register() {
     const [err, setErr] = useState("");
     const router = useRouter();
-    const { isLoading, user } = useAuth();
 
-    useEffect(() => {
-        if (!isLoading && user) {
-            router.push('/');
-        }
-    }, [isLoading]);
     /**
      * 
      * @param {FormData} form 
@@ -49,7 +42,7 @@ export default function Register() {
     }
 
     return (
-        !isLoading ? (
+        (
             <section className="flex justify-center items-center h-screen w-screen">
                 <div className="bg-white p-6 sm:p-[3rem] border w-[90%] sm:w-[26rem] rounded">
                     <h2 className="font-normal text-xl mb-2">Sign up to continue</h2>
@@ -92,6 +85,6 @@ export default function Register() {
                     </form>
                 </div>
             </section>
-        ) : null
+        )
     )
 };

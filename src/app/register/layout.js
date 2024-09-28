@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import localFont from "next/font/local";
 import "../globals.css";
+import LoggedOutOnly from "@/components/LoggedOutOnly";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -28,7 +29,9 @@ export default function RegisterLayout({ children }) {
         enableSystem
         disableTransitionOnChange
       >
-        {children}
+        <LoggedOutOnly>
+          {children}
+        </LoggedOutOnly>
       </ThemeProvider>
     </main>
   );

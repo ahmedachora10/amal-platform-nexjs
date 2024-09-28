@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
+import LoggedOutOnly from "@/components/LoggedOutOnly";
 
 
 export const metadata = {
@@ -15,8 +16,9 @@ export default function LoginLayout({ children }) {
       enableSystem
       disableTransitionOnChange
     >
-
+      <LoggedOutOnly>
       {children}
+      </LoggedOutOnly>
     </ThemeProvider>
   );
 }

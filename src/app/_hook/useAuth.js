@@ -1,27 +1,16 @@
 import { User } from "@/api/user";
-import { useState, useEffect } from "react";
-
+import useSWR, { mutate } from "swr";
 
 export default function useAuth() {
-    const [isLoading, setIsLoading] = useState(true);
     /**
         * @type {[import("@/types/User").User|null, (user:import("@/types/User").User) => void]}
      */
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        if (!user) {
-            User.getUser().then(data => {
-                setUser(data);
-                setIsLoading(false);
-            });
-        }
-    }, [user]);
+    const { isLoading, data } = useSWR("/api/user", User.getUser);
 
     const changeInfo = (name, email, phone) => {
         return User.changeInfo(name, email, phone).then(() => {
-            setUser({ ...user, name, email, phone });
-        })
+            mutate("/api/user", { ...data, name, email, phone });
+        });
     }
 
     return {
@@ -35,10 +24,10 @@ export default function useAuth() {
         //     isBlocked: false,
         //     image: "https://example.com/photo.png",
         // },
-        user,
+        user: data,
         login: async (username, password) => {
             const result = await User.login(username, password);
-            setUser(result.user);
+            mutate("/api/user", result.user);
         },
         logout: User.logout,
         csrf: User.csrf,

@@ -4,25 +4,11 @@ import FormError from "@/components/FormError";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import useAuth from "../_hook/useAuth";
-import { useRouter } from "next/navigation";
-import { axios } from "@/api/axios";
+import { useState } from "react";
 
 export default function Login() {
-    const router = useRouter();
     const [err, setErr] = useState("");
-    const { isLoading, user } = useAuth();
 
-    
-    // console.log(User.getUser());
-    
-
-    useEffect(() => {
-        if (!isLoading && user) {
-            router.push('/');
-        }
-    }, [isLoading]);
 
     /**
      * 
@@ -38,7 +24,7 @@ export default function Login() {
         const res = await User.login(username, password);
 
         console.log(res);
-        
+
 
         if (!res.status) {
             setErr(res.message || "there is unknown a problem with this login, please try again..");
