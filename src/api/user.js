@@ -14,7 +14,7 @@ export class User {
             // create a www-x-form-urlencoded form to send the request using axios
 
             const formData = new FormData();
-            formData.append('username', username);
+            formData.append('phone', username);
             formData.append('password', password);
 
             // send the request to the server using axios
