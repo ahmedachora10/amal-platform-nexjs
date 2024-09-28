@@ -38,8 +38,7 @@ export default function useAuth() {
         user,
         login: async (username, password) => {
             const result = await User.login(username, password);
-            console.log(result);
-            setUser(user === null ? undefined : null);
+            setUser(result.user);
         },
         logout: User.logout,
         csrf: User.csrf,
