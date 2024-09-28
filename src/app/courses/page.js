@@ -50,7 +50,9 @@ export default function CoursesPage() {
                 {
                     filterOpen ? (
                         <Modal onClose={() => setFilterOpen(false)}>
-                            <CoursesFilter />
+                            <div className="w-screen">
+                                <CoursesFilter />
+                            </div>
                         </Modal>
                     ) : undefined
                 }

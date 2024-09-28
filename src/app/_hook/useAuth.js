@@ -18,11 +18,28 @@ export default function useAuth() {
         }
     }, [user]);
 
+    const changeInfo = (name, email, phone) => {
+        return User.changeInfo(name, email, phone).then(() => {
+            setUser({ ...user, name, email, phone });
+        })
+    }
+
     return {
+        // user: {
+        //     id: 5,
+        //     name: "user name",
+        //     email: "user email",
+        //     phone: "user phone",
+        //     emailVerifiedAt: new Date(),
+        //     role: "Student",
+        //     isBlocked: false,
+        //     image: "https://example.com/photo.png",
+        // },
         user,
         login: User.login,
         logout: User.logout,
         csrf: User.csrf,
+        changeInfo,
         isLoading,
     };
 

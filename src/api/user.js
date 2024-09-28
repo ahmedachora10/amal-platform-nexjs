@@ -50,6 +50,21 @@ export class User {
             return "";
         }
     }
+
+    static async changeInfo(name, email, phone) {
+        if (!name || !email || !phone) return;
+        try {
+            const formData = new FormData();
+            formData.append("name", name);
+            formData.append("email", email);
+            formData.append("phone", phone);
+            return (await axios.post("/api/student/personal-information", formData)).data
+        }
+        catch (err) {
+            return null;
+        }
+
+    }
     /**
      * 
      * @param {import("@/types/User").RequiredRegisterData} data 

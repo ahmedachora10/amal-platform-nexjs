@@ -1,6 +1,4 @@
-'use client'
-
-import Link from "next/link";
+'use client';
 import { Button } from "../ui/button";
 import MainLinks from "../ui/main-links";
 import AuthButtons from "../AuthButtons";
