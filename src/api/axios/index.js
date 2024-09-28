@@ -1,6 +1,5 @@
 import AxiosBase from "axios";
 const instance = AxiosBase.create({
-    baseURL: "http://localhost:8000",
+    baseURL: process.env.baseURL,
 });
-
 export const axios = instance;
