@@ -27,9 +27,14 @@ export default function useAuth() {
         user: data,
         login: async (username, password) => {
             const result = await User.login(username, password);
-            mutate("/api/user", result.user);
+            if (result.status) {
+                mutate("/api/user", result.user);
+            }
         },
-        logout: User.logout,
+        logout: async () => {
+            await User.logout();
+            mutate("/api/user", null);
+        },
         csrf: User.csrf,
         changeInfo,
         changePassword: User.changePassword,
