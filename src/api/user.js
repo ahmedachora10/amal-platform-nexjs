@@ -1,5 +1,5 @@
-import { axios } from "./axios";
 import FormData from "form-data";
+import { axios } from "./axios";
 
 export class User {
     /**
@@ -18,7 +18,12 @@ export class User {
             formData.append('password', password);
 
             // send the request to the server using axios
-            return (await axios.post('/login', formData)).data;
+            return (await axios.post('/login', formData, {
+                headers: {
+                    'X-XSRF-TOKEN': await this.csrf(),
+                    // 'Referer': 'http://localhost:3000'
+                }
+            })).data;
         }
         catch (err) {
             console.log("An unknown error occured when trying to login");
@@ -34,7 +39,7 @@ export class User {
 
     static async logout() {
         try {
-            return await axios.post("/api/logout");
+            return await axios.post("/logout");
         }
         catch (err) {
             return null;
@@ -43,7 +48,7 @@ export class User {
 
     static async csrf() {
         try {
-            const csrfCode = await axios.get("/api/sanctum/csrf-cookie");
+            const csrfCode = await axios.get("/sanctum/csrf-cookie");
             return csrfCode.data
         }
         catch (err) {

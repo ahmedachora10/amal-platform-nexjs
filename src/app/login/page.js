@@ -20,23 +20,17 @@ export default function Login() {
     }, [isLoading]);
     /**
      * 
-     * @param {Event} e 
+     * @param {FormData} form 
      */
-    const onSubmit = async (e) => {
-        e.preventDefault();
-
-        const form = new FormData(e.target);
+    const onSubmit = async (form) => {
         const username = form.get("username"), password = form.get("password");
-
-        console.log(username, password);
         if (!username || !username.length) return setErr("username is required");
         if (!password || !password.length) return setErr("password is required");
-
         const res = await User.login(username, password);
         if (!res.status) {
-            setErr(res.message || "There is an unknown problem with this login, please try again..");
+            setErr(res.message || "there is unknown a problem with this login, please try again..");
         }
-    };
+    }
 
     return (
         <section className="flex justify-center items-center h-screen w-screen">
@@ -44,7 +38,7 @@ export default function Login() {
                 <h2 className="font-normal text-xl mb-2">Login | Welcome Back</h2>
                 <p className="text-gray-400 text-sm"> You Do not have an account? <Link href="/register">Register</Link></p>
 
-                <form className="mt-[2.5rem]" onSubmit={onSubmit}>
+                <form className="mt-[2.5rem]" action={onSubmit}>
                     <div className="my-3">
                         <Input name="username" id="phone-number" type="text" placeholder='Phone No.' className='border-2 py-5' onChange={err ? () => setErr("") : undefined} />
                     </div>
