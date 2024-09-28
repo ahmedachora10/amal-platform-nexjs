@@ -1,4 +1,5 @@
 'use client';
+import { StaticPagesApi } from "@/api/static";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -14,12 +15,20 @@ export default function CoursesFilter({ onChange }) {
     const pathname = usePathname();
     const params = useSearchParams();
     const { replace } = useRouter();
+    /**
+     * @type {[import("@/types/static/global").Category[], (value: import("@/types/static/global").Category[]) => void]}
+     */
+    const [categories, setCategories] = useState([]);
 
-    const levels = ["Beginner", "Intermediate", "Advanced"];
+    /**
+     * @type {[import("@/types/static/global").Level[], (value: import("@/types/static/global").Level[]) => void]}
+     */
+    const [levels, setLevels] = useState([]);
     /** * @type {import("@/types/CourseFilter").CourseFilter} */
+
     const defaultFilter = {
-        categories: [params.get("category1") || "arabic", params.get("category2") || "sharia"],
-        level: params.get("level") || levels[0],
+        categoryId: params.get("categoryId"),
+        levelId: params.get("level") || levels[0],
         search: params.get("search") || ""
     }
 
@@ -33,22 +42,30 @@ export default function CoursesFilter({ onChange }) {
     /** * @type {(value: import("@/types/CourseFilter").CourseFilter) => void} */
     const setFilterData = filterState[1];
 
-    const changeCategory = (index, value) => {
+    const changeCategory = (value) => {
         setFilterData({
             ...filterData,
-            categories: index == 0 ? [value, filterData.categories[1]] : [filterData.categories[0], value],
+            categoryId: value,
         });
     }
 
     // here we update the url path after every change to make the filter data shared with all page components
     useEffect(() => {
         const newParams = new URLSearchParams(params);
-        newParams.set("category1", filterData.categories[0]);
-        newParams.set("category2", filterData.categories[1]);
-        newParams.set("search", filterData.search);
-        newParams.set("level", filterData.level);
+        if (filterData.categoryId) newParams.set("categoryId", filterData.categoryId);
+        if (filterData.search) newParams.set("search", filterData.search);
+        if (filterData.levelId) newParams.set("levelId", filterData.levelId);
         replace(`${pathname}?${newParams}`)
     }, [filterData]);
+
+    useEffect(() => {
+        StaticPagesApi.getCategories().then(setCategories);
+    }, []);
+
+    useEffect(() => {
+        StaticPagesApi.getLevels().then(setLevels);
+    }, []);
+
 
 
     return (
@@ -64,25 +81,27 @@ export default function CoursesFilter({ onChange }) {
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
                 <h1 className="text-3xl">Category</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
-                    <select value={filterData.categories[0]} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(0, e.target.value)}>
-                        <option value="tech">technology</option>
-                        <option value="arabic">Arabic Language Basics</option>
-                        <option value="english">english</option>
+                    <select value={filterData.categoryId || null} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(e.target.value)}>
+                        {
+                            categories.map(category => (
+                                <option key={category.id} value={category.id} title={category.description}>{category.name}</option>
+                            ))
+                        }
                     </select>
 
-                    <select value={filterData.categories[1]} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(1, e.target.value)}>
+                    {/* <select value={filterData.categories[1]} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(1, e.target.value)}>
                         <option value="sharia">Sharia sciences</option>
                         <option value="arabic">arabic</option>
                         <option value="english">english</option>
-                    </select>
+                    </select> */}
                 </div>
             </section>
 
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
                 <h1 className="text-3xl">Level</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
-                    {levels.map((level, i) => (
-                        <div key={i} onClick={() => setFilterData({ ...filterData, level })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level == filterData.level ? "border-sky-600" : "border-[#F0F4F9]")}>{level}</div>
+                    {levels.map((level) => (
+                        <div key={level.id} onClick={() => setFilterData({ ...filterData, levelId: level.id })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level.id == filterData.levelId ? "border-sky-600" : "border-[#F0F4F9]")}>{level.name}</div>
                     ))}
                 </div>
             </section>

@@ -4,7 +4,6 @@ import test2 from "@/app/test-2.png"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import BestSellingCourses from "@/components/sections/BestSellingCourses";
 import ReviewsSection from "@/components/sections/course/reviews";
 import CourseOverviewSection from "@/components/sections/course/overview";
 import CourseDescriptionSection from "@/components/sections/course/description";

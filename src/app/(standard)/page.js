@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import Bg1 from "./images/home/bg-1.png";
-import ScienceImg from "./images/home/Science.png";
-import ScholarImg from "./images/home/Scholar.png";
+import Bg1 from "../images/home/bg-1.png";
+import ScienceImg from "../images/home/Science.png";
+import ScholarImg from "../images/home/Scholar.png";
 import TextSection from "@/components/sections/text_section";
 import { StaticPagesApi } from "@/api/static";
 import AboutUs from "@/components/sections/home/AboutUs";

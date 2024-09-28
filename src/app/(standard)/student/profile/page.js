@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
-import icon from "../../test.jpeg";
+import icon from "@/app/test.jpeg";
 import {
     Dialog,
     DialogContent,
@@ -14,19 +14,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import useAuth from "@/app/_hook/useAuth";
-import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 
 export default function Profile() {
-    const { user, isLoading, changeInfo } = useAuth();
     const [isUpdatingData, setIsUpdatingData] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const router = useRouter();
     const updateFormRef = useRef();
-    if (!user && !isLoading) {
-        router.replace('/login');
-        return <></>
-    };
+    const { user } = useAuth();
 
     /**
      * 
@@ -42,7 +36,7 @@ export default function Profile() {
     }
 
 
-    return isLoading ? <></> : (
+    return user && (
         <div>
             <h3 className="text-blue-950 font-bold mb-5">My Profile</h3>
             <div className="grid grid-cols-6 border-2 rounded items-center">

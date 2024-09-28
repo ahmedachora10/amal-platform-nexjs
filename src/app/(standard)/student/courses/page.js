@@ -15,6 +15,7 @@ export default function StudentCoursesPage() {
             setData(courses);
         });
     }, []);
+
     return (
         <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
             {data.map(course => {

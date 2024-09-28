@@ -99,7 +99,7 @@ export class User {
     static async register(data) {
         try {
 
-            const formData = new FormData({ enctype: "application/x-www-form-urlencoded" });
+            const formData = new FormData();
             formData.append("email", data.email);
             formData.append("password", data.password);
             formData.append("password_confirmation", data.password_confirmation);

@@ -7,13 +7,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function PasswordResetPage() {
-    const { user, isLoading, changePassword } = useAuth();
+    const { changePassword } = useAuth();
     const [err, setErr] = useState("");
     const [isChanging, setIsChanging] = useState(false);
     const router = useRouter();
-    if (!user && !isLoading) {
-        router.replace("/");
-    }
 
     /**
      * 
