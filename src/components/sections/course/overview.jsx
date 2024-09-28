@@ -1,13 +1,15 @@
 import { ChevronUp, CirclePlay, Clock9Icon, File } from "lucide-react";
 import Link from "next/link";
 import TextSection from "../text_section";
+import CourseLesson from "./CourseLesson";
+import React from "react";
 
 /**
  * 
- * @param {{data: import("@/types/static/global").Course}} param0 
+ * @param {{data: import("@/types/static/global").Course, lessons: import("@/types/static/global").CourseLesson[]}} param0 
  * @returns 
  */
-export default function CourseOverviewSection({ data }) {
+export default function CourseOverviewSection({ data, lessons }) {
     return (
         <section className="w-full">
             <div>
@@ -37,56 +39,12 @@ export default function CourseOverviewSection({ data }) {
                 <hr />
 
                 <tbody className="flex flex-col">
-                    <div className="text-sm flex gap-3 items-center justify-between grow p-4">
-                        <div className="flex items-center gap-2">
-                            <File />
-                            <p>First Hour Lesson 1</p>
-                        </div>
-
-                        <div>
-                            <Link href="" className="text-[#084C94]">Preview</Link>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <div className="text-sm flex gap-3 items-center justify-between grow p-4">
-                        <div className="flex items-center gap-2">
-                            <File />
-                            <p>First Hour Lesson 2</p>
-                        </div>
-
-                        <div className="flex gap-3">
-                            <Clock9Icon />
-                            <p>7 min</p>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <div className="text-sm flex gap-3 items-center justify-between grow p-4">
-                        <div className="flex items-center gap-2">
-                            <File />
-                            <p>First Hour Lesson 3</p>
-                        </div>
-
-                        <div className="flex gap-3 items-center">
-                            <Clock9Icon />
-                            <p>5 min</p>
-                        </div>
-                    </div>
-                    <hr />
-
-                    <div className="text-sm flex gap-3 items-center justify-between grow p-4">
-                        <div className="flex items-center gap-2">
-                            <File />
-                            <p>First Hour Lesson 4</p>
-                        </div>
-
-                        <div className="flex gap-3 items-center">
-                            <Clock9Icon />
-                            <Link href="" className="text-[#084C94]">8 Quessions</Link>
-                        </div>
-                    </div>
-                    <hr />
+                    {lessons?.map((lesson, i) => (
+                        <React.Fragment key={i}>
+                            <CourseLesson data={lesson} />
+                            <hr />
+                        </React.Fragment>
+                    ))}
                 </tbody>
             </div>
         </section>

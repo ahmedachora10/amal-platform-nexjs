@@ -3,7 +3,7 @@ import { axios } from "./axios";
 export default class DynamicPagesApi {
     /**
      * @param {import("@/types/CourseFilter").CourseFilter} filter
-     * @returns {import("@/types/static/global").Course[]}
+     * @returns {Promise<{course: import("@/types/static/global").Course,relatedCourses:import("@/types/static/global").Course[]}>}
      */
     static async courses(filter) {
         let data = null;

@@ -53,10 +53,11 @@ export default async function CourseDetailsPage({ params }) {
     //         },
     //     ],
     // }
+    const data = (await DynamicPagesApi.courses({ id: params.id }));
     /**
      * @type {import("@/types/static/global").Course}
      */
-    const virtualCourseRequiredData = (await DynamicPagesApi.courses({ id: params.id }))[0];
+    const virtualCourseRequiredData = data.course;
 
     return (
         <div className="overflow-hidden flex flex-col gap-7">
@@ -90,12 +91,12 @@ export default async function CourseDetailsPage({ params }) {
 
 
                     <CourseDescriptionSection data={virtualCourseRequiredData} />
-                    <CourseOverviewSection data={virtualCourseRequiredData} />
+                    <CourseOverviewSection data={virtualCourseRequiredData} lessons={data.course.lessons} />
                     <ReviewsSection data={virtualCourseRequiredData} />
 
                     <div className="w-full">
                         <h1 className="text-3xl">Related Courses</h1>
-                        <Courses data={virtualCourseRequiredData.relatedCourses || []} />
+                        <Courses data={data.relatedCourses || []} />
                     </div>
 
                 </div>

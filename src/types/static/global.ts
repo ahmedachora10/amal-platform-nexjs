@@ -9,6 +9,13 @@ export interface Category {
     description: string
 }
 
+export interface CourseLesson {
+    id: number,
+    name: string,
+    quizzes: [],
+    videos: []
+}
+
 export interface Course {
     id: number,
     level: {
@@ -30,12 +37,13 @@ export interface Course {
     oldPrice: number,
     price: number,
     status: number,
-    best_selling_list: true,
-    top_of_list: true,
+    best_selling_list: boolean,
+    top_of_list: boolean,
     subscriptions_count: number,
     lessons_count: null | number,
     videos_count: null | number,
     relatedCourses: Course[] | null;
+    lessons: { id: number, name: string, quizzes: [], videos: [] }[] | null;
 }
 
 export interface Feature {
