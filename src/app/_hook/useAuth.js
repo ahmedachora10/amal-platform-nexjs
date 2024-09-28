@@ -36,7 +36,11 @@ export default function useAuth() {
         //     image: "https://example.com/photo.png",
         // },
         user,
-        login: User.login,
+        login: async (username, password) => {
+            const result = await User.login(username, password);
+            console.log(result);
+            setUser(user === null ? undefined : null);
+        },
         logout: User.logout,
         csrf: User.csrf,
         changeInfo,
