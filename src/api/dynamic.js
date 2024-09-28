@@ -16,9 +16,11 @@ export default class DynamicPagesApi {
             if (filter.search) searchParams.set("search", filter.search);
 
 
-            data = await axios.get(`/api/courses?${searchParams}`);
+
+            console.log(searchParams.toString());
+            // data = await axios.get(`/api/courses?${searchParams}`);
         }
-        return data;
+        return data || [];
     }
 
     /**

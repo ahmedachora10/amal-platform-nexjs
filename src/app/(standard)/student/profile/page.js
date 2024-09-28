@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
-import icon from "../../test.jpeg";
+import icon from "@/app/test.jpeg";
 import {
     Dialog,
     DialogContent,

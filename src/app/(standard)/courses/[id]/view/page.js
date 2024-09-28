@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import OpenBox from "@/components/ui/open_box";
 import { Search } from "lucide-react";
 import Image from "next/image";
-import test3 from "../../../test-3.png";
+import test3 from "@/app/test-3.png";
 import TextSection from "@/components/sections/text_section";
 import FileDownload from "@/components/file_download";
 

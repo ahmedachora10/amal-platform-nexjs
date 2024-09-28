@@ -1,4 +1,5 @@
 'use client';
+import { StaticPagesApi } from "@/api/static";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -47,11 +48,15 @@ export default function CoursesFilter({ onChange }) {
     // here we update the url path after every change to make the filter data shared with all page components
     useEffect(() => {
         const newParams = new URLSearchParams(params);
-        newParams.set("categoryId", filterData.categories[0]);
-        newParams.set("search", filterData.search);
-        newParams.set("level", filterData.level);
+        if (filterData.category) newParams.set("categoryId", filterData.category);
+        if (filterData.search) newParams.set("search", filterData.search);
+        if (filterData.level) newParams.set("level", filterData.level);
         replace(`${pathname}?${newParams}`)
     }, [filterData]);
+
+    useEffect(() => {
+        StaticPagesApi.getCategories().then(setCategories);
+    }, []);
 
 
     return (

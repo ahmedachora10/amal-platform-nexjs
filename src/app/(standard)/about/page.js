@@ -1,9 +1,4 @@
-import OpenBox from "@/components/ui/open_box";
-import girlDoingHomework1 from "../images/about/girl-doing-homework1.png";
-import girlDoingHomework2 from "../images/about/girl-doing-homework2.png";
-import Image from "next/image";
 import UserPositionSection from "@/components/sections/user_position_section";
-import TextWithYelloTrue from "@/components/yellow_true_txt";
 import { StaticPagesApi } from "@/api/static";
 import AboutSection from "@/components/sections/about/section";
 import AboutFaqs from "@/components/sections/about/faqs";

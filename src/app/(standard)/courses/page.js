@@ -7,7 +7,7 @@ import CoursesFilter from "@/components/ui/CoursesFilter";
 import { Filter } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { getCourses } from "../_actions/getCourses";
+import { getCourses } from "@/app/_actions/getCourses";
 import Modal from "@/components/Modal";
 
 export default function CoursesPage() {
@@ -19,7 +19,7 @@ export default function CoursesPage() {
     const filterData = {
         level: params.get("level"),
         search: params.get("search"),
-        categories: [params.get("category1"), params.get("category2")]
+        category: params.get("category"),
     };
 
     const coursesState = useState([]);

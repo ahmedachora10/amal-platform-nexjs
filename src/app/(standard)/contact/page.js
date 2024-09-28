@@ -1,7 +1,7 @@
 import UserPositionSection from "@/components/sections/user_position_section";
 import ContactIcons from "@/components/ui/contact_icons";
 import { Button } from "@/components/ui/button";
-import MaskGroup15 from "../images/contact/Mask Group 15.png";
+import MaskGroup15 from "@/app/images/contact/Mask Group 15.png";
 import Image from "next/image";
 import ContactPeaces from "@/components/cards/Contact_peaces";
 import TitleWithLine from "@/components/title_with_line";
