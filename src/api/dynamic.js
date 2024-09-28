@@ -7,7 +7,6 @@ export default class DynamicPagesApi {
      */
     static async courses(filter) {
         try {
-
             let data = null;
             if (filter.id) {
                 data = [(await axios.get(`/api/courses/${filter.id}/details`)).data];
@@ -21,8 +20,9 @@ export default class DynamicPagesApi {
 
 
                 console.log(searchParams.toString());
-                data = await axios.get(`/api/courses?${searchParams}`);
+                data = (await axios.get(`/api/courses?${searchParams}`)).data;
             }
+
             return data || [];
         }
         catch (err) {
@@ -40,7 +40,7 @@ export default class DynamicPagesApi {
     static async studentCourses() {
         try {
             const data = await axios.get("/api/student/courses");
-            return data.data;
+            return data.data?.data || [];
         }
         catch (err) {
             return [];

@@ -1,6 +1,8 @@
+'use client';
 import { Star } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Course({
     image = "",
@@ -9,8 +11,11 @@ export default function Course({
     price = 0,
     rating = 0,
     link = '/',
+    isSubscribed = false,
     subscriptions = 0
 }) {
+    const router = useRouter();
+
     return (
         <div className="bg-white p-4 rounded w-[18rem] border">
             <div className="relative">
@@ -32,15 +37,12 @@ export default function Course({
             </div>
             <h5 className="text-sm text-gray-800 font-bold my-3">{category} | {title}</h5>
             <div className="grid gap-1 grid-cols-2 mt-6">
-                <Button variant="outline" className="text-gray rounded-bl-xl text-xs" asChild>
-                    <Link href='/'>
-                        More Details
-                    </Link>
+                <Button variant="outline" className="text-gray rounded-bl-xl text-xs cursor-pointer" asChild onClick={() => router.push(link)}>
+                    <p>More Details</p>
                 </Button>
-                <Button variant="outline" className="bg-primary text-white rounded-br-xl text-xs" asChild>
-                    <Link href='/'>
-                        Buy Now
-                    </Link>
+
+                <Button variant="outline" className={"text-white rounded-br-xl text-xs " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias" : "bg-primary")} asChild>
+                    <p>{isSubscribed ? "Owned" : "Buy Now"}</p>
                 </Button>
             </div>
         </div>
