@@ -63,7 +63,7 @@ export interface Feature {
 
 export interface Testimonial {
     id: number,
-    image: "string",
+    image: string,
     name: string,
     profession: string,
     comment: string,
