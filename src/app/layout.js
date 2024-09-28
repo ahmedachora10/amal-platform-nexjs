@@ -14,7 +14,7 @@ const geistMono = localFont({
 export default function RootLayout({ children }) {
 
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true} data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false">
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen overflow-x-hidden`}
             >
