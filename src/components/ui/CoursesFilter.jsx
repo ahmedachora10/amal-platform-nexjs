@@ -20,11 +20,15 @@ export default function CoursesFilter({ onChange }) {
      */
     const [categories, setCategories] = useState([]);
 
-    const levels = ["Beginner", "Intermediate", "Advanced"];
+    /**
+     * @type {[import("@/types/static/global").Level[], (value: import("@/types/static/global").Level[]) => void]}
+     */
+    const [levels, setLevels] = useState([]);
     /** * @type {import("@/types/CourseFilter").CourseFilter} */
+
     const defaultFilter = {
         categoryId: params.get("categoryId"),
-        level: params.get("level") || levels[0],
+        levelId: params.get("level") || levels[0],
         search: params.get("search") || ""
     }
 
@@ -41,22 +45,27 @@ export default function CoursesFilter({ onChange }) {
     const changeCategory = (value) => {
         setFilterData({
             ...filterData,
-            category: value,
+            categoryId: value,
         });
     }
 
     // here we update the url path after every change to make the filter data shared with all page components
     useEffect(() => {
         const newParams = new URLSearchParams(params);
-        if (filterData.category) newParams.set("categoryId", filterData.category);
+        if (filterData.categoryId) newParams.set("categoryId", filterData.categoryId);
         if (filterData.search) newParams.set("search", filterData.search);
-        if (filterData.level) newParams.set("level", filterData.level);
+        if (filterData.levelId) newParams.set("levelId", filterData.levelId);
         replace(`${pathname}?${newParams}`)
     }, [filterData]);
 
     useEffect(() => {
         StaticPagesApi.getCategories().then(setCategories);
     }, []);
+
+    useEffect(() => {
+        StaticPagesApi.getLevels().then(setLevels);
+    }, []);
+
 
 
     return (
@@ -72,7 +81,7 @@ export default function CoursesFilter({ onChange }) {
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
                 <h1 className="text-3xl">Category</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
-                    <select value={filterData.category || null} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(e.target.value)}>
+                    <select value={filterData.categoryId || null} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(e.target.value)}>
                         {
                             categories.map(category => (
                                 <option key={category.id} value={category.id} title={category.description}>{category.name}</option>
@@ -91,8 +100,8 @@ export default function CoursesFilter({ onChange }) {
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
                 <h1 className="text-3xl">Level</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
-                    {levels.map((level, i) => (
-                        <div key={i} onClick={() => setFilterData({ ...filterData, level })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level == filterData.level ? "border-sky-600" : "border-[#F0F4F9]")}>{level}</div>
+                    {levels.map((level) => (
+                        <div key={level.id} onClick={() => setFilterData({ ...filterData, levelId: level.id })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level.id == filterData.levelId ? "border-sky-600" : "border-[#F0F4F9]")}>{level.name}</div>
                     ))}
                 </div>
             </section>

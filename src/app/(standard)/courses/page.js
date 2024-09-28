@@ -17,9 +17,9 @@ export default function CoursesPage() {
      * @type {import("@/types/CourseFilter").CourseFilter}
      */
     const filterData = {
-        level: params.get("level"),
+        levelId: params.get("levelId"),
         search: params.get("search"),
-        category: params.get("category"),
+        categoryId: params.get("categoryId"),
     };
 
     const coursesState = useState([]);

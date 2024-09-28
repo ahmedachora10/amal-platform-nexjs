@@ -1,16 +1,11 @@
 import { About } from "./about";
-import { Category, Course, Faq, Feature, Testimonial } from "./global";
+import { Category, Course, Faq, Feature, Level, Testimonial } from "./global";
 
 export type SliderData = {
     id: number,
     image: string,
     icon: string
 };
-
-export type Level = {
-    id: number,
-    name: string
-}
 
 export interface HomePageData {
     sliders: SliderData[];

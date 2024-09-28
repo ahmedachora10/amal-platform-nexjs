@@ -9,6 +9,11 @@ export interface Category {
     description: string
 }
 
+export interface Level {
+    id: number;
+    name: string;
+}
+
 export interface CourseLesson {
     id: number,
     name: string,
