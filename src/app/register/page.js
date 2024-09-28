@@ -49,7 +49,7 @@ export default function Register() {
     }
 
     return (
-        isLoading ? (
+        !isLoading ? (
             <section className="flex justify-center items-center h-screen w-screen">
                 <div className="bg-white p-6 sm:p-[3rem] border w-[90%] sm:w-[26rem] rounded">
                     <h2 className="font-normal text-xl mb-2">Sign up to continue</h2>

@@ -18,4 +18,27 @@ export class StaticPagesApi {
         const data = (await axios.get("/api/home")).data
         return data;
     }
+
+    /**
+     * @returns {Promise<import("@/types/static/global").Category[]>}
+     */
+    static async getCategories() {
+        return [
+            {
+                id: 1,
+                name: "category",
+                description: "category"
+            },
+            {
+                id: 2,
+                name: "category 2",
+                description: "category"
+            },
+            {
+                id: 3,
+                name: "category 3",
+                description: "category"
+            },
+        ]
+    }
 }

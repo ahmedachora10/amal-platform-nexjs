@@ -1,6 +1,6 @@
 export type CourseFilter = {
     id?: number,
-    categories: string[],
+    category: string,
     level: string,
     search: string;
 }
