@@ -76,7 +76,7 @@ export default async function CourseDetailsPage({ params }) {
                     <h1 className="text-4xl">Arabic language | The comprehensive course - Learn modern</h1>
 
                     <div className="flex flex-col gap-3">
-                        {virtualCourseRequiredData.thumbnail && <Image src={test2} alt="" className="w-full" width={1024} height={1024} />}
+                        {virtualCourseRequiredData.thumbnail && <Image src={virtualCourseRequiredData.thumbnail} alt="" className="w-full" width={1024} height={1024} />}
                         <div className="flex lg:hidden">
                             <CourseFeatures
                                 enrolled={virtualCourseRequiredData?.subscriptions_count}
