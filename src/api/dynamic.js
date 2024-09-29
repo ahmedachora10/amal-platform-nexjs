@@ -29,6 +29,11 @@ export default class DynamicPagesApi {
         }
     }
 
+    /**
+     * 
+     * @param {number} id 
+     * @returns {{course: import("@/types/static/global").Course, relatedCourses: import("@/types/static/global").Course[]}}
+     */
     static async course(id) {
         try {
             return (await axios.get(`/api/courses/${id}/details`)).data;

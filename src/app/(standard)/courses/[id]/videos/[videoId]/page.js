@@ -6,20 +6,42 @@ import Image from "next/image";
 import test3 from "@/app/test-3.png";
 import TextSection from "@/components/sections/text_section";
 import FileDownload from "@/components/file_download";
+import DynamicPagesApi from "@/api/dynamic";
+import { notFound } from "next/navigation";
 
-export default function CourseView() {
-    const virtualData = {}
+export default async function CourseVideo({ params: { id, videoId } }) {
+    /** @type {(import("@/types/static/global").Video)|null} */
+    let currentVideo = null;
 
-    return (
+    /** @param {import("@/types/static/global").Lesson} lesson  */
+    const finder = (lesson) => {
+        for (let video of lesson.videos) {
+            if (video.id == videoId) {
+                currentVideo = video;
+                return true;
+            };
+
+        }
+        return false;
+    }
+
+    const data = await DynamicPagesApi.course(id);
+    const course = data.course;
+    const lessons = course.lessons;
+    const lesson = lessons.find(finder);
+    console.log(lesson, currentVideo)
+
+    if (!currentVideo && !lesson) notFound();
+    return (Boolean(currentVideo) && Boolean(lesson)) ? (
         <main className="flex md:container mx-4 gap-7 mt-7 md:mx-auto">
-            <div className="grow hidden sm:flex flex-col gap-4 items-end">
+            <div className="grow hidden md:flex flex-col gap-4 items-end min-w-[18rem]">
                 <div className="flex items-center border-2 border-[#EAEAEA] rounded-lg pr-2 w-full">
                     <Input placeholder="Search" className="p-3 border-none" />
                     <Search className="rotate-90 text-sm size-4" />
                 </div>
 
                 <div className="w-full">
-                    <OpenBox title="Getting Started" openClassName="n" open>
+                    {/* <OpenBox title="Getting Started" openClassName="n" open>
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
@@ -61,39 +83,61 @@ export default function CourseView() {
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
                         <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
+                    </OpenBox> */}
+
+                    {
+                        lessons?.map(lesson => lesson?.videos?.length ? (
+                            <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
+                                {lesson.videos.map(video => (
+                                    <LessonQuizBox key={video.id} title={video.name} minutes={video.video ? undefined : undefined} progress={undefined} url={video.video ? `/courses/${course.id}/videos/${video.id}` : ""} />
+                                ))}
+                            </OpenBox>
+                        ) : null)
+                    }
+
+                    <div className="w-full border-2 border-[#EAEAEA] py-3 px-4 shadow-sm">Quiz</div>
+
+
+                    {
+                        lessons?.map(lesson => lesson?.quizzes?.length ? (
+                            <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
+                                {lesson.quizzes.map(quize => (
+                                    <LessonQuizBox noProgress title={quize.name} unitName={"Q"} unitValue={quize.questions_count} url={quize.questions_count ? `/courses/${course.id}/quizes/${quize.id}` : undefined} />
+                                ))}
+                            </OpenBox>
+                        ) : null)
+                    }
 
                 </div>
             </div>
 
             <div className="grow-[4] flex flex-col gap-11">
-                <Image src={test3} />
-                <TextSection content={`
-Proactively envisioned multimedia based expertise and cross-media growth strategies. Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate installed base portals after maintainable products.
+                {currentVideo.video ? (
+                    <video controls>
+                        <source src={currentVideo.video}></source>
+                    </video>
+                ) : (
+                    <Image src={test3} />
+                )
+                }
 
-Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric “outside the box” thinking. Completely pursue scalable customer service through sustainable potentialities.
+                <TextSection title={currentVideo.name} content={currentVideo.description} />
 
-Collaboratively administrate turnkey channels whereas virtual e-tailers. Objectively seize scalable metrics whereas proactive e-services. Seamlessly empower fully researched growth strategies and interoperable internal or “organic” sources.
 
-Credibly innovate granular internal or “organic” sources whereas high standards in web-readiness. Energistically scale future-proof core competencies vis-a-vis impactful experiences. Dramatically synthesize integrated schemas with optimal networks.
-
-Interactively procrastinate high-payoff content without backward-compatible data. Quickly cultivate optimal processes and tactical architectures. Completely iterate covalent strategic theme areas via accurate e-markets.
-
-Globally incubate standards compliant channels before scalable benefits. Quickly disseminate superior deliverables whereas web-enabled applications. Quickly drive clicks-and-mortar catalysts for change before vertical architectures.
-
-Credibly reintermediate backend ideas for cross-platform models. Continually reintermediate integrated processes through technically sound intellectual capital. Holistically foster superior methodologies without market-driven best practices.
-
-Distinctively exploit optimal alignments for intuitive bandwidth. Quickly coordinate e-business applications through revolutionary catalysts for change. Seamlessly underwhelm optimal testing procedures whereas bricks-and-clicks processes.
-
-Synergistically evolve 2.0 technologies rather than just in time initiatives. Quickly deploy strategic networks with compelling e-business. Credibly pontificate highly efficient manufactured products and enabled data.`} />
-
-                <h3 className="text-lg font-bold">File</h3>
-                <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3">
-                    <FileDownload name="Name Of File" url="" />
-                    <FileDownload name="Name Of File" url="" />
-                </div>
+                {
+                    (currentVideo?.attachments?.length || null) ? (
+                        <>
+                            <h3 className="text-lg font-bold">File</h3>
+                            <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-3">
+                                {currentVideo.attachments.map(attachment => (
+                                    <FileDownload key={attachment.url} name={attachment.name} url={attachment.url} />
+                                ))}
+                            </div>
+                        </>
+                    ) : null
+                }
             </div>
-            <div className="grow hidden sm:block"></div>
+            <div className="grow hidden md:block"></div>
         </main>
-    )
+    ) : null
 }

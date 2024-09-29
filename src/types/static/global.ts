@@ -17,8 +17,40 @@ export interface Level {
 export interface CourseLesson {
     id: number,
     name: string,
-    quizzes: [],
-    videos: []
+    quizzes: Quiz[],
+    videos: Video[]
+}
+
+export interface VideoAttachment {
+    name: string;
+    url: string;
+}
+
+export interface Video {
+    id: number;
+    description: string;
+    name: string;
+    isFree: boolean;
+    video: string;
+    attachments: VideoAttachment[]
+}
+
+export interface Question {
+
+}
+
+export interface Quiz {
+    id: number;
+    name: string;
+    questions: Question[];
+    questions_count: number;
+}
+
+export interface Lesson {
+    id: number;
+    name: string;
+    quizzes: Quiz[];
+    videos: Video[]
 }
 
 export interface Course {
@@ -48,7 +80,7 @@ export interface Course {
     lessons_count: null | number,
     videos_count: null | number,
     relatedCourses: Course[] | null;
-    lessons: { id: number, name: string, quizzes: [], videos: [] }[] | null;
+    lessons: Lesson[] | null;
 }
 
 export interface Feature {
