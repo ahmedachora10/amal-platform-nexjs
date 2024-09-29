@@ -39,12 +39,12 @@ export default async function Home() {
             <div className="container mx-auto xl:flex grid grid-cols-2 gap-7">
 
               <div className="xl:max-w-[12.5%] flex flex-col gap-4">
-                <Image src={ScholarImg} />
+                <Image src={ScholarImg} alt="image" />
                 <TextSection title="Arabic Grammer" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
               </div>
 
               <div className="xl:max-w-[12.5%] flex flex-col gap-4">
-                <Image src={ScienceImg} />
+                <Image src={ScienceImg} alt="image" />
                 <TextSection title="Sharia sciences" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
               </div>
 
