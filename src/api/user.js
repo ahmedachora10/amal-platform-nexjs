@@ -153,7 +153,7 @@ export class User {
         formdata.append("message", contactInfo.message);
 
         try {
-            return await axios.post("/api/contact-us", formdata, { headers: CSRFHeader() })
+            return (await axios.post("/api/contact-us", formdata, { headers: CSRFHeader() })).data
         }
         catch (err) {
             console.log("There is error while trying to send contact info");
@@ -165,5 +165,26 @@ export class User {
                 message: "there is unknown error, please try again later"
             }
         }
+    }
+
+    /**
+     * @param {import("@/types/static/global").EnrollCourse} data
+     * @returns {Promise<{status: boolean, message?: string}>}
+     * 
+     */
+    static async enrollCourse(data) {
+        const formdata = new FormData();
+        formdata.append("student_id", data.student_id);
+        formdata.append("course_id", data.course_id);
+        formdata.append("price", data.price);
+        try {
+            return (await axios.post("/api/student/enroll", data, { headers: CSRFHeader() })).data;
+        }
+        catch (err) {
+            console.log("error while trying to enroll a course");
+            console.log("data was:", data);
+            console.log("error was:", err);
+        }
+
     }
 }

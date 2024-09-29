@@ -71,3 +71,9 @@ export interface Testimonial {
     created_at: Date,
     updated_at: Date
 }
+
+export interface EnrollCourse {
+    student_id: number;
+    course_id: number;
+    price: number;
+}

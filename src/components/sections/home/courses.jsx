@@ -18,7 +18,7 @@ export default function Courses({ data }) {
                 {data.map((item, index) => (
                     <CarouselItem key={index} className="pl-1 basis-1/1 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
                         <div className="p-4">
-                            <Course title={item.name} category={item.category.name} image={item.thumbnail} subscriptions={item.subscriptions_count} link={"/courses/" + item.id} price={item.price} rating={"0.0"} />
+                            <Course title={item.name} category={item.category.name} image={item.thumbnail} subscriptions={item.subscriptions_count} link={"/courses/" + item.id} price={item.price} rating={"0.0"} courseId={item.id} />
                         </div>
                     </CarouselItem>
                 ))}

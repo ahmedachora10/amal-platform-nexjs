@@ -3,18 +3,53 @@ import { Star } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import useAuth from "@/app/_hook/useAuth";
+import { useState } from "react";
+import { User } from "@/api/user";
 
-export default function Course({
-    image = "",
-    category = "",
-    title = "",
-    price = 0,
-    rating = 0,
-    link = '/',
-    isSubscribed = false,
-    subscriptions = 0
-}) {
+/**
+ * 
+ * @param {import("@/types/cards/CourseProps").CourseProps} props 
+ * @returns 
+ */
+export default function Course(props) {
     const router = useRouter();
+    const { user } = useAuth();
+    const [_err, setErr] = useState(null);
+    const [pending, setPending] = useState(false);
+
+    /**
+     * @type {[import("@/types/cards/CourseProps").CourseProps, (value: import("@/types/cards/CourseProps").CourseProps) => void]}
+     */
+    const [course, setCourse] = useState(props);
+    const {
+        image,
+        category,
+        title,
+        price,
+        rating,
+        link,
+        isSubscribed,
+        subscriptions,
+        courseId
+    } = course;
+
+    const enrollCourse = () => {
+        setPending(true);
+
+        User.enrollCourse({
+            course_id: courseId,
+            price: price,
+            student_id: user.id
+        }).then(res => {
+            if (!res.status) {
+                setErr(res.message);
+            }
+
+            setPending(false);
+        });
+
+    }
 
     return (
         <div className="bg-white p-4 rounded w-[18rem] border">
@@ -41,7 +76,7 @@ export default function Course({
                     <p>More Details</p>
                 </Button>
 
-                <Button variant="outline" className={"text-white rounded-br-xl text-xs " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias" : "bg-primary")} asChild>
+                <Button variant="outline" className={"text-white rounded-br-xl text-xs " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias " : "bg-primary") + (pending ? " bg-gray-300 hover:bg-gray-300 text-black" : "")} asChild onClick={isSubscribed ? undefined : enrollCourse}>
                     <p>{isSubscribed ? "Owned" : "Buy Now"}</p>
                 </Button>
             </div>

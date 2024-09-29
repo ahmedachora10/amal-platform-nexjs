@@ -23,7 +23,7 @@ export default function StudentCoursesPage() {
                 if (course.course) course = course.course;
 
                 return (
-                    <Course key={course.id} rating={""} category={course.category.name} title={course.name} price={course.price} link={`/courses/${course.id}/details`} subscriptions={course.subscriptions_count} />
+                    <Course key={course.id} rating={""} category={course.category.name} title={course.name} price={course.price} link={`/courses/${course.id}/details`} subscriptions={course.subscriptions_count} isSubscribed />
                 )
             })}
 
