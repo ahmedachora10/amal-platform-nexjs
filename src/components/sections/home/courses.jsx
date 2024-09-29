@@ -13,7 +13,7 @@ import {
  */
 export default function Courses({ data }) {
     return (
-        <Carousel className="col-12">
+        data.length ? <Carousel className="col-12">
             <CarouselContent className="-ml-1">
                 {data.map((item, index) => (
                     <CarouselItem key={index} className="pl-1 basis-1/1 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
@@ -25,6 +25,6 @@ export default function Courses({ data }) {
             </CarouselContent>
             <CarouselPrevious className="relative lg:start-[87%] md:start-[80%] sm:start-[74%] start-[40%] rounded h-[3rem] w-[70px] top-[2rem]" />
             <CarouselNext className="relative lg:start-[87%] md:start-[80%] sm:start-[74%] start-[40%] rounded h-[3rem] w-[70px] top-[2rem] ms-3  border-primary" />
-        </Carousel>
+        </Carousel> : null
     )
 }

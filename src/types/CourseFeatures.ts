@@ -6,4 +6,5 @@ export interface CourseFeatures {
     instructorName: string;
     categories: string[];
     tags: string[];
+    courseId: number | string;
 }

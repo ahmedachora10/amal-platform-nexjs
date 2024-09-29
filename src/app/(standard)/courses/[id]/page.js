@@ -78,6 +78,7 @@ export default async function CourseDetailsPage({ params }) {
                                 categories={[virtualCourseRequiredData.category?.name]}
                                 tags={virtualCourseRequiredData.tags || []}
                                 instructorName={virtualCourseRequiredData.instructor}
+                                courseId={virtualCourseRequiredData.id}
                             />
                         </div>
 
@@ -93,10 +94,13 @@ export default async function CourseDetailsPage({ params }) {
                     <CourseOverviewSection data={virtualCourseRequiredData} lessons={data.course.lessons} />
                     <ReviewsSection data={virtualCourseRequiredData} />
 
-                    <div className="w-full">
-                        <h1 className="text-3xl">Related Courses</h1>
-                        <Courses data={data.relatedCourses || []} />
-                    </div>
+                    {
+                        data.relatedCourses.length ?
+                            <div className="w-full">
+                                <h1 className="text-3xl">Related Courses</h1>
+                                <Courses data={data.relatedCourses || []} />
+                            </div> : null
+                    }
 
                 </div>
 
@@ -110,6 +114,7 @@ export default async function CourseDetailsPage({ params }) {
                             categories={[virtualCourseRequiredData.category?.name]}
                             tags={virtualCourseRequiredData.tags || []}
                             instructorName={virtualCourseRequiredData.instructor}
+                            courseId={virtualCourseRequiredData.id}
                         />
                     </div>
 

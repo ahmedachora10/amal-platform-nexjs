@@ -9,12 +9,12 @@ import TextSection from "../text_section";
 export default function CourseDescriptionSection({ data }) {
 
     return (
-        <section className="w-full">
+        <section className="w-full flex flex-col gap-11">
             <div className="text-sm flex flex-col items-center">
                 <TextSection content={data.description} />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 text-sm">
+            <div className="grid grid-cols-1 md:grid-cols-2 text-sm gap-4">
                 {data.properties?.map((prop, i) => (
                     <TextWithYelloTrue key={i} text={prop} />
                 ))}
