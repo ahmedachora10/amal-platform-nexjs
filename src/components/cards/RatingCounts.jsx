@@ -38,11 +38,11 @@ export default function ReviewsCounts(props) {
 
             {/* the rating details */}
             <div className="flex-grow-[2] flex flex-col gap-3 p-4">
-                <p className="whitespace-nowrap flex gap-3 items-center justify-between">5 stars <hr className="w-[85%] border border-[#707070]" /> {fiveStarsPersent.length == 3 ? fiveStarsPersent : fiveStarsPersent + "." + "0".repeat(3 - fiveStarsPersent.length)} %</p>
-                <p className="whitespace-nowrap flex gap-3 items-center justify-between">4 stars <hr className="w-[85%] border border-[#707070]" /> {fourStarsPersent.length == 3 ? fourStarsPersent : fourStarsPersent + "." + "0".repeat(3 - fourStarsPersent.length)} %</p>
-                <p className="whitespace-nowrap flex gap-3 items-center justify-between">3 stars <hr className="w-[85%] border border-[#707070]" /> {threeStarsPersent.length == 3 ? threeStarsPersent : threeStarsPersent + "." + "0".repeat(3 - threeStarsPersent.length)} %</p>
-                <p className="whitespace-nowrap flex gap-3 items-center justify-between">2 stars <hr className="w-[85%] border border-[#707070]" /> {twoStarsPersent.length == 3 ? twoStarsPersent : twoStarsPersent + "." + "0".repeat(3 - twoStarsPersent.length)} %</p>
-                <p className="whitespace-nowrap flex gap-3 items-center justify-between">1 stars <hr className="w-[85%] border border-[#707070]" /> {oneStarPersent.length == 3 ? oneStarPersent : oneStarPersent + "." + "0".repeat(3 - oneStarPersent.length)} %</p>
+                <div className="whitespace-nowrap flex gap-3 items-center justify-between">5 stars <hr className="w-[85%] border border-[#707070]" /> {fiveStarsPersent.length == 3 ? fiveStarsPersent : fiveStarsPersent + "." + "0".repeat(3 - fiveStarsPersent.length)} %</div>
+                <div className="whitespace-nowrap flex gap-3 items-center justify-between">4 stars <hr className="w-[85%] border border-[#707070]" /> {fourStarsPersent.length == 3 ? fourStarsPersent : fourStarsPersent + "." + "0".repeat(3 - fourStarsPersent.length)} %</div>
+                <div className="whitespace-nowrap flex gap-3 items-center justify-between">3 stars <hr className="w-[85%] border border-[#707070]" /> {threeStarsPersent.length == 3 ? threeStarsPersent : threeStarsPersent + "." + "0".repeat(3 - threeStarsPersent.length)} %</div>
+                <div className="whitespace-nowrap flex gap-3 items-center justify-between">2 stars <hr className="w-[85%] border border-[#707070]" /> {twoStarsPersent.length == 3 ? twoStarsPersent : twoStarsPersent + "." + "0".repeat(3 - twoStarsPersent.length)} %</div>
+                <div className="whitespace-nowrap flex gap-3 items-center justify-between">1 stars <hr className="w-[85%] border border-[#707070]" /> {oneStarPersent.length == 3 ? oneStarPersent : oneStarPersent + "." + "0".repeat(3 - oneStarPersent.length)} %</div>
             </div>
         </div>
     )

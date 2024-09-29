@@ -53,6 +53,9 @@ export default async function CourseDetailsPage({ params }) {
     //         },
     //     ],
     // }
+    /**
+     * @type {{course: import("@/types/static/global").Course, courses: import("@/types/static/global").Course[]}}
+     */
     const data = await DynamicPagesApi.course(params.id);
     /**
      * @type {import("@/types/static/global").Course}
@@ -73,7 +76,7 @@ export default async function CourseDetailsPage({ params }) {
                     <h1 className="text-4xl">Arabic language | The comprehensive course - Learn modern</h1>
 
                     <div className="flex flex-col gap-3">
-                        <Image src={test2} className="w-full" />
+                        {virtualCourseRequiredData.thumbnail && <Image src={virtualCourseRequiredData.thumbnail} alt="" className="w-full" />}
                         <div className="flex lg:hidden">
                             <CourseFeatures
                                 enrolled={virtualCourseRequiredData?.subscriptions_count}

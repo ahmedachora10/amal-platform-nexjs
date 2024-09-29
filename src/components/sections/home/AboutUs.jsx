@@ -12,7 +12,7 @@ export default function AboutUs({ data }) {
     return (
         <section className="container lg:mx-auto flex lg:flex-row flex-col-reverse items-center gap-7">
             <div className="">
-                <img src={data.image} />
+                <Image src={data.image} alt="" width={1024} height={1024} />
             </div>
 
             <div className="flex flex-col lg:max-w-[32.66vw] gap-9">

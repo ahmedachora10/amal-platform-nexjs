@@ -54,7 +54,7 @@ export default function Course(props) {
     return (
         <div className="bg-white p-4 rounded w-[18rem] border">
             <div className="relative">
-                <img src={image} alt={title} className="rounded-xl object-cover" width={255} style={{
+                <Image src={image} alt={title} className="rounded-xl object-cover" width={255} style={{
                     'height': '145px !important'
                 }} />
                 <div className="absolute top-0 right-0 p-2 bg-orange-500 rounded-tr-xl px-2 text-blak text-xs font-bold">
