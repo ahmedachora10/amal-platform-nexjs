@@ -55,6 +55,11 @@ export default function CoursesFilter({ onChange }) {
         if (filterData.categoryId) newParams.set("categoryId", filterData.categoryId);
         if (filterData.search) newParams.set("search", filterData.search);
         if (filterData.levelId) newParams.set("levelId", filterData.levelId);
+
+        if (!filterData.categoryId) newParams.delete("categoryId");
+        if (!filterData.search) newParams.delete("search");
+        if (!filterData.levelId) newParams.delete("levelId");
+
         replace(`${pathname}?${newParams}`)
     }, [filterData]);
 
@@ -65,7 +70,6 @@ export default function CoursesFilter({ onChange }) {
     useEffect(() => {
         StaticPagesApi.getLevels().then(setLevels);
     }, []);
-
 
 
     return (
