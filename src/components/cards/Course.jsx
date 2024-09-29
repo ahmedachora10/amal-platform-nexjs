@@ -55,9 +55,7 @@ export default function Course(props) {
     return (
         <div className="bg-white p-4 rounded w-[18rem] border">
             <div className="relative">
-                <Image src={image} alt={title} className="rounded-xl object-cover" width={255} height={255} style={{
-                    'height': '145px !important'
-                }} />
+                <Image src={image} alt={title} className="rounded-xl object-cover max-h-40" width={255} height={255} />
                 <div className="absolute top-0 right-0 p-2 bg-orange-500 rounded-tr-xl px-2 text-blak text-xs font-bold">
                     <Link href={link}>{category}</Link>
                 </div>

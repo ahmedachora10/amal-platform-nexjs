@@ -1,6 +1,5 @@
 import CourseFeatures from "@/components/cards/CourseFeatures";
 import UserPositionSection from "@/components/sections/user_position_section";
-import test2 from "@/app/test-2.png"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
