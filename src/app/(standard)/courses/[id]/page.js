@@ -76,14 +76,14 @@ export default async function CourseDetailsPage({ params }) {
                         <Image src={test2} className="w-full" />
                         <div className="flex lg:hidden">
                             <CourseFeatures
-                                enrolled={virtualCourseRequiredData.subscriptions_count}
-                                lectures={virtualCourseRequiredData.lectures || 1}
-                                duration={virtualCourseRequiredData.duration}
-                                price={virtualCourseRequiredData.price}
-                                categories={[virtualCourseRequiredData.category?.name]}
-                                tags={virtualCourseRequiredData.tags || []}
-                                instructorName={virtualCourseRequiredData.instructor}
-                                courseId={virtualCourseRequiredData.id}
+                                enrolled={virtualCourseRequiredData?.subscriptions_count}
+                                lectures={virtualCourseRequiredData?.lectures || 1}
+                                duration={virtualCourseRequiredData?.duration}
+                                price={virtualCourseRequiredData?.price}
+                                categories={[virtualCourseRequiredData?.category?.name]}
+                                tags={virtualCourseRequiredData?.tags || []}
+                                instructorName={virtualCourseRequiredData?.instructor}
+                                courseId={virtualCourseRequiredData?.id}
                             />
                         </div>
 
