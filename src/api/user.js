@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import { axios } from "./axios";
-import { getCookie } from "@/utils/helpers";
+import { CSRFHeader, getCookie } from "@/utils/helpers";
 
 export class User {
     /**
@@ -40,7 +40,7 @@ export class User {
 
     static async logout() {
         try {
-            return await axios.post("/logout");
+            return await axios.post("/logout", {}, { headers: CSRFHeader() });
         }
         catch (err) {
             return null;
@@ -64,7 +64,7 @@ export class User {
             formData.append("name", name);
             formData.append("email", email);
             formData.append("phone", phone);
-            return (await axios.post("/api/student/personal-information", formData)).data
+            return (await axios.post("/api/student/personal-information", formData, { headers: CSRFHeader() })).data
         }
         catch (err) {
             return null;
@@ -85,7 +85,7 @@ export class User {
         form.append("new_password", newPassword);
         form.append("new_password_confirmation", newPasswordConfirmation);
         try {
-            return (await axios.post("/api/student/password")).data
+            return (await axios.post("/api/student/password", form, { headers: CSRFHeader() })).data
         }
         catch (err) {
             console.log("An Error Occured When Trying to change the password");
@@ -139,4 +139,31 @@ export class User {
         }
     }
 
+    /**
+     * 
+     * @param {import("@/types/static/contact").ContactTeamData} contactInfo 
+     * @returns {Promise<{status: boolean, message?: string}>}
+     */
+    static async contactTeam(contactInfo) {
+        const formdata = new FormData();
+        formdata.append("name", contactInfo.name)
+        formdata.append("email", contactInfo.email)
+        formdata.append("phone", contactInfo.phone)
+        formdata.append("subject", contactInfo.subject)
+        formdata.append("message", contactInfo.message);
+
+        try {
+            return await axios.post("/api/contact-us", formdata, { headers: CSRFHeader() })
+        }
+        catch (err) {
+            console.log("There is error while trying to send contact info");
+            console.log("contact info was:", contactInfo);
+            console.log("error was:", err);
+
+            return {
+                status: false,
+                message: "there is unknown error, please try again later"
+            }
+        }
+    }
 }

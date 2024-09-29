@@ -1,3 +1,4 @@
+'use client';
 import UserPositionSection from "@/components/sections/user_position_section";
 import ContactIcons from "@/components/ui/contact_icons";
 import { Button } from "@/components/ui/button";
@@ -5,8 +6,42 @@ import MaskGroup15 from "@/app/images/contact/Mask Group 15.png";
 import Image from "next/image";
 import ContactPeaces from "@/components/cards/Contact_peaces";
 import TitleWithLine from "@/components/title_with_line";
+import { User } from "@/api/user";
+import { useState } from "react";
+import FormError from "@/components/FormError";
 
 export default function ContactPage() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [err, setErr] = useState("");
+    /**
+     * @param {Event} e
+     */
+    const contact = (e) => {
+        setIsLoading(true);
+        e.preventDefault();
+        console.log("Contact form submitted");
+        const formData = new FormData(e.target);
+        const
+            name = formData.get("name"),
+            phone = formData.get("phone"),
+            email = formData.get("email"),
+            subject = formData.get("subject"),
+            message = formData.get("message");
+
+        /**
+         * @type {import("@/types/static/contact").ContactTeamData}
+         */
+        const contactInfo = { name, phone, email, subject, message };
+        console.log("contact info:", contactInfo);
+
+        User.contactTeam(contactInfo).then((result) => {
+            setIsLoading(false);
+            if (!result.status) {
+                setErr(result.message);
+            }
+        })
+    }
+
     return (
         <div className="flex flex-col gap-10 overflow-hidden">
             <UserPositionSection pageName="Contact Us" position="Home | Contact Us" />
@@ -23,13 +58,14 @@ export default function ContactPage() {
                 </div>
 
                 <div className="sm:w-[40.10%] flex">
-                    <form className="grid grid-cols-2 grow gap-4">
-                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Full Name" />
-                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Phone Number" />
-                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Email Address" />
-                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Subject" />
-                        <textarea className="p-3 min-h-40 border border-[#084C94] outline-none rounded-md col-span-2" placeholder="Your Message" />
-                        <Button className="col-span-2 w-fit rounded-lg">Send Message</Button>
+                    <form className="grid grid-cols-2 grow gap-4" onSubmit={contact}>
+                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Full Name" name="name" onChange={err ? () => setErr("") : undefined} />
+                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Phone Number" name="phone" onChange={err ? () => setErr("") : undefined} />
+                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Email Address" name="email" onChange={err ? () => setErr("") : undefined} />
+                        <input className="p-3 border border-[#084C94] outline-none rounded-md" placeholder="Subject" name="subject" onChange={err ? () => setErr("") : undefined} />
+                        <textarea className="p-3 min-h-40 border border-[#084C94] outline-none rounded-md col-span-2" placeholder="Your Message" name="message" onChange={err ? () => setErr("") : undefined} />
+                        <div className={"col-span-2"}><FormError err={err} /></div>
+                        <Button className={"col-span-2 w-fit rounded-lg" + (isLoading ? " bg-gray-300 hover:bg-gray-300 text-black" : "")}>Send Message</Button>
                     </form>
                 </div>
             </section>
