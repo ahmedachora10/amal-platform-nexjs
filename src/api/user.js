@@ -184,6 +184,10 @@ export class User {
             console.log("error while trying to enroll a course");
             console.log("data was:", data);
             console.log("error was:", err);
+            return {
+                status: false,
+                message: "There is unknown error, please try again later"
+            }
         }
 
     }

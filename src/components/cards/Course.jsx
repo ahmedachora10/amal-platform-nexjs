@@ -40,13 +40,13 @@ export default function Course(props) {
         User.enrollCourse({
             course_id: courseId,
             price: price,
-            student_id: user.id
+            student_id: user?.id
         }).then(res => {
+            setPending(false);
             if (!res.status) {
                 setErr(res.message);
             }
 
-            setPending(false);
         });
 
     }
@@ -76,7 +76,7 @@ export default function Course(props) {
                     <p>More Details</p>
                 </Button>
 
-                <Button variant="outline" className={"text-white rounded-br-xl text-xs " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias " : "bg-primary") + (pending ? " bg-gray-300 hover:bg-gray-300 text-black" : "")} asChild onClick={isSubscribed ? undefined : enrollCourse}>
+                <Button variant="outline" className={"text-white rounded-br-xl text-xs cursor-pointer " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias " : "bg-primary") + (pending ? " bg-gray-300 hover:bg-gray-300 text-black" : "")} asChild onClick={isSubscribed ? undefined : enrollCourse}>
                     <p>{isSubscribed ? "Owned" : "Buy Now"}</p>
                 </Button>
             </div>
