@@ -8,20 +8,16 @@ export default class DynamicPagesApi {
     static async courses(filter) {
         try {
             let data = null;
-            if (filter.id) {
-                data = (await axios.get(`/api/courses/${filter.id}/details`)).data;
-            }
-            else {
-                const searchParams = new URLSearchParams();
-                if (filter.categoryId) searchParams.set("categoryId", filter.categoryId);
-                if (filter.levelId) searchParams.set("levelId", filter.levelId);
-                if (filter.search) searchParams.set("search", filter.search);
+
+            const searchParams = new URLSearchParams();
+            if (filter.categoryId) searchParams.set("categoryId", filter.categoryId);
+            if (filter.levelId) searchParams.set("levelId", filter.levelId);
+            if (filter.search) searchParams.set("search", filter.search);
 
 
 
-                console.log(searchParams.toString());
-                data = (await axios.get(`/api/courses?${searchParams}`)).data;
-            }
+            console.log(searchParams.toString());
+            data = (await axios.get(`/api/courses?${searchParams}`)).data;
 
             return data || [];
         }
@@ -33,6 +29,17 @@ export default class DynamicPagesApi {
         }
     }
 
+    static async course(id) {
+        try {
+            return await axios.get(`/api/courses/${id}/details`);
+        }
+        catch (Err) {
+            console.log("error while get a course data with course id");
+            console.log("course id was:", id);
+            console.log("error was:", Err);
+            return null;
+        }
+    }
     /**
      * 
      * @returns {Promise<import("@/types/static/global").Course[]>}

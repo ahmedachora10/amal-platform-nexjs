@@ -9,6 +9,7 @@ import CourseOverviewSection from "@/components/sections/course/overview";
 import CourseDescriptionSection from "@/components/sections/course/description";
 import DynamicPagesApi from "@/api/dynamic";
 import Courses from "@/components/sections/home/courses";
+import { notFound } from "next/navigation";
 
 export default async function CourseDetailsPage({ params }) {
     // const virtualCourseRequiredData = {
@@ -52,13 +53,17 @@ export default async function CourseDetailsPage({ params }) {
     //         },
     //     ],
     // }
-    const data = (await DynamicPagesApi.courses({ id: params.id }));
+    const data = await DynamicPagesApi.course(params.id);
     /**
      * @type {import("@/types/static/global").Course}
      */
-    const virtualCourseRequiredData = data.course;
+    const virtualCourseRequiredData = data?.course;
 
-    return (
+    if (!data) {
+        notFound();
+    }
+
+    return data ? (
         <div className="overflow-hidden flex flex-col gap-7">
             <UserPositionSection pageName="Course Details" position="Home | Course Details" />
 
@@ -123,5 +128,5 @@ export default async function CourseDetailsPage({ params }) {
             </main>
 
         </div>
-    )
+    ) : null
 }
