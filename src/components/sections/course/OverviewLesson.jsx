@@ -1,14 +1,13 @@
-'use client';
 import { ChevronDown, ChevronUp, CirclePlay, Clock9Icon } from "lucide-react";
 import React, { useState } from "react";
 import CourseLessonUnit from "./CourseLessonUnit";
 
 /**
  * 
- * @param {{hiddenByDefault: boolean, lesson: import("@/types/static/global").Lesson}} param0 
+ * @param {{hiddenByDefault: boolean, lesson: import("@/types/static/global").Lesson, courseId: number}} param0 
  * @returns 
  */
-export default function OverviewLesson({ hiddenByDefault, lesson }) {
+export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" }) {
     const [hidden, setHidden] = useState(hiddenByDefault);
     return (
         <div className="flex flex-col justify-between w-full" >
@@ -35,14 +34,14 @@ export default function OverviewLesson({ hiddenByDefault, lesson }) {
                 <hr />
                 {lesson.videos.map((video) => (
                     <React.Fragment key={video.id}>
-                        <CourseLessonUnit name={video.name} icon="file" icon2="time" unit={12} unitName="min" url="" />
+                        <CourseLessonUnit name={video.name} icon="file" icon2={video.isFree ? "none" : "time"} unit={video.isFree ? null : 12} unitName={video.isFree ? "preview" : "min"} url={video.isFree ? `/courses/${courseId}/videos/${video.id}` : ""} />
                         <hr />
                     </React.Fragment>
                 ))}
 
                 {lesson.quizzes.map(quize => (
                     <React.Fragment key={quize.id}>
-                        <CourseLessonUnit name={quize.name} icon="quession" icon2="none" unit={quize.questions_count || 0} unitName="Quessions" url="s" />
+                        <CourseLessonUnit name={quize.name} icon="quession" icon2="none" unit={quize.questions_count || 0} unitName="Quessions" url={`/courses/${courseId}/quizes/${quize.id}`} />
                         <hr />
                     </React.Fragment>
                 ))}
