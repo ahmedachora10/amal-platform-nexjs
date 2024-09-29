@@ -36,7 +36,10 @@ export interface Video {
 }
 
 export interface Question {
-
+    id: number;
+    correctAnswerId: null | number;
+    question: string;
+    sort: number;
 }
 
 export interface Quiz {

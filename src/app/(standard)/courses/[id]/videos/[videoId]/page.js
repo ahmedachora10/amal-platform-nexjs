@@ -1,6 +1,4 @@
-import LessonQuizBox from "@/components/lesson_quiz_box";
 import { Input } from "@/components/ui/input";
-import OpenBox from "@/components/ui/open_box";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import test3 from "@/app/test-3.png";
@@ -8,6 +6,7 @@ import TextSection from "@/components/sections/text_section";
 import FileDownload from "@/components/file_download";
 import DynamicPagesApi from "@/api/dynamic";
 import { notFound } from "next/navigation";
+import LessonsSidebarOpenBoxes from "@/components/sections/course/LessonsSidebarOpenBoxes";
 
 export default async function CourseVideo({ params: { id, videoId } }) {
     /** @type {(import("@/types/static/global").Video)|null} */
@@ -29,7 +28,6 @@ export default async function CourseVideo({ params: { id, videoId } }) {
     const course = data.course;
     const lessons = course.lessons;
     const lesson = lessons.find(finder);
-    console.log(lesson, currentVideo)
 
     if (!currentVideo && !lesson) notFound();
     return (Boolean(currentVideo) && Boolean(lesson)) ? (
@@ -41,73 +39,7 @@ export default async function CourseVideo({ params: { id, videoId } }) {
                 </div>
 
                 <div className="w-full">
-                    {/* <OpenBox title="Getting Started" openClassName="n" open>
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <div className="w-full border-2 border-[#EAEAEA] p-3">Quiz</div>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox>
-
-                    <OpenBox title="Getting Started" openClassName="n">
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                        <LessonQuizBox title="First Hour Lesson 1" minutes={20} progress={70} />
-                    </OpenBox> */}
-
-                    {
-                        lessons?.map(lesson => lesson?.videos?.length ? (
-                            <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
-                                {lesson.videos.map(video => (
-                                    <LessonQuizBox key={video.id} title={video.name} minutes={video.video ? undefined : undefined} progress={undefined} url={video.video ? `/courses/${course.id}/videos/${video.id}` : ""} />
-                                ))}
-                            </OpenBox>
-                        ) : null)
-                    }
-
-                    <div className="w-full border-2 border-[#EAEAEA] py-3 px-4 shadow-sm">Quiz</div>
-
-
-                    {
-                        lessons?.map(lesson => lesson?.quizzes?.length ? (
-                            <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
-                                {lesson.quizzes.map(quize => (
-                                    <LessonQuizBox noProgress title={quize.name} unitName={"Q"} unitValue={quize.questions_count} url={quize.questions_count ? `/courses/${course.id}/quizes/${quize.id}` : undefined} />
-                                ))}
-                            </OpenBox>
-                        ) : null)
-                    }
-
+                    <LessonsSidebarOpenBoxes lessons={lessons} course={course} />
                 </div>
             </div>
 

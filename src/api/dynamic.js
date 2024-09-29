@@ -36,6 +36,7 @@ export default class DynamicPagesApi {
      */
     static async course(id) {
         try {
+
             return (await axios.get(`/api/courses/${id}/details`)).data;
         }
         catch (Err) {
