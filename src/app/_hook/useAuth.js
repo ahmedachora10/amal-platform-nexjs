@@ -5,7 +5,7 @@ export default function useAuth() {
     /**
         * @type {[import("@/types/User").User|null, (user:import("@/types/User").User) => void]}
      */
-    const { isLoading, data } = useSWR("/api/user", User.getUser);
+    const { isLoading, data } = useSWR("/api/user", () => User.getUser());
 
     const changeInfo = (name, email, phone) => {
         return User.changeInfo(name, email, phone).then(() => {

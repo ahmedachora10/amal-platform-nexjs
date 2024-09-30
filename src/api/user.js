@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import { axios } from "./axios";
-import { CSRFHeader, getCookie } from "@/utils/helpers";
+import { getCookie } from "@/utils/helpers";
 
 export class User {
     /**
@@ -21,8 +21,8 @@ export class User {
             // send the request to the server using axios
             return (await axios.post('/login', formData, {
                 headers: {
-                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
-                    // 'Referer': 'http://localhost:3000'
+                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                    'Referer': 'http://localhost:3000'
                 }
             })).data;
         }
@@ -40,7 +40,7 @@ export class User {
 
     static async logout() {
         try {
-            return await axios.post("/logout", {}, { headers: CSRFHeader() });
+            return await axios.post("/logout");
         }
         catch (err) {
             return null;
@@ -64,7 +64,7 @@ export class User {
             formData.append("name", name);
             formData.append("email", email);
             formData.append("phone", phone);
-            return (await axios.post("/api/student/personal-information", formData, { headers: CSRFHeader() })).data
+            return (await axios.post("/api/student/personal-information", formData)).data
         }
         catch (err) {
             return null;
@@ -85,7 +85,7 @@ export class User {
         form.append("new_password", newPassword);
         form.append("new_password_confirmation", newPasswordConfirmation);
         try {
-            return (await axios.post("/api/student/password", form, { headers: CSRFHeader() })).data
+            return (await axios.post("/api/student/password")).data
         }
         catch (err) {
             console.log("An Error Occured When Trying to change the password");
@@ -131,7 +131,12 @@ export class User {
      */
     static async getUser() {
         try {
-            const user = await axios.get("/api/user");
+            const user = await axios.get("/api/user", {
+                headers: {
+                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                    'Referer': 'http://localhost:3000'
+                }
+            });
             return user.data;
         }
         catch (err) {
@@ -139,56 +144,4 @@ export class User {
         }
     }
 
-    /**
-     * 
-     * @param {import("@/types/static/contact").ContactTeamData} contactInfo 
-     * @returns {Promise<{status: boolean, message?: string}>}
-     */
-    static async contactTeam(contactInfo) {
-        const formdata = new FormData();
-        formdata.append("name", contactInfo.name)
-        formdata.append("email", contactInfo.email)
-        formdata.append("phone", contactInfo.phone)
-        formdata.append("subject", contactInfo.subject)
-        formdata.append("message", contactInfo.message);
-
-        try {
-            return (await axios.post("/api/contact-us", formdata, { headers: CSRFHeader() })).data
-        }
-        catch (err) {
-            console.log("There is error while trying to send contact info");
-            console.log("contact info was:", contactInfo);
-            console.log("error was:", err);
-
-            return {
-                status: false,
-                message: "there is unknown error, please try again later"
-            }
-        }
-    }
-
-    /**
-     * @param {import("@/types/static/global").EnrollCourse} data
-     * @returns {Promise<{status: boolean, message?: string}>}
-     * 
-     */
-    static async enrollCourse(data) {
-        const formdata = new FormData();
-        formdata.append("student_id", data.student_id);
-        formdata.append("course_id", data.course_id);
-        formdata.append("price", data.price);
-        try {
-            return (await axios.post("/api/student/enroll", data, { headers: CSRFHeader() })).data;
-        }
-        catch (err) {
-            console.log("error while trying to enroll a course");
-            console.log("data was:", data);
-            console.log("error was:", err);
-            return {
-                status: false,
-                message: "There is unknown error, please try again later"
-            }
-        }
-
-    }
 }
