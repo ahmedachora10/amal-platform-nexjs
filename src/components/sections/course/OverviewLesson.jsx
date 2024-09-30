@@ -18,13 +18,13 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
             <div className="grow flex">
                 <div className="text-sm flex gap-3 items-center justify-start grow bg-[#F9F9F9] p-4 cursor-pointer hover:shadow-md" onClick={() => setHidden(!hidden)}>
                     {hidden ? <ChevronDown /> : <ChevronUp />}
-                    <p className="font-semibold">{lesson.name}</p>
+                    <p className="font-semibold">{lesson?.name}</p>
                 </div>
 
                 <div className="flex items-center gap-4">
                     <div className="flex text-sm gap-2 items-center">
                         <CirclePlay className="text-xs" />
-                        <p>{lesson.videos.length || 0} lectures</p>
+                        <p>{lesson?.videos?.length || 0} lectures</p>
                     </div>
 
                     <div className="flex text-sm gap-2 items-center">
@@ -36,11 +36,11 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
 
             <div className={"flex-col " + (hidden ? "hidden" : "flex")}>
                 <hr />
-                {lesson.videos.map((video) => (
+                {lesson?.videos.map((video) => (
                     <CourseLessonVideoUnit key={video.id} video={video} courseId={courseId} onDuration={(videoDuration) => setDuration(duration + (videoDuration / 60))} />
                 ))}
 
-                {lesson.quizzes.map(quize => (
+                {lesson?.quizzes.map(quize => (
                     <React.Fragment key={quize.id}>
                         <CourseLessonUnit name={quize.name} icon="quession" icon2="none" unit={quize.questions_count || 0} unitName="Quessions" url={`/courses/${courseId}/quizes/${quize.id}`} />
                         <hr />
