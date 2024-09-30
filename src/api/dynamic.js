@@ -15,10 +15,10 @@ export default class DynamicPagesApi {
             if (filter.search) searchParams.set("search", filter.search);
             // if no filter value provided
             if (!filter.categoryId && !filter.levelId && !filter.search) {
-                data = (await axios.get(`/api/courses`)).data;
+                data = (await axios.get(`/api/courses/filter`)).data?.courses;
             }
             else {
-                data = (await axios.get(`/api/courses/filter?${searchParams}`)).data;
+                data = (await axios.get(`/api/courses/filter?${searchParams}`)).data?.courses;
             }
 
             return data || [];
