@@ -17,9 +17,9 @@ export default function CourseOverviewSection({ data, lessons = [] }) {
 
 
 
-            {lessons.length ? <OverviewLesson lesson={lessons[0]} key={lessons[0].id} hiddenByDefault={false} /> : null}
+            {lessons?.length ? <OverviewLesson lesson={lessons[0]} key={lessons[0].id} hiddenByDefault={false} /> : null}
 
-            {lessons.map((lesson, index) => {
+            {lessons?.map((lesson, index) => {
                 if (index == 0) return;
 
                 return (lesson.quizzes.length || lesson.videos.length) ? (
