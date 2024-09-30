@@ -135,7 +135,7 @@ export class User {
     static async getUser() {
         try {
             // TODO: send a Bearer token with a protected request
-            const user = await axios.get("/api/user", { headers: CSRFHeader() });
+            const user = (await axios.get("/api/user", { headers: CSRFHeader() })).data;
             return user.data;
         }
         catch (err) {
