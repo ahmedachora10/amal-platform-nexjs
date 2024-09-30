@@ -150,7 +150,7 @@ export class User {
     static async enrollCourse(data) {
         const formdata = new FormData();
         formdata.append("student_id", data.student_id);
-        formdata.append("course_id", data.student_id);
+        formdata.append("course_id", data.course_id);
         formdata.append("price", data.price);
 
         try {
