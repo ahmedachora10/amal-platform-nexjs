@@ -24,7 +24,7 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
                 <div className="flex items-center gap-4">
                     <div className="flex text-sm gap-2 items-center">
                         <CirclePlay className="text-xs" />
-                        <p>{lesson.videos.length || 0} lectures</p>
+                        <p>{lesson?.videos?.length || 0} lectures</p>
                     </div>
 
                     <div className="flex text-sm gap-2 items-center">
@@ -36,7 +36,7 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
 
             <div className={"flex-col " + (hidden ? "hidden" : "flex")}>
                 <hr />
-                {lesson.videos.map((video) => (
+                {lesson?.videos?.map((video) => (
                     <CourseLessonVideoUnit key={video.id} video={video} courseId={courseId} onDuration={(videoDuration) => setDuration(duration + (videoDuration / 60))} />
                 ))}
 

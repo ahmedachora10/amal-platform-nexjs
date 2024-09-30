@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import TextWithYelloTrue from "@/components/yellow_true_txt";
 import TitleWithLine from "@/components/title_with_line";
 import Link from "next/link";
+import Image from "next/image";
 
 /**
  * 

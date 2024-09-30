@@ -22,7 +22,7 @@ export class User {
             return (await axios.post('/login', formData, {
                 headers: {
                     'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                    'Referer': 'http://localhost:3000'
+                    // 'Referer': 'http://localhost:3000'
                 }
             })).data;
         }
@@ -131,10 +131,12 @@ export class User {
      */
     static async getUser() {
         try {
+            // TODO: send a Bearer token with a protected request
             const user = await axios.get("/api/user", {
                 headers: {
                     'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                    'Referer': 'http://localhost:3000'
+                    'Referer': 'http://localhost:3000',
+                    'Authorization' : 'Bearer 3|EDnOy4msycQPE3vXUKP6SsjjT2kIbwyC5iQghHfWd432fb5e'
                 }
             });
             return user.data;

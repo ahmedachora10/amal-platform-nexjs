@@ -22,7 +22,7 @@ export default function CourseOverviewSection({ data, lessons = [] }) {
             {lessons.map((lesson, index) => {
                 if (index == 0) return;
 
-                return (lesson.quizzes.length || lesson.videos.length) ? (
+                return (lesson?.quizzes?.length || lesson?.videos?.length) ? (
                     <React.Fragment key={index}>
                         {/* only first lesson is show by default, others are hidden by default */}
                         <OverviewLesson lesson={lesson} key={lesson.id} hiddenByDefault={true} courseId={data.id} />
