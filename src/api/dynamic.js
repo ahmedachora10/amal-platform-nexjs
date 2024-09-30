@@ -18,7 +18,7 @@ export default class DynamicPagesApi {
                 data = (await axios.get(`/api/courses/filter`)).data?.courses;
             }
             else {
-                data = (await axios.get(`/api/courses/filter?${searchParams}`)).data;
+                data = (await axios.get(`/api/courses/filter?${searchParams}`)).data?.courses;
             }
 
             return data || [];
