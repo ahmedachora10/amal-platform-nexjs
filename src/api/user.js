@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import { axios } from "./axios";
-import { getCookie } from "@/utils/helpers";
+import { CSRFHeader, getCookie } from "@/utils/helpers";
 
 export class User {
     /**
@@ -136,7 +136,7 @@ export class User {
                 headers: {
                     'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
                     'Referer': 'http://localhost:3000',
-                    'Authorization' : 'Bearer 3|EDnOy4msycQPE3vXUKP6SsjjT2kIbwyC5iQghHfWd432fb5e'
+                    'Authorization': 'Bearer 3|EDnOy4msycQPE3vXUKP6SsjjT2kIbwyC5iQghHfWd432fb5e'
                 }
             });
             return user.data;
@@ -146,4 +146,23 @@ export class User {
         }
     }
 
+    /**
+     * 
+     * @param {import("@/types/static/global").EnrollCourse} data 
+     */
+    static async enrollCourse(data) {
+        const formdata = new FormData();
+        formdata.append("student_id", data.student_id);
+        formdata.append("course_id", data.student_id);
+        formdata.append("price", data.price);
+
+        try {
+            return (await axios.post("/api/student/enroll", formdata, CSRFHeader())).data
+        }
+        catch (err) {
+            console.log("error while enrolling the course");
+            console.log("data was:", data);
+            console.log("error was:", err);
+        }
+    }
 }
