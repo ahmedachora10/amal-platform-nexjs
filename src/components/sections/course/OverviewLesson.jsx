@@ -1,6 +1,8 @@
+'use client';
 import { ChevronDown, ChevronUp, CirclePlay, Clock9Icon } from "lucide-react";
 import React, { useState } from "react";
 import CourseLessonUnit from "./CourseLessonUnit";
+import CourseLessonVideoUnit from "./CourseLessonVideoUnit";
 
 /**
  * 
@@ -9,6 +11,8 @@ import CourseLessonUnit from "./CourseLessonUnit";
  */
 export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" }) {
     const [hidden, setHidden] = useState(hiddenByDefault);
+    const [duration, setDuration] = useState(0);
+
     return (
         <div className="flex flex-col justify-between w-full" >
             <div className="grow flex">
@@ -25,7 +29,7 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
 
                     <div className="flex text-sm gap-2 items-center">
                         <Clock9Icon className="text-xs" />
-                        <p>{2} min</p>
+                        <p>{duration.toFixed(2)} min</p>
                     </div>
                 </div>
             </div>
@@ -33,10 +37,7 @@ export default function OverviewLesson({ hiddenByDefault, lesson, courseId = "" 
             <div className={"flex-col " + (hidden ? "hidden" : "flex")}>
                 <hr />
                 {lesson.videos.map((video) => (
-                    <React.Fragment key={video.id}>
-                        <CourseLessonUnit name={video.name} icon="file" icon2={video.isFree ? "none" : "time"} unit={video.isFree ? null : 12} unitName={video.isFree ? "preview" : "min"} url={video.isFree ? `/courses/${courseId}/videos/${video.id}` : ""} />
-                        <hr />
-                    </React.Fragment>
+                    <CourseLessonVideoUnit key={video.id} video={video} courseId={courseId} onDuration={(videoDuration) => setDuration(duration + (videoDuration / 60))} />
                 ))}
 
                 {lesson.quizzes.map(quize => (

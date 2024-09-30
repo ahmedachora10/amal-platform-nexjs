@@ -1,5 +1,7 @@
+'use client';
 import LessonQuizBox from "@/components/lesson_quiz_box";
 import OpenBox from "@/components/ui/open_box";
+import LessonVideoSidebarOpenBox from "./LessonVideoSidebarOpenBox";
 
 /**
  * @param {{lesson: import("@/types/static/global").Lesson[], course: import("@/types/static/global").Course}} param0
@@ -11,7 +13,7 @@ export default function LessonsSidebarOpenBoxes({ lessons = [], course }) {
                 lessons?.map(lesson => lesson?.videos?.length ? (
                     <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
                         {lesson.videos.map(video => (
-                            <LessonQuizBox key={video.id} title={video.name} minutes={video.video ? undefined : undefined} progress={undefined} url={video.video ? `/courses/${course.id}/videos/${video.id}` : ""} />
+                            <LessonVideoSidebarOpenBox video={video} courseId={course.id} />
                         ))}
                     </OpenBox>
                 ) : null)
