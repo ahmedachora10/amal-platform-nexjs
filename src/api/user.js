@@ -7,7 +7,7 @@ export class User {
      * 
      * @param {string} username 
      * @param {string} password 
-     * @returns {Promise<{status: boolean, user?:User,message?: string}>}
+     * @returns {Promise<{status: boolean, user?:User,message?: string, token: string}>}
      */
     static async login(username, password) {
         try {
@@ -19,12 +19,14 @@ export class User {
             formData.append('password', password);
 
             // send the request to the server using axios
-            return (await axios.post('/login', formData, {
+            const response = (await axios.post('/login', formData, {
                 headers: {
                     'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
                     // 'Referer': 'http://localhost:3000'
                 }
-            })).data;
+            })).data
+
+            return response;
         }
         catch (err) {
             console.log("An unknown error occured when trying to login");
