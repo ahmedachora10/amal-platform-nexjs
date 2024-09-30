@@ -34,16 +34,18 @@ export default function Course(props) {
         subscriptions,
         courseId
     } = course;
+    
 
     const enrollCourse = () => {
         setPending(true);
 
         const enrollData = {
             course_id: courseId,
-            price: price,
-            student_id: user?.id
+            price: price.toFixed(2),
+            student_id: user?.data?.id
         };
-        console.log(enrollData);
+        
+        console.log(enrollData, user);
         User.enrollCourse(enrollData).then(res => {
             setPending(false);
             if (!res.status) {
