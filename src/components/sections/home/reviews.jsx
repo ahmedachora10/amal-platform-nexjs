@@ -14,7 +14,7 @@ export default function Reviews({ data }) {
         <section className="bg-[#EBF3FF] px pt-7 pb-50 lg:pb-52 mb-[50%] lg:mb-0 relative">
 
             <div className="flex justify-center items-center overflow-hidden absolute w-full h-full">
-                <Image draggable={false} src={Bg3} className="max-w-[100vw] w-[116.93%]" />
+                <Image draggable={false} src={Bg3} className="max-w-[100vw] w-[116.93%]" width={1024} height={1024} />
             </div>
 
             <div className="flex flex-col gap-9 w-full mt-10 p-7">

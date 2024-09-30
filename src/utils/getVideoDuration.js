@@ -3,7 +3,7 @@
  * @param {string} url 
  * @returns {number}
  */
-async function getVideoDuration(url) {
+export default async function getVideoDuration(url) {
     // Create a new video element
     const video = document.createElement('video');
 

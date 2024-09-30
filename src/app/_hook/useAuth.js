@@ -30,6 +30,8 @@ export default function useAuth() {
             if (result.status) {
                 mutate("/api/user", result.user);
             }
+
+            return result;
         },
         logout: async () => {
             await User.logout();

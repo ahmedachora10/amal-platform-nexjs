@@ -1,6 +1,5 @@
 import CourseFeatures from "@/components/cards/CourseFeatures";
 import UserPositionSection from "@/components/sections/user_position_section";
-import test2 from "@/app/test-2.png"
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -53,6 +52,9 @@ export default async function CourseDetailsPage({ params }) {
     //         },
     //     ],
     // }
+    /**
+     * @type {{course: import("@/types/static/global").Course, courses: import("@/types/static/global").Course[]}}
+     */
     const data = await DynamicPagesApi.course(params.id);
     /**
      * @type {import("@/types/static/global").Course}
@@ -69,11 +71,11 @@ export default async function CourseDetailsPage({ params }) {
 
             <main className="grow flex mx-auto container mt-7">
                 <div className="grow hidden lg:block"></div>
-                <div className="grow-[4] flex flex-col gap-16 max-w-[50vw] mx-auto items-center">
+                <div className="grow-[4] flex flex-col gap-16 max-w-[50vw] mx-auto items-center w-full">
                     <h1 className="text-4xl">Arabic language | The comprehensive course - Learn modern</h1>
 
-                    <div className="flex flex-col gap-3">
-                        <Image src={test2} className="w-full" />
+                    <div className="flex flex-col gap-3 w-full">
+                        {virtualCourseRequiredData.thumbnail && <Image src={virtualCourseRequiredData.thumbnail} alt="" className="w-fit" width={1024} height={1024} />}
                         <div className="flex lg:hidden">
                             <CourseFeatures
                                 enrolled={virtualCourseRequiredData?.subscriptions_count}
@@ -87,7 +89,7 @@ export default async function CourseDetailsPage({ params }) {
                             />
                         </div>
 
-                        <div className="flex justify-between gap-2 mt-7">
+                        <div className="flex justify-between gap-2 mt-7 w-full">
                             <Button variant="outline" className="font-bold w-full bg-[#F9B03F] hover:bg-[#f9af3fd0] text-white">Description</Button>
                             <Button variant="outline" className="font-bold w-full"><Link href="#overview">Overview</Link></Button>
                             <Button variant="outline" className="font-bold w-full"><Link href="#reviews">Reviews</Link></Button>

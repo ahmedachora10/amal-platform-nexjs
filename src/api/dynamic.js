@@ -13,11 +13,13 @@ export default class DynamicPagesApi {
             if (filter.categoryId) searchParams.set("categoryId", filter.categoryId);
             if (filter.levelId) searchParams.set("levelId", filter.levelId);
             if (filter.search) searchParams.set("search", filter.search);
-
-
-
-            console.log(searchParams.toString());
-            data = (await axios.get(`/api/courses?${searchParams}`)).data;
+            // if no filter value provided
+            if (!filter.categoryId && !filter.levelId && !filter.search) {
+                data = (await axios.get(`/api/courses`)).data;
+            }
+            else {
+                data = (await axios.get(`/api/courses/filter?${searchParams}`)).data;
+            }
 
             return data || [];
         }
@@ -29,8 +31,14 @@ export default class DynamicPagesApi {
         }
     }
 
+    /**
+     * 
+     * @param {number} id 
+     * @returns {{course: import("@/types/static/global").Course, relatedCourses: import("@/types/static/global").Course[]}}
+     */
     static async course(id) {
         try {
+
             return (await axios.get(`/api/courses/${id}/details`)).data;
         }
         catch (Err) {

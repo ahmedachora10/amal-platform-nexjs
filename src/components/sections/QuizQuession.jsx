@@ -1,7 +1,7 @@
 'use client';
 import { Input } from "../ui/input";
 
-export default function Quiz({ answer = "", quession = "", chooses = [] }) {
+export default function QuizQuession({ answer = "", quession = "", chooses = [] }) {
     return (
         <div className="w-full">
             <div className="bg-[#F9F9F9] border border-[#ABB3B7] p-4">
@@ -14,7 +14,7 @@ export default function Quiz({ answer = "", quession = "", chooses = [] }) {
                         <div key={i} className="flex items-center gap-3 w-full border border-[#ABB3B7] p-4" onClick={() => {
 
                         }}>
-                            <Input type="radio" value={choose} name="answer" className="w-[29px]" />
+                            <Input type="radio" value={choose} name={quession} className="w-[29px]" />
                             <p >{choose}</p>
                         </div>
                     ))

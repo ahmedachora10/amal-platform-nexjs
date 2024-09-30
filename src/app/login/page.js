@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { useState } from "react";
+import useAuth from "../_hook/useAuth";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
     const [err, setErr] = useState("");
-
+    const { login } = useAuth();
+    const router = useRouter();
 
     /**
      * 
@@ -21,12 +24,13 @@ export default function Login() {
 
         await User.csrf();
 
-        const res = await User.login(username, password);
-
-        console.log(res);
+        const res = await login(username, password);
 
 
-        if (!res.status) {
+        if (res.status) {
+            router.replace("/student/profile");
+        }
+        else {
             setErr(res.message || "there is unknown a problem with this login, please try again..");
         }
 
