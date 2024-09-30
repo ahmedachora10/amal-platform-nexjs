@@ -1,6 +1,6 @@
 import FormData from "form-data";
 import { axios } from "./axios";
-import { getCookie } from "@/utils/helpers";
+import { CSRFHeader, getCookie } from "@/utils/helpers";
 
 export class User {
     /**
@@ -25,7 +25,7 @@ export class User {
                     // 'Referer': 'http://localhost:3000'
                 }
             })).data
-
+            localStorage.setItem("token", response.token);
             return response;
         }
         catch (err) {
@@ -42,7 +42,8 @@ export class User {
 
     static async logout() {
         try {
-            return await axios.post("/logout");
+            localStorage.removeItem("token");
+            return await axios.post("/logout", { headers: CSRFHeader() });
         }
         catch (err) {
             return null;
@@ -66,7 +67,7 @@ export class User {
             formData.append("name", name);
             formData.append("email", email);
             formData.append("phone", phone);
-            return (await axios.post("/api/student/personal-information", formData)).data
+            return (await axios.post("/api/student/personal-information", formData, { headers: CSRFHeader() })).data
         }
         catch (err) {
             return null;
@@ -87,7 +88,7 @@ export class User {
         form.append("new_password", newPassword);
         form.append("new_password_confirmation", newPasswordConfirmation);
         try {
-            return (await axios.post("/api/student/password")).data
+            return (await axios.post("/api/student/password", form, { headers: CSRFHeader() })).data
         }
         catch (err) {
             console.log("An Error Occured When Trying to change the password");
@@ -114,7 +115,7 @@ export class User {
             formData.append("name", data.name);
             formData.append("phone", data.phone);
 
-            return (await axios.post("/register")).data
+            return (await axios.post("/register", formData, { headers: CSRFHeader() })).data
         }
         catch (err) {
             console.log("An unknown error occured when trying to register new user");
@@ -134,13 +135,7 @@ export class User {
     static async getUser() {
         try {
             // TODO: send a Bearer token with a protected request
-            const user = await axios.get("/api/user", {
-                headers: {
-                    'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                    'Referer': 'http://localhost:3000',
-                    // 'Authorization' : 'Bearer 1|CcT2tMHcBSpt2plqTcxH2vht7jKKDwRpsGHzVOnUad83de17'
-                }
-            });
+            const user = await axios.get("/api/user", { headers: CSRFHeader() });
             return user.data;
         }
         catch (err) {
@@ -148,4 +143,23 @@ export class User {
         }
     }
 
+    /**
+ * 
+ * @param {import("@/types/static/global").EnrollCourse} data 
+ */
+    static async enrollCourse(data) {
+        const formdata = new FormData();
+        formdata.append("student_id", data.student_id);
+        formdata.append("course_id", data.student_id);
+        formdata.append("price", data.price);
+
+        try {
+            return (await axios.post("/api/student/enroll", formdata, { headers: CSRFHeader() })).data
+        }
+        catch (err) {
+            console.log("error while enrolling the course");
+            console.log("data was:", data);
+            console.log("error was:", err);
+        }
+    }
 }
