@@ -38,11 +38,13 @@ export default function Course(props) {
     const enrollCourse = () => {
         setPending(true);
 
-        User.enrollCourse({
+        const enrollData = {
             course_id: courseId,
             price: price,
             student_id: user?.id
-        }).then(res => {
+        };
+        console.log(enrollData);
+        User.enrollCourse(enrollData).then(res => {
             setPending(false);
             if (!res.status) {
                 setErr(res.message);
