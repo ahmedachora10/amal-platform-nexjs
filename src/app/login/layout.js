@@ -17,7 +17,7 @@ export default function LoginLayout({ children }) {
       enableSystem
       disableTransitionOnChange
     >
-      <LoggedOutOnly skeleton={<div className="w-screen h-screen flex justify-center items-center"><Skeleton className="w-[26rem] h-96 border-2 border"></Skeleton></div>}>
+      <LoggedOutOnly skeleton={<div className="w-screen h-screen flex justify-center items-center"><Skeleton className="w-[26rem] h-96 border"></Skeleton></div>}>
         {children}
       </LoggedOutOnly>
     </ThemeProvider>
