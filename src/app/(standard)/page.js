@@ -10,12 +10,13 @@ import Features from "@/components/sections/home/features";
 import Reviews from "@/components/sections/home/reviews";
 import Courses from "@/components/sections/home/courses";
 import Sliders from "@/components/cards/sliders";
+import ViewAllCoursesButton from "@/components/ViewAllCoursesButton";
 
 export default async function Home() {
   const data = await StaticPagesApi.home();
   return (
     <div>
-      <div className='container md:mx-auto px-2 flex flex-col gap-14'>
+      <div className='container mx-auto px-2 flex flex-col gap-14'>
 
         <main>
           <section className="container mx-auto justify-between flex flex-col xl:flex-row relative">
@@ -56,10 +57,10 @@ export default async function Home() {
         <Features data={data.features} />
 
 
-        <section className="container mx-auto bg-[#EBF3FF] p-7">
+        <section className="container mx-auto bg-[#EBF3FF] p-7 flex flex-col gap-4">
           <div className="flex justify-between">
             <h1 className="text-3xl font-bold">Our Top Online Courses</h1>
-            <Button>View All</Button>
+            <ViewAllCoursesButton />
           </div>
 
           <Courses data={data.bestSellingListCourses || []} />

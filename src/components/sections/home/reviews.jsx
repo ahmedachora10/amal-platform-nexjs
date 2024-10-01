@@ -1,8 +1,8 @@
 import ClientReview from "@/components/cards/ClientReview";
 import TitleWithLine from "@/components/title_with_line";
-import { Carousel, CarouselContent, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Image from "next/image";
 import Bg3 from "@/app/images/home/clients-reviews-section-bg.svg";
+import Carousel from "./Carousel";
 
 /**
  * 
@@ -33,15 +33,16 @@ export default function Reviews({ data }) {
                     <Children data={data} />
                 </div>
 
-                <div className="block md:hidden">
-                    <Carousel className="flex">
-                        <CarouselContent>
-                            <Children data={data} />
-                        </CarouselContent>
+                <div className="flex md:hidden grow justify-center">
+                    {
+                        data.length > 1 ? (
 
-                        <CarouselPrevious />
-                        <CarouselNext />
-                    </Carousel>
+                            <Carousel slides={Children({ data })} />
+                        )
+                            : (
+                                <Children data={data} />
+                            )
+                    }
                 </div>
             </div>
 
@@ -54,9 +55,7 @@ export default function Reviews({ data }) {
  * @param {{data: import("@/types/static/global").Testimonial[]}} param0
  */
 function Children({ data }) {
-    return (
-        data.map((item, index) => (
-            <ClientReview key={index} name={item.name} reviewText={item.comment} subtitle={item.profession} rate={item.status} imageComponent={<img src={item.image} />} />
-        ))
-    )
+    return data.map((item, index) => (
+        <ClientReview key={index} name={item.name} reviewText={item.comment} subtitle={item.profession} rate={item.status} imageComponent={<img src={item.image} />} />
+    ))
 }
