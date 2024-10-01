@@ -1,9 +1,8 @@
-import { Suspense } from "react";
-
+'use client';
 export default function CoursesLayout({ children }) {
     return (
-        <Suspense>
+        <div className="w-screen min-h-screen">
             {children}
-        </Suspense>
+        </div>
     )
 }

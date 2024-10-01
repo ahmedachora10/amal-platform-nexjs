@@ -9,6 +9,8 @@ import useAuth from "@/app/_hook/useAuth";
 import LoggedInOnly from "../LoggedInOnly";
 import Image from "next/image";
 import HeaderRightBarSkeleton from "../ui/skeletons/HeaderRightBar";
+import LoggedOutOnly from "../LoggedOutOnly";
+import HeaderUserImg from "../HeaderUserImg";
 
 export default function Header() {
     const [isOpened, setIsOpened] = useState(false);
@@ -30,24 +32,18 @@ export default function Header() {
                         ) : (
                             <>
                                 {
-                                    user ? <></> : (
+                                    <LoggedOutOnly noRedirect>
                                         <div className="auth">
                                             <div className="flex items-center justify-start">
                                                 <AuthButtons />
                                             </div>
                                         </div>
-                                    )
+                                    </LoggedOutOnly>
                                 }
 
-                                {
-                                    user?.image ? (
-                                        <LoggedInOnly noRedirect>
-                                            <div className="hidden md:flex items-center justify-center w-11 h-11 border bg-gray-400 rounded-full cursor-pointer relative">
-                                                <Image src={user?.image} width={480} height={480} className="max-w-full max-h-full rounded-full" draggable={false} alt="" />
-                                            </div>
-                                        </LoggedInOnly>
-                                    ) : <></>
-                                }
+                                <LoggedInOnly noRedirect>
+                                    <HeaderUserImg />
+                                </LoggedInOnly>
 
                             </>
                         )
@@ -56,7 +52,8 @@ export default function Header() {
             </div>
 
             <div className="md:hidden flex justify-end px-8">
-                <Button onClick={() => setIsOpened(true)}><Menu /></Button>
+                <Button onClick={() => setIsOpened(true)} variant="ghost"><Menu className="text-[#979797] w-8 h-8" /></Button>
+                <HeaderUserImg />
                 {
                     isOpened && (
                         <Modal className="" onClose={() => setIsOpened(false)}>

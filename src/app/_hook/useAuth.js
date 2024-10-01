@@ -14,17 +14,17 @@ export default function useAuth() {
     }
 
     return {
-        // user: {
-        //     id: 5,
-        //     name: "user name",
-        //     email: "user email",
-        //     phone: "user phone",
-        //     emailVerifiedAt: new Date(),
-        //     role: "Student",
-        //     isBlocked: false,
-        //     image: "https://www.shutterstock.com/shutterstock/photos/1883859943/display_1500/stock-photo-the-word-example-is-written-on-a-magnifying-glass-on-a-yellow-background-1883859943.jpg",
-        // },
-        user: data,
+        user: {
+            id: 5,
+            name: "user name",
+            email: "user email",
+            phone: "user phone",
+            emailVerifiedAt: new Date(),
+            role: "Student",
+            isBlocked: false,
+            image: "https://www.shutterstock.com/shutterstock/photos/1883859943/display_1500/stock-photo-the-word-example-is-written-on-a-magnifying-glass-on-a-yellow-background-1883859943.jpg",
+        },
+        // user: data,
         login: async (username, password) => {
             const result = await User.login(username, password);
             if (result.status) {
