@@ -2,6 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import localFont from "next/font/local";
 import "../globals.css";
 import LoggedOutOnly from "@/components/LoggedOutOnly";
+import Skeleton from "@/components/ui/skeleton";
 
 const geistSans = localFont({
   src: "../fonts/GeistVF.woff",
@@ -29,7 +30,7 @@ export default function RegisterLayout({ children }) {
         enableSystem
         disableTransitionOnChange
       >
-        <LoggedOutOnly>
+        <LoggedOutOnly skeleton={<div className="w-screen h-screen flex items-center justify-center"><Skeleton className="w-[24rem] h-[32rem]" /></div>}>
           {children}
         </LoggedOutOnly>
       </ThemeProvider>

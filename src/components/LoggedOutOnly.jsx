@@ -4,7 +4,7 @@ import useAuth from "@/app/_hook/useAuth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function LoggedOutOnly({ children, noRedirect = false }) {
+export default function LoggedOutOnly({ children, noRedirect = false, skeleton = null }) {
     const { user, isLoading } = useAuth();
     const router = useRouter();
 
@@ -14,7 +14,7 @@ export default function LoggedOutOnly({ children, noRedirect = false }) {
         }
     });
 
-    return isLoading ? <></> : !user ? (
+    return isLoading ? <>{skeleton}</> : !user ? (
         <>
             {children}
         </>

@@ -1,6 +1,7 @@
 import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
 import LoggedOutOnly from "@/components/LoggedOutOnly";
+import Skeleton from "@/components/ui/skeleton";
 
 
 export const metadata = {
@@ -16,8 +17,8 @@ export default function LoginLayout({ children }) {
       enableSystem
       disableTransitionOnChange
     >
-      <LoggedOutOnly>
-      {children}
+      <LoggedOutOnly skeleton={<div className="w-screen h-screen flex justify-center items-center"><Skeleton className="w-[26rem] h-96 border-2 border"></Skeleton></div>}>
+        {children}
       </LoggedOutOnly>
     </ThemeProvider>
   );

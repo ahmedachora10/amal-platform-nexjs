@@ -9,10 +9,12 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { getCourses } from "@/app/_actions/getCourses";
 import Modal from "@/components/Modal";
+import CourseSkeleton from "@/components/ui/skeletons/course";
 
 export default function CoursesPage() {
     const [filterOpen, setFilterOpen] = useState(false);
     const params = useSearchParams();
+    const [pending, setPending] = useState(true);
     /**
      * @type {import("@/types/CourseFilter").CourseFilter}
      */
@@ -29,11 +31,18 @@ export default function CoursesPage() {
 
 
     useEffect(() => {
+        if (!pending) setPending(true);
         getCourses(filterData).then(response => {
-            setCourses(response);
+            setTimeout(() => {
+                setPending(false);
+                setCourses(response);
+            }, 500);
         })
     }, [params]);
 
+    useEffect(() => {
+        console.log(pending)
+    })
     return (
         <div className="flex flex-col mb-52">
             <UserPositionSection pageName="Courses List" position="Home | Courses List" />
@@ -79,12 +88,22 @@ export default function CoursesPage() {
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
+                    <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
                         {courses.map((course, index) => (
                             <div className="p-4 mx-auto" key={index}>
                                 <Course isSubscribed={course.isSubscribed} title={course.name} category={course.category.name} image={icon} subscriptions={3} link={`/courses/${course.id}`} price={course.price} rating={4.4} courseId={course.id} />
                             </div>
                         ))}
+
+                        {
+                            (courses.length === 0 && pending) ? (
+                                <>
+                                    {Array.from({ length: 9 }).map(() => (
+                                        <CourseSkeleton />
+                                    ))}
+                                </>
+                            ) : null
+                        }
                     </div>
 
                     <div className="md:hidden flex gap-3 items-center"><BackForwardButtons /></div>
