@@ -4,6 +4,7 @@ import QuizQuession from "@/components/sections/QuizQuession";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { notFound } from "next/navigation";
 
 export default async function CourseQuiz({ params: { id, quizeId } }) {
     /** @type {(import("@/types/static/global").Quiz)|null} */
@@ -22,9 +23,13 @@ export default async function CourseQuiz({ params: { id, quizeId } }) {
     }
 
     const data = await DynamicPagesApi.course(id);
-    const course = data.course;
-    const lessons = course.lessons;
+    const course = data?.course;
+    const lessons = await DynamicPagesApi.getLessonsDetails(id);
+    if (!lessons || !course) notFound();
+
     lessons.find(finder);
+
+    if (!currentQuize) notFound();
 
     return (
         <main className="flex md:container mx-4 gap-7 mt-7 md:mx-auto">
@@ -42,8 +47,8 @@ export default async function CourseQuiz({ params: { id, quizeId } }) {
             <div className="grow-[4] flex flex-col gap-11">
                 <h1 className="text-xl font-bold">Quiz</h1>
                 {
-                    currentQuize.questions.map(quession => (
-                        <QuizQuession key={quession.id} quession={quession.question} chooses={[]} answer={quession.correctAnswerId} />
+                    currentQuize?.questions.map(quession => (
+                        <QuizQuession key={quession.id} quession={quession.question} chooses={quession.options} answer={quession.correctAnswerId} />
                     ))
                 }
                 <Button className="w-fit px-16">Send</Button>

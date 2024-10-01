@@ -35,18 +35,30 @@ export interface Video {
     attachments: VideoAttachment[]
 }
 
+export interface QuessionOption {
+    id: number,
+    quiz_id: number,
+    question_id: number,
+    answer: string,
+    sort: number,
+    created_at: Date,
+    updated_at: Date,
+};
+
+
 export interface Question {
     id: number;
     correctAnswerId: null | number;
     question: string;
     sort: number;
+    options: QuessionOption[]
 }
 
 export interface Quiz {
     id: number;
     name: string;
     questions: Question[];
-    questions_count: number;
+    questions_count?: number;
 }
 
 export interface Lesson {

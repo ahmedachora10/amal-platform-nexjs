@@ -34,11 +34,10 @@ export default class DynamicPagesApi {
     /**
      * 
      * @param {number} id 
-     * @returns {{course: import("@/types/static/global").Course, relatedCourses: import("@/types/static/global").Course[]}}
+     * @returns {Promise<{course: import("@/types/static/global").Course, relatedCourses: import("@/types/static/global").Course[]}|null>}
      */
     static async course(id) {
         try {
-
             return (await axios.get(`/api/courses/${id}/details`)).data;
         }
         catch (Err) {
@@ -48,6 +47,22 @@ export default class DynamicPagesApi {
             return null;
         }
     }
+
+    /**
+     * 
+     * @param {number} courseId 
+     * @returns {Promise<import("@/types/static/global").Lesson[] | null>}
+     */
+    static async getLessonsDetails(courseId) {
+        try {
+            const responseBody = (await axios.get(`/api/lessons/${courseId}/details`)).data;
+            return responseBody?.data || null;
+        }
+        catch (err) {
+            return null;
+        }
+    }
+
     /**
      * 
      * @returns {Promise<import("@/types/static/global").Course[]>}

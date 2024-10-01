@@ -4,9 +4,10 @@ import OpenBox from "@/components/ui/open_box";
 import LessonVideoSidebarOpenBox from "./LessonVideoSidebarOpenBox";
 
 /**
- * @param {{lesson: import("@/types/static/global").Lesson[], course: import("@/types/static/global").Course}} param0
+ * @param {{lessons: import("@/types/static/global").Lesson[], course: import("@/types/static/global").Course}} param0
  */
 export default function LessonsSidebarOpenBoxes({ lessons = [], course }) {
+
     return (
         <>
             {
@@ -26,7 +27,7 @@ export default function LessonsSidebarOpenBoxes({ lessons = [], course }) {
                 lessons?.map(lesson => lesson?.quizzes?.length ? (
                     <OpenBox title={lesson.name} openClassName="n" key={lesson.id}>
                         {lesson.quizzes.map(quize => (
-                            <LessonQuizBox noProgress title={quize.name} unitName={"Q"} unitValue={quize.questions_count} url={quize.questions_count ? `/courses/${course.id}/quizes/${quize.id}` : undefined} />
+                            <LessonQuizBox noProgress title={quize.name} unitName={"Q"} unitValue={quize.questions.length} url={quize.questions.length ? `/courses/${course.id}/quizes/${quize.id}` : undefined} />
                         ))}
                     </OpenBox>
                 ) : null)
