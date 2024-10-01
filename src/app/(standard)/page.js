@@ -18,9 +18,9 @@ export default async function Home() {
     <div>
       <div className='container mx-auto px-2 flex flex-col gap-14'>
 
-        <main>
+        <main className="flex flex-col gap-16">
           <section className="container mx-auto justify-between flex flex-col xl:flex-row relative">
-            <Image src={Bg1} className="absolute top-0 left-0 -translate-x-[25%] -translate-y-[25%]" draggable={false} />
+            <Image src={Bg1} className="absolute top-0 left-0 -translate-x-[25%] -translate-y-[25%]" draggable={false} alt="" />
 
             <div className="xl:w-[40.83%] flex flex-col items-center gap-7">
               <h1 className="xl:text-[80px] text-[40px] font-bold">Learn Arabic with us from the best.</h1>

@@ -11,9 +11,9 @@ import Image from "next/image";
 export default function AboutUs({ data }) {
 
     return (
-        <section className="container lg:mx-auto flex lg:flex-row flex-col-reverse items-center gap-7">
+        <section className="container lg:mx-auto flex lg:flex-row flex-col-reverse items-center justify-evenly gap-16">
             <div className="">
-                <Image src={data.image} alt="" width={1024} height={1024} />
+                <Image className="max-w-96" src={data.image} alt="" width={480} height={480} />
             </div>
 
             <div className="flex flex-col lg:max-w-[32.66vw] gap-9">
