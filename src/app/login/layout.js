@@ -2,7 +2,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "../globals.css";
 import LoggedOutOnly from "@/components/LoggedOutOnly";
 import Skeleton from "@/components/ui/skeleton";
-
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Create Next App",
@@ -11,15 +11,18 @@ export const metadata = {
 
 export default function LoginLayout({ children }) {
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <LoggedOutOnly skeleton={<div className="w-screen h-screen flex justify-center items-center"><Skeleton className="w-[26rem] h-96 border"></Skeleton></div>}>
-        {children}
-      </LoggedOutOnly>
-    </ThemeProvider>
+    <Suspense>
+
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
+      >
+        <LoggedOutOnly skeleton={<div className="w-screen h-screen flex justify-center items-center"><Skeleton className="w-[26rem] h-96 border"></Skeleton></div>}>
+          {children}
+        </LoggedOutOnly>
+      </ThemeProvider>
+    </Suspense>
   );
 }

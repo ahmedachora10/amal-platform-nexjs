@@ -22,7 +22,7 @@ function Links() {
             <li className="mx-3"><Link href="/about">About Us</Link></li>
             <li className="mx-3"><Link href="/contact">Contact Us</Link></li>
             {
-                (user && !isLoading) ? <li className="mx-3"><Link href="/student/profile">Profile</Link></li> : null
+                (user && !isLoading) ? <li className="mx-3 md:hidden"><Link href="/student/profile">Profile</Link></li> : null
             }
         </>
     )

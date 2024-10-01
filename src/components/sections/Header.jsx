@@ -7,32 +7,50 @@ import { Menu } from "lucide-react";
 import Modal from "../Modal";
 import useAuth from "@/app/_hook/useAuth";
 import LoggedInOnly from "../LoggedInOnly";
+import Image from "next/image";
+import HeaderRightBarSkeleton from "../ui/skeletons/HeaderRightBar";
 
 export default function Header() {
     const [isOpened, setIsOpened] = useState(false);
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
 
     return (
-        <header className="bg-white py-3">
+        <header className="bg-white py-3 w-screen">
             <div className="container mx-auto hidden md:block">
                 <div className="flex items-center justify-between">
                     <div className="logo">Logo</div>
+
                     <div className="menu">
                         <MainLinks />
                     </div>
-                    <div className="auth">
-                        <div className="flex items-center justify-start">
-                            <AuthButtons />
-                        </div>
-                    </div>
+
                     {
-                        user?.image ? (
-                            <LoggedInOnly noRedirect>
-                                <div className="hidden md:block">
-                                    <img src={user?.image} className="max-w-16 max-h-16 rounded-full" draggable={false} />
-                                </div>
-                            </LoggedInOnly>
-                        ) : null
+                        isLoading ? (
+                            <HeaderRightBarSkeleton />
+                        ) : (
+                            <>
+                                {
+                                    user ? <></> : (
+                                        <div className="auth">
+                                            <div className="flex items-center justify-start">
+                                                <AuthButtons />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+
+                                {
+                                    user?.image ? (
+                                        <LoggedInOnly noRedirect>
+                                            <div className="hidden md:flex items-center justify-center w-11 h-11 border bg-gray-400 rounded-full cursor-pointer relative">
+                                                <Image src={user?.image} width={480} height={480} className="max-w-full max-h-full rounded-full" draggable={false} alt="" />
+                                            </div>
+                                        </LoggedInOnly>
+                                    ) : <></>
+                                }
+
+                            </>
+                        )
                     }
                 </div>
             </div>
