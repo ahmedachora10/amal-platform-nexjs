@@ -1,9 +1,9 @@
 'use client';
 import useAuth from "@/app/_hook/useAuth";
 import { Button } from "../ui/button";
-import FormError from "../FormError";
 import { useState, useEffect } from "react";
 import { User } from "@/api/user";
+import Snackbar from "../ui/SnakeBar";
 
 /**
  * 
@@ -12,6 +12,7 @@ import { User } from "@/api/user";
 export default function CourseFeatures(features) {
     const { user } = useAuth();
     const [err, setErr] = useState(null);
+    const [message, setMessage] = useState(null);
     const [pending, setPending] = useState(false);
 
     const enrollCourse = () => {
@@ -22,8 +23,11 @@ export default function CourseFeatures(features) {
             student_id: user?.id
         }).then(result => {
             setPending(false);
-            if (!result?.status) {
-                setErr(result?.message);
+            if (result?.status) {
+                setMessage(result?.message || "Your Request has been sent")
+            }
+            else {
+                setErr(result?.message || "Failed To Enroll Course");
             }
         });
 
@@ -56,9 +60,12 @@ export default function CourseFeatures(features) {
 
                 <div className="px-4 py-8 bg-[#F2F7FD] flex flex-col justify-center items-center gap-7">
                     <h3 className="text-xl font-bold">Price: ${features.price}</h3>
-                    <FormError err={err} />
                     <Button className={"rounded-2xl " + (pending ? "bg-gray-300 hover:bg-gray-300" : "")} onClick={enrollCourse}>ENROLL COURSE</Button>
                 </div>
+
+                {err && <Snackbar message={err} variant="error" onClose={() => setErr(null)} />}
+                {message && <Snackbar message={message} variant="warning" onClose={() => setMessage(null)} />}
+
             </div>
         </div>
     )

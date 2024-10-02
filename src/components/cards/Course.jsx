@@ -7,6 +7,7 @@ import useAuth from "@/app/_hook/useAuth";
 import { useState } from "react";
 import { User } from "@/api/user";
 import Image from "next/image";
+import Snackbar from "../ui/SnakeBar";
 
 /**
  * 
@@ -16,7 +17,8 @@ import Image from "next/image";
 export default function Course(props) {
     const router = useRouter();
     const { user } = useAuth();
-    const [_err, setErr] = useState(null);
+    const [err, setErr] = useState(null);
+    const [message, setMessage] = useState(null);
     const [pending, setPending] = useState(false);
 
     /**
@@ -48,8 +50,11 @@ export default function Course(props) {
         console.log(enrollData, user);
         User.enrollCourse(enrollData).then(res => {
             setPending(false);
-            if (!res.status) {
-                setErr(res.message);
+            if (res.status) {
+                setMessage(res?.message || "your request has been sent");
+            }
+            else {
+                setErr(res?.message || "Failed To Enroll Course");
             }
 
         });
@@ -82,6 +87,10 @@ export default function Course(props) {
                 <Button variant="outline" className={"text-white rounded-br-xl text-xs cursor-pointer " + (isSubscribed ? "hover:bg-primary hover:text-white bg-opacity-90 text-white bg-primary cursor-alias " : "bg-primary") + (pending ? " bg-gray-300 hover:bg-gray-300 text-black" : "")} asChild onClick={isSubscribed ? undefined : enrollCourse}>
                     <p>{isSubscribed ? "Owned" : "Buy Now"}</p>
                 </Button>
+
+                {err && <Snackbar variant={"error"} message={err} duration={10000} onClose={() => setErr(null)} />}
+                {message && <Snackbar variant={"warning"} message={"The subscription request has been sent"} duration={10000} onClose={() => setEnrolled(false)} />}
+
             </div>
         </div>
     );

@@ -160,6 +160,10 @@ export class User {
             console.log("error while enrolling the course");
             console.log("data was:", data);
             console.log("error was:", err);
+            return {
+                status: false,
+                message: "Failed To Enroll Course"
+            }
         }
     }
 }
