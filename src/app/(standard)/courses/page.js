@@ -89,7 +89,7 @@ export default function CoursesPage() {
                     </div>
 
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
-                        {courses.map((course, index) => (
+                        {courses?.map((course, index) => (
                             <div className="p-4 mx-auto" key={index}>
                                 <Course isSubscribed={course.isSubscribed} title={course.name} category={course.category.name} image={icon} subscriptions={3} link={`/courses/${course.id}`} price={course.price} rating={4.4} courseId={course.id} />
                             </div>
