@@ -20,7 +20,7 @@ export default function Profile() {
     const [isUpdatingData, setIsUpdatingData] = useState(false);
     const [dialogOpen, setDialogOpen] = useState(false);
     const updateFormRef = useRef();
-    const { user } = useAuth();
+    const { user, changeInfo } = useAuth();
 
     /**
      * 
