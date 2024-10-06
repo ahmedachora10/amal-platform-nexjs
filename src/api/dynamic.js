@@ -69,7 +69,7 @@ export default class DynamicPagesApi {
      */
     static async studentCourses() {
         try {
-            const data = await axios.get("/api/student/courses");
+            const data = await axios.get("/api/student/courses", CSRFHeader());
             return data.data?.data || [];
         }
         catch (err) {
