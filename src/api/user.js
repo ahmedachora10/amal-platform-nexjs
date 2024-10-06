@@ -48,7 +48,7 @@ export class User {
         catch (err) {
             return null;
         }
-    }
+   }
 
     static async csrf() {
         try {
@@ -165,5 +165,15 @@ export class User {
                 message: "Failed To Enroll Course"
             }
         }
+    }
+    async contactTeam(data){
+        const form = new FormData();
+        form.append("name",data.name);
+        form.append("subject",data.subject)
+        form.append("email", data.email)
+        form.append("message", data.message) 
+                    formData.append("phone", data.phone);
+        return (await axios.post("/api/contact-us", form)).data; 
+
     }
 }
