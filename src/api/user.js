@@ -166,14 +166,14 @@ export class User {
             }
         }
     }
-    async contactTeam(data){
-        const form = new FormData();
-        form.append("name",data.name);
-        form.append("subject",data.subject)
-        form.append("email", data.email)
-        form.append("message", data.message) 
-                    formData.append("phone", data.phone);
-        return (await axios.post("/api/contact-us", form)).data; 
+    static async contactTeam(data){
+        const formdata = new FormData();
+        formdata.append("name",data.name);
+        formdata.append("subject", data.subject);
+        formdata.append("email", data.email);
+        formdata.append("message", data.message);
+        formdata.append("phone", data.phone);
+        return (await axios.post("/api/contact-us", formdata)).data;
 
     }
 }
