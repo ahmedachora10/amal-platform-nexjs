@@ -98,7 +98,7 @@ export default async function CourseDetailsPage({ params }) {
 
 
                     <CourseDescriptionSection data={virtualCourseRequiredData} />
-                    <CourseOverviewSection data={virtualCourseRequiredData} lessons={data.course.lessons} />
+                    <CourseOverviewSection data={virtualCourseRequiredData} lessons={data.course.sections} />
                     <ReviewsSection data={virtualCourseRequiredData} />
 
                     {
