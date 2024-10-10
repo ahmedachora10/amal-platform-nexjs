@@ -1,49 +1,53 @@
 import { Star } from "lucide-react";
 
 /**
- * 
+ *
  * @param {{counts: import("@/types/ReviewsCounts").ReviewsCounts, averageRating: string}} props
  */
 export default function ReviewsCounts(props) {
-    const { counts, averageRating } = props;
-    const totalReviews = (counts["1"] || 0) + (counts["2"] || 0) + (counts["3"] || 0) + (counts["4"] || 0) + (counts["5"] || 0);
-    let fiveStarsPersent = ((counts["5"] / totalReviews) * 100).toString();
-    let fourStarsPersent = ((counts["4"] / totalReviews) * 100).toString();
-    let threeStarsPersent = ((counts["3"] / totalReviews) * 100).toString();
-    let twoStarsPersent = ((counts["2"] / totalReviews) * 100).toString();
-    let oneStarPersent = ((counts["1"] / totalReviews) * 100).toString();
-    if (isNaN(fiveStarsPersent)) fiveStarsPersent = 0;
-    if (isNaN(fourStarsPersent)) fourStarsPersent = 0;
-    if (isNaN(threeStarsPersent)) threeStarsPersent = 0;
-    if (isNaN(twoStarsPersent)) twoStarsPersent = 0;
-    if (isNaN(oneStarPersent)) oneStarPersent = 0;
+  const { counts, averageRating } = props;
+  const totalReviews = Object.values(counts).reduce(
+    (acc, curr) => acc + curr,
+    0
+  ); // Sum all review counts
 
-    return (
-        <div className="flex flex-col md:flex-row border p-4 gap-4">
-            {/* the suumary data */}
-            <div className="flex-grow flex flex-col justify-center items-center gap-4">
-                <h1 className="text-3xl font-bold font-sans">{averageRating}</h1>
-                <div className="flex gap-2 text-yellow-500">
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                </div>
-                <p>Rating {averageRating} out of 5</p>
-            </div>
+  const formatPercentage = (count) => {
+    const percentage = (count / totalReviews) * 100;
+    return isNaN(percentage) ? "0.00" : percentage.toFixed(2);
+  };
 
-            {/* separator */}
-            <div className="border md:w-0 w-full"></div>
-
-            {/* the rating details */}
-            <div className="flex-grow-[2] flex flex-col gap-3 p-4">
-                <div className="whitespace-nowrap flex gap-3 items-center justify-between">5 stars <hr className="w-[85%] border border-[#707070]" /> {fiveStarsPersent.length == 3 ? fiveStarsPersent : fiveStarsPersent + "." + "0".repeat(3 - fiveStarsPersent.length)} %</div>
-                <div className="whitespace-nowrap flex gap-3 items-center justify-between">4 stars <hr className="w-[85%] border border-[#707070]" /> {fourStarsPersent.length == 3 ? fourStarsPersent : fourStarsPersent + "." + "0".repeat(3 - fourStarsPersent.length)} %</div>
-                <div className="whitespace-nowrap flex gap-3 items-center justify-between">3 stars <hr className="w-[85%] border border-[#707070]" /> {threeStarsPersent.length == 3 ? threeStarsPersent : threeStarsPersent + "." + "0".repeat(3 - threeStarsPersent.length)} %</div>
-                <div className="whitespace-nowrap flex gap-3 items-center justify-between">2 stars <hr className="w-[85%] border border-[#707070]" /> {twoStarsPersent.length == 3 ? twoStarsPersent : twoStarsPersent + "." + "0".repeat(3 - twoStarsPersent.length)} %</div>
-                <div className="whitespace-nowrap flex gap-3 items-center justify-between">1 stars <hr className="w-[85%] border border-[#707070]" /> {oneStarPersent.length == 3 ? oneStarPersent : oneStarPersent + "." + "0".repeat(3 - oneStarPersent.length)} %</div>
-            </div>
+  return (
+    <div className="flex flex-col gap-4 p-4 border md:flex-row">
+      {/* Summary Data */}
+      <div className="flex flex-col items-center justify-center flex-grow gap-4">
+        <h1 className="font-sans text-3xl font-bold">
+          {averageRating.toFixed(2)}
+        </h1>
+        <div className="flex gap-2 text-yellow-500">
+          {/* Render stars dynamically based on the average rating */}
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} filled={i < Math.floor(averageRating)} />
+          ))}
         </div>
-    )
+        <p>Rating {averageRating.toFixed(2)} out of 5</p>
+      </div>
+
+      {/* Separator */}
+      <div className="w-full border md:w-0"></div>
+
+      {/* Rating Details */}
+      <div className="flex-grow-[2] flex flex-col gap-3 p-4">
+        {Object.keys(counts).map((star) => (
+          <div
+            key={star}
+            className="flex items-center justify-between gap-3 whitespace-nowrap"
+          >
+            {star} stars
+            <hr className="w-[85%] border border-[#707070]" />
+            {formatPercentage(counts[star])} %
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

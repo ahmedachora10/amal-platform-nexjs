@@ -1,59 +1,57 @@
 import DynamicPagesApi from "@/api/dynamic";
 import LessonsSidebarOpenBoxes from "@/components/sections/course/LessonsSidebarOpenBoxes";
-import QuizQuession from "@/components/sections/QuizQuession";
-import { Button } from "@/components/ui/button";
+import QuizeProvides from "@/components/sections/QuizeProvides";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { notFound } from "next/navigation";
 
 export default async function CourseQuiz({ params: { id, quizeId } }) {
-    /** @type {(import("@/types/static/global").Quiz)|null} */
-    let currentQuize = null;
+  /** @type {(import("@/types/static/global").Quiz)|null} */
+  let currentQuize = null;
 
-    /** @param {import("@/types/static/global").Lesson} lesson  */
-    const finder = (lesson) => {
-        for (let quize of lesson.quizzes) {
-            if (quize.id == quizeId) {
-                currentQuize = quize;
-                return true;
-            }
-        }
-
-        return false;
+  /** @param {import("@/types/static/global").Lesson} lesson  */
+  const finder = (lesson) => {
+    for (let quize of lesson.quizzes) {
+      if (quize.id == quizeId) {
+        currentQuize = quize;
+        return true;
+      }
     }
 
-    const data = await DynamicPagesApi.course(id);
-    const course = data?.course;
-    const lessons = await DynamicPagesApi.getLessonsDetails(id);
-    if (!lessons || !course) notFound();
+    return false;
+  };
 
-    lessons.find(finder);
+  const data = await DynamicPagesApi.course(id);
+  const course = data?.course;
+  const lessons = await DynamicPagesApi.getLessonsDetails(id);
+  if (!lessons || !course) notFound();
 
-    if (!currentQuize) notFound();
+  const foundQuiz = lessons.find(finder);
+  console.log("currentQuize", currentQuize);
+  // if (!currentQuize) notFound();
 
+  if (!foundQuiz || !currentQuize)
     return (
-        <main className="flex md:container mx-4 gap-7 mt-7 md:mx-auto">
-            <div className="grow hidden sm:flex flex-col gap-4 items-end">
-                <div className="flex items-center border-2 border-[#EAEAEA] rounded-lg pr-2 w-full">
-                    <Input placeholder="Search" className="p-3 border-none" />
-                    <Search className="rotate-90 text-sm size-4" />
-                </div>
+      <main className="flex mx-4 md:container gap-7 mt-7 md:mx-auto">
+        No Quiz Found
+      </main>
+    );
 
-                <div className="w-full">
-                    <LessonsSidebarOpenBoxes lessons={lessons} course={course} />
-                </div>
-            </div>
+  return (
+    <main className="flex mx-4 md:container gap-7 mt-7 md:mx-auto">
+      <div className="flex-col items-end hidden gap-4 grow sm:flex">
+        <div className="flex items-center border-2 border-[#EAEAEA] rounded-lg pr-2 w-full">
+          <Input placeholder="Search" className="p-3 border-none" />
+          <Search className="text-sm rotate-90 size-4" />
+        </div>
 
-            <div className="grow-[4] flex flex-col gap-11">
-                <h1 className="text-xl font-bold">Quiz</h1>
-                {
-                    currentQuize?.questions.map(quession => (
-                        <QuizQuession key={quession.id} quession={quession.question} chooses={quession.options} answer={quession.correctAnswerId} />
-                    ))
-                }
-                <Button className="w-fit px-16">Send</Button>
-            </div>
-            <div className="grow hidden sm:block"></div>
-        </main>
-    )
+        <div className="w-full">
+          <LessonsSidebarOpenBoxes lessons={lessons} course={course} />
+        </div>
+      </div>
+
+      <QuizeProvides currentQuize={currentQuize} />
+      <div className="hidden grow sm:block"></div>
+    </main>
+  );
 }
