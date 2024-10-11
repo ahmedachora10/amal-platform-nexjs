@@ -60,10 +60,12 @@ export default async function CourseDetailsPage({ params }) {
    * @type {import("@/types/static/global").Course}
    */
   const virtualCourseRequiredData = data?.course;
-  console.log(virtualCourseRequiredData);
   if (!data) {
     notFound();
   }
+
+  console.log(virtualCourseRequiredData);
+  
 
   return data ? (
     <div className="flex flex-col overflow-hidden gap-7">
@@ -121,7 +123,7 @@ export default async function CourseDetailsPage({ params }) {
           <CourseDescriptionSection data={virtualCourseRequiredData} />
           <CourseOverviewSection
             data={virtualCourseRequiredData}
-            lessons={data.course.lessons}
+            lessons={data.course.sections}
           />
           <ReviewsSection data={virtualCourseRequiredData.reviews} />
 

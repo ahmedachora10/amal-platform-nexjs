@@ -9,22 +9,12 @@ export default function StudentTestPage() {
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
+
     DynamicPagesApi.studentTests().then((tests) => {
       console.log("tests", tests);
       setIsPending(false);
       // setData(tests);
-      setData([
-        {
-          id: 1,
-          name: "Quiz One",
-          course: {
-            id: 3,
-            name: "Abdul Galloway",
-            categoryName: "English",
-          },
-          createdAt: "2024-10-10 14:50",
-        },
-      ]);
+      setData(tests);
     });
   }, []);
 

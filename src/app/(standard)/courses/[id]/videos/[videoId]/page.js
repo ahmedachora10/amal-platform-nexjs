@@ -26,7 +26,7 @@ export default async function CourseVideo({ params: { id, videoId } }) {
 
     const data = await DynamicPagesApi.course(id);
     const course = data?.course;
-    const lessons = course?.lessons;
+    const lessons = course?.sections;
     const lesson = lessons?.find(finder);
 
     if (!currentVideo && !lesson) notFound();

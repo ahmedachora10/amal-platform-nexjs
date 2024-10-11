@@ -44,7 +44,6 @@ export default function Course(props) {
       student_id: user?.id,
     };
 
-    console.log(enrollData, user);
     User.enrollCourse(enrollData).then((res) => {
       setPending(false);
       if (res.status) {

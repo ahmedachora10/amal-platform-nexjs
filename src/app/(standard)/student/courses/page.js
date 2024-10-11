@@ -11,7 +11,8 @@ export default function StudentCoursesPage() {
 
   useEffect(() => {
     DynamicPagesApi.studentCourses().then((courses) => {
-      console.log("courses", courses);
+      console.log(courses);
+      
       setIsPending(false);
       setData(courses);
     });
@@ -19,17 +20,17 @@ export default function StudentCoursesPage() {
 
   return (
     <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-      {data.map((course) => {
-        if (course.course) course = course.course;
+      {data?.map((course) => {
 
         return (
           <Course
             key={course.id}
+            image={course.thumbnail}
             rating={""}
             category={course.category.name}
             title={course.name}
             price={course.price}
-            link={`/courses/${course.id}/details`}
+            link={`/courses/${course.id}`}
             subscriptions={course.subscriptions_count}
             isSubscribed
           />

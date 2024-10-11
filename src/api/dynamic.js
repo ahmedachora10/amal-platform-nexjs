@@ -1,3 +1,4 @@
+import { CSRFHeader } from "@/utils/helpers";
 import { axios } from "./axios";
 
 export default class DynamicPagesApi {
@@ -53,7 +54,7 @@ export default class DynamicPagesApi {
    */
   static async getLessonsDetails(courseId) {
     try {
-      const responseBody = (await axios.get(`/api/lessons/${courseId}/details`))
+      const responseBody = (await axios.get(`/api/sections/${courseId}/details`))
         .data;
       return responseBody?.data || null;
     } catch (err) {
@@ -67,8 +68,8 @@ export default class DynamicPagesApi {
    */
   static async studentCourses() {
     try {
-      const data = await axios.get("/api/student/courses", CSRFHeader());
-      return data.data?.data || [];
+      const data = (await axios.get("/api/student/courses", { headers: CSRFHeader() })).data;
+      return data?.data || [];
     } catch (err) {
       return [];
     }
@@ -88,7 +89,7 @@ export default class DynamicPagesApi {
             quizeId,
             answers: answers,
           },
-          CSRFHeader()
+          { headers: CSRFHeader() }
         )
       ).data;
     } catch (err) {
@@ -98,8 +99,8 @@ export default class DynamicPagesApi {
 
   static async studentTests() {
     try {
-      const data = (await axios.get("/api/student/passed-exams", C)).data;
-      return data || [];
+      const data = (await axios.get("/api/student/passed-exams", { headers: CSRFHeader() })).data;
+      return data?.data || [];
     } catch (err) {
       return [];
     }
