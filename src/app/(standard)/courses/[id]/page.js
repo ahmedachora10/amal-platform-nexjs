@@ -65,7 +65,6 @@ export default async function CourseDetailsPage({ params }) {
   }
 
   console.log(virtualCourseRequiredData);
-  
 
   return data ? (
     <div className="flex flex-col overflow-hidden gap-7">
@@ -123,7 +122,7 @@ export default async function CourseDetailsPage({ params }) {
           <CourseDescriptionSection data={virtualCourseRequiredData} />
           <CourseOverviewSection
             data={virtualCourseRequiredData}
-            lessons={data.course.sections}
+            sections={data.course.sections}
           />
           <ReviewsSection data={virtualCourseRequiredData.reviews} />
 

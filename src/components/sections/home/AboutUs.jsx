@@ -1,8 +1,8 @@
+import TitleWithLine from "@/components/title_with_line";
 import { Button } from "@/components/ui/button";
 import TextWithYelloTrue from "@/components/yellow_true_txt";
-import TitleWithLine from "@/components/title_with_line";
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
 /**
  * 
@@ -11,25 +11,25 @@ import Image from "next/image";
 export default function AboutUs({ data }) {
 
     return (
-        <section className="container lg:mx-auto flex lg:flex-row flex-col-reverse items-center justify-evenly gap-16">
+        <section className="container flex flex-col-reverse items-center gap-16 lg:mx-auto lg:flex-row justify-evenly">
             <div className="">
-                <Image className="max-w-96" src={data.image} alt="" width={480} height={480} />
+                <Image className="max-w-96" src={data?.image} alt="" width={480} height={480} />
             </div>
 
             <div className="flex flex-col lg:max-w-[32.66vw] gap-9">
                 <div className="flex flex-col gap-2">
                     <TitleWithLine title={"About Us"} />
-                    <h1 className="lg:text-[47px] text-[30px]">{data.title}</h1>
-                    <p className="text-[#707070]">{data.description}</p>
+                    <h1 className="lg:text-[47px] text-[30px]">{data?.title}</h1>
+                    <p className="text-[#707070]">{data?.description}</p>
                 </div>
 
-                <div className="grid xl:grid-cols-2 grid-cols-1 gap-4">
-                    {data.properties?.map((prop, i) => (
+                <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+                    {data?.properties?.map((prop, i) => (
                         <TextWithYelloTrue key={i} text={prop} />
                     ))}
                 </div>
 
-                <Button variant="outline" className="w-fit font-bold px-7"><Link href="/about">Read More</Link></Button>
+                <Button variant="outline" className="font-bold w-fit px-7"><Link href="/about">Read More</Link></Button>
             </div>
 
         </section>
