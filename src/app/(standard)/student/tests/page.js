@@ -1,30 +1,35 @@
 "use client";
 
 import DynamicPagesApi from "@/api/dynamic";
+import CourseSkeleton from "@/components/ui/skeletons/course";
+import { CalendarIcon, FileTextIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { CalendarIcon, FileTextIcon } from "lucide-react"; // Assuming you're using lucide-react icons
 
 export default function StudentTestPage() {
   const [data, setData] = useState([]);
   const [isPending, setIsPending] = useState(true);
 
   useEffect(() => {
-
-    DynamicPagesApi.studentTests().then((tests) => {
-      console.log("tests", tests);
-      setIsPending(false);
-      // setData(tests);
-      setData(tests);
-    });
+    if (!data.length) {
+      DynamicPagesApi.studentTests().then((tests) => {
+        setIsPending(false);
+        setData(tests);
+      });
+    }
   }, []);
 
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-xl font-semibold">Your Tests</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2  gap-4">
-        {data.map((quiz) => {
-          return <TestCard key={quiz.id} quiz={quiz} />;
-        })}
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        {isPending
+          ? Array.from({ length: 4 }).map(() => <CourseSkeleton />)
+          : null}
+
+        {!isPending &&
+          data?.map((quiz) => {
+            return <TestCard key={quiz.id} quiz={quiz} />;
+          })}
 
         {!data.length && !isPending ? (
           <h4 className="text-xl text-center">You don't have any tests</h4>
@@ -43,8 +48,8 @@ const TestCard = ({ quiz }) => {
   });
 
   return (
-    <div className="border rounded-lg p-4 w-full flex flex-col gap-2 shadow-sm hover:shadow-md transition-shadow">
-      <h3 className="font-semibold text-lg">{quiz.name}</h3>
+    <div className="flex flex-col w-full gap-2 p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-md">
+      <h3 className="text-lg font-semibold">{quiz.name}</h3>
       <p className="text-sm text-gray-600">
         {quiz.course.categoryName} Language | {quiz.course.name}
       </p>

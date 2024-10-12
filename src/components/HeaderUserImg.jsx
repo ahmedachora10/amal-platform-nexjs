@@ -2,7 +2,6 @@ import useAuth from "@/app/_hook/useAuth";
 import { LogOut } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Button } from "./ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +13,7 @@ import {
 } from "./ui/dropdown-menu";
 
 export default function HeaderUserImg() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
 
   return (
@@ -54,12 +53,11 @@ export default function HeaderUserImg() {
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => {
-                // TODO: logout
-                router.push("/");
+                logout();
               }}
-              className="cursor-pointer"
+              className="text-white cursor-pointer bg-destructive"
             >
-              <LogOut className="w-4 h-4 mr-2" />
+              <LogOut className="w-4 h-4 mr-2 " />
               <span>Logout</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>
