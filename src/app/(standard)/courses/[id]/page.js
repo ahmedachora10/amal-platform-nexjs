@@ -11,47 +11,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 export default async function CourseDetailsPage({ params }) {
-  // const virtualCourseRequiredData = {
-  //     title: "Arabic language | The comprehensive course - Learn modern",
-  //     reviewsDescription: "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab",
-  //     duration: 2, // hours
-  //     lectures: 8,
-  //     enrolled: 20,
-  //     tags: ["Android", "javascript"],
-  //     categories: ["technology"],
-  //     instructor: "Hubert Frank",
-  //     price: 54, // $54
-  //     description: `The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab quick-jived waltz. Brick quiz whangs jumpy veldt fox. Bright vixens jump; dozy fowl quack. Quick wafting zephyrs vex bold Jim. Quick zephyrs blow, vexing daft Jim. Sex-charged fop blew my junk TV quiz. How quickly daft jumping zebras vex. Two driven jocks help fax my big quiz. Quick, Baz, get my woven flax jodhpurs! "Now fax quiz Jack!" my brave ghost pled. Five quacking zephyrs jolt my wax bed. Flummoxed by job, kvetching W. zaps Iraq. Cozy sphinx waves quart jug of bad milk. A very bad quack might jinx zippy fowls. Few quips galvanized the mock jury box. Quick brown dogs jump over the lazy fox. The jay, pig, fox, zebra, and my wolves quack! Blowzy red vixens fight for a quick jump.`,
-  //     overview: `The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz, bad nymph, for quick jigs vex! Fox nymphs grab`,
-  //     img: test2,
-  //     rates: {
-  //         1: 0,
-  //         2: 0,
-  //         3: 0,
-  //         4: 0,
-  //         5: 5
-  //     },
-  //     lessons: [
-  //         { title: "First Hour Lesson 1", link: "/" },
-  //         { title: "First Hour Lesson 2", link: "/" },
-  //         { title: "First Hour Lesson Four", link: "/" },
-  //         { title: "First Hour Quiz", link: "/" }
-  //     ],
-  //     reviews: [
-  //         {
-  //             rate: 4.3, name: "Natasha Fisher",
-  //             text: "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz"
-  //         },
-  //         {
-  //             rate: 4.3, name: "Natasha Fisher",
-  //             text: "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz"
-  //         },
-  //         {
-  //             rate: 4.3, name: "Natasha Fisher",
-  //             text: "The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps. Bawds jog, flick quartz, vex nymphs. Waltz"
-  //         },
-  //     ],
-  // }
+  
   /**
    * @type {{course: import("@/types/static/global").Course, courses: import("@/types/static/global").Course[]}}
    */
@@ -64,8 +24,6 @@ export default async function CourseDetailsPage({ params }) {
     notFound();
   }
 
-  console.log(virtualCourseRequiredData);
-
   return data ? (
     <div className="flex flex-col overflow-hidden gap-7">
       <UserPositionSection
@@ -77,7 +35,7 @@ export default async function CourseDetailsPage({ params }) {
         <div className="hidden grow lg:block"></div>
         <div className="grow-[4] flex flex-col gap-16 max-w-[50vw] mx-auto items-center w-full">
           <h1 className="text-4xl">
-            Arabic language | The comprehensive course - Learn modern
+            {virtualCourseRequiredData?.category?.name} | {virtualCourseRequiredData.name}
           </h1>
 
           <div className="flex flex-col w-full gap-3">
@@ -122,7 +80,7 @@ export default async function CourseDetailsPage({ params }) {
           <CourseDescriptionSection data={virtualCourseRequiredData} />
           <CourseOverviewSection
             data={virtualCourseRequiredData}
-            sections={data.course.sections}
+            sections={data.course?.sections}
           />
           <ReviewsSection data={virtualCourseRequiredData.reviews} />
 

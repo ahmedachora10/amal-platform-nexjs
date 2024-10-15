@@ -13,7 +13,8 @@ export default function QuizQuession({
   correctAnswer = null,
   submitted = false,
   onAnswerSelect,
-}) {
+}) {;
+  
   return (
     <div className="w-full">
       <div className="bg-[#F9F9F9] border border-[#ABB3B7] p-4">
@@ -37,10 +38,11 @@ export default function QuizQuession({
           >
             <Input
               type="radio"
-              name={`quiz_${choose.quiz_id}`}
+              name={`questions[${choose.question_id}]`}
               checked={selectedAnswer === choose.id}
               className="w-[29px]"
               readOnly={submitted} // Disable input after submission
+              onChange={() => false}
             />
             <p>{choose.answer}</p>
           </div>

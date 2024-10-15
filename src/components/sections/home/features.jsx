@@ -1,6 +1,7 @@
 import Feature from "@/components/cards/Feature";
 import TitleWithLine from "@/components/title_with_line";
 import Carousel from "./Carousel";
+import Headline from "@/components/Headline";
 
 /**
  * 
@@ -11,17 +12,11 @@ export default function Features({ data }) {
 
         <section>
             <TitleWithLine title="Features" />
+            <Headline title="Platform Featrues" />
 
-            <div className="lg:hidden">
-                <Carousel slides={Children({ data })}></Carousel>
-            </div>
-
-            <div className="hidden lg:flex">
+            <div className="flex flex-wrap sm:justify-start justify-center">
                 <Children data={data} />
             </div>
-
-
-
         </section>
     )
 }
@@ -31,7 +26,7 @@ export default function Features({ data }) {
  */
 function Children({ data }) {
     return data?.map((value, i) => (
-        <div className="col-3 mx-3 min-w-[300px]" key={i}>
+        <div className="lg:col-3 md:col-4 sm:col-6 col-12 mx-3 lg:min-w-[290px] md:min-w-[300px] sm:min-w-[250px] min-w-[300px]" key={i}>
             <Feature icon={value.image} title={value.name} description={value.description} />
         </div>
     ))

@@ -27,7 +27,7 @@ export default function HeaderUserImg() {
               height={480}
               className="object-cover w-full h-full rounded-full"
               draggable={false}
-              alt=""
+              alt={user.name}
             />
           ) : (
             <p>No User</p>

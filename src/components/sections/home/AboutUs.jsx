@@ -1,3 +1,4 @@
+import Headline from "@/components/Headline";
 import TitleWithLine from "@/components/title_with_line";
 import { Button } from "@/components/ui/button";
 import TextWithYelloTrue from "@/components/yellow_true_txt";
@@ -11,16 +12,16 @@ import Link from "next/link";
 export default function AboutUs({ data }) {
 
     return (
-        <section className="container flex flex-col-reverse items-center gap-16 lg:mx-auto lg:flex-row justify-evenly">
+        <section className="container flex flex-col-reverse items-center gap-3 lg:mx-auto lg:flex-row justify-evenly">
             <div className="">
-                <Image className="max-w-96" src={data?.image} alt="" width={480} height={480} />
+                <Image className="max-w-96" src={data?.image} alt={data.title} width={480} height={490} style={{'height' : '500px'}} />
             </div>
 
             <div className="flex flex-col lg:max-w-[32.66vw] gap-9">
                 <div className="flex flex-col gap-2">
                     <TitleWithLine title={"About Us"} />
-                    <h1 className="lg:text-[47px] text-[30px]">{data?.title}</h1>
-                    <p className="text-[#707070]">{data?.description}</p>
+                    <Headline title={data.title} />
+                    <p className="text-[#707070] mt-3 text-md">{data?.description}</p>
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">

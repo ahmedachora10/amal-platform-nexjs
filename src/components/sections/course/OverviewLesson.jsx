@@ -12,6 +12,7 @@ import CourseLessonVideoUnit from "./CourseLessonVideoUnit";
 export default function OverviewLesson({ hiddenByDefault, section, courseId , isSubscribed}) {
   const [hidden, setHidden] = useState(hiddenByDefault);
   const [duration, setDuration] = useState(0);
+  const [sectionDuration, setSectionDuration] = useState(0);
   return (
     <div className="flex flex-col justify-between w-full">
       <div className="flex grow">
@@ -31,47 +32,52 @@ export default function OverviewLesson({ hiddenByDefault, section, courseId , is
 
           <div className="flex items-center gap-2 text-sm">
             <Clock9Icon className="text-xs" />
-            <p>{duration.toFixed(2)} min</p>
+            <p>{sectionDuration.toFixed(2)} min</p>
           </div>
         </div>
       </div>
 
       <div className={"flex-col " + (hidden ? "hidden" : "flex")}>
         <hr />
-        {section?.videos.map((video) =>
+
+        {section?.videos.map((video, index) =>
           section?.videos.length ? (
             <CourseLessonVideoUnit
               key={video.id}
               video={video}
               courseId={courseId}
-              onDuration={(videoDuration) =>
-                setDuration(duration + videoDuration / 60)
+              onDuration={(videoDuration) => {
+                setDuration(duration + videoDuration / 60);
+
+                if (index == 0)
+                  setSectionDuration(0);
+                setSectionDuration(prev => prev + (videoDuration / 60));
               }
-              isSubscribed
+              }
+              isSubscribed={isSubscribed}
             />
           ) : (
-            <h3 className="block p-4 text-destructive">No Videos</h3>
+            <h3 key={video.id} className="block p-4 text-destructive">No Videos</h3>
           )
         )}
 
         {section?.quizzes?.map((quize) => {
-          console.log("cscscscsc", `/courses/${courseId}/quizes/${quize.id}`);
-          if (quize.questions_count === 0)
-            return <h3 className="block p-4 text-destructive">No Quizes</h3>;
-          return (
-            <React.Fragment key={quize.id}>
-              <CourseLessonUnit
-                name={quize.name}
-                icon="quession"
-                icon2="none"
-                unit={quize.questions_count || 0}
-                unitName="Quessions"
-                url={`/courses/${courseId}/quizes/${quize.id}`}
-                isSubscribed
-              />
-              <hr />
-            </React.Fragment>
-          );
+          if (quize.questions_count !== 0)
+            return (
+              <React.Fragment key={quize.id}>
+                <CourseLessonUnit
+                  key={quize.id}
+                  name={quize.name}
+                  icon="quession"
+                  icon2="none"
+                  unit={quize.questions_count || 0}
+                  unitName="Quessions"
+                  url={isSubscribed ? `/courses/${courseId}/quizes/${quize.id}` : ''}
+                  isSubscribed={isSubscribed}
+                />
+                <hr />
+              </React.Fragment>
+            );
         })}
       </div>
     </div>

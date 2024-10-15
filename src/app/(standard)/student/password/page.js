@@ -5,6 +5,7 @@ import FormError from "@/components/FormError";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function PasswordResetPage() {
     const { changePassword } = useAuth();
@@ -23,8 +24,10 @@ export default function PasswordResetPage() {
             confirmPassword = formdata.get("password_confirmation");
 
         if (newPassword !== confirmPassword) return setErr("Passwords do not match");
-        changePassword(oldPassword, newPassword, confirmPassword).then(value => {
-            if (!value.status) return setErr(value.message || "unknown error");
+        changePassword(oldPassword, newPassword, confirmPassword).then(res => {
+            if (res.errors) return Object.values(res.errors).forEach(err => toast.error(err || 'Something went wrong!', {className: "bg-red-500 text-white" }));
+
+            if (!res.status) return toast.error(res.message || 'Something went wrong!', {variant: "destructive"});
             router.replace("/student/profile");
         });
 

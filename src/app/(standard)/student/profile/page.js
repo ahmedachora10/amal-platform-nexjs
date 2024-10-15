@@ -24,7 +24,7 @@ export default function Profile() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogOpenImage, setDialogOpenImage] = useState(false);
   const updateFormRef = useRef();
-  const { user, changeInfo } = useAuth();
+  const { user, changeInfo, changeImage } = useAuth();
 
   /**
    *
@@ -42,7 +42,7 @@ export default function Profile() {
     setDialogOpen(false);
   };
   const onChangeImage = (formdata) => {
-    changeInfo(formdata.get("image") || user.image).then((data) => {
+    changeImage(formdata.get("image") || null).then((data) => {
       toast.success(data?.message || "Updated Successfully");
       setIsUpdatingImage(false);
     });
@@ -54,10 +54,10 @@ export default function Profile() {
       <div>
         <h3 className="mb-5 font-bold text-blue-950">My Profile</h3>
         <div className="grid items-center grid-cols-6 border-2 rounded">
-          <div className="col-span-5">
+          <div className="lg:col-span-5 col-span-4">
             <div className="flex items-center p-6">
               <Image
-                src={icon}
+                src={user?.image}
                 width={80}
                 alt="test"
                 height={80}
@@ -73,7 +73,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="lg:col-span-1 col-span-2 flex justify-end me-6">
             <Dialog open={dialogOpenImage}>
               <DialogTrigger asChild>
                 <Button
@@ -82,7 +82,7 @@ export default function Profile() {
                   onClick={() => setDialogOpenImage(true)}
                 >
                   <Pencil size={15} />
-                  <span>Edit Image</span>
+                  <span className="md:block hidden">Edit Image</span>
                 </Button>
               </DialogTrigger>
               <DialogContent
@@ -136,7 +136,7 @@ export default function Profile() {
               <div className="col-6 me-6">
                 <span className="block text-sm text-gray-500">First Name</span>
                 <span className="block mb-4 font-bold text-md">
-                  {user.name.slice(0, user.name.indexOf(" "))}
+                  {user?.name?.slice(0, user?.name?.indexOf(" "))}
                 </span>
                 <span className="block text-sm text-gray-500">Email</span>
                 <span className="block mb-4 font-bold text-md">
@@ -146,7 +146,7 @@ export default function Profile() {
               <div className="col-6">
                 <span className="block text-sm text-gray-500">Last Name</span>
                 <span className="block mb-4 font-bold text-md">
-                  {user.name.slice(user.name.indexOf(" "))}
+                  {user?.name?.slice(user?.name?.indexOf(" "))}
                 </span>
                 <span className="block text-sm text-gray-500">Phone No.</span>
                 <span className="block mb-4 font-bold text-md">
@@ -155,16 +155,16 @@ export default function Profile() {
               </div>
             </div>
           </div>
-          <div className="col-span-1">
+          <div className="col-span-1 flex justify-end">
             <Dialog open={dialogOpen}>
               <DialogTrigger asChild>
                 <Button
                   variant="outline"
-                  className="grid grid-cols-2 border rounded-full"
+                  className="grid md:grid-cols-2 border rounded-full"
                   onClick={() => setDialogOpen(true)}
                 >
                   <Pencil size={15} />
-                  <span>Edit</span>
+                  <span className="md:block hidden">Edit</span>
                 </Button>
               </DialogTrigger>
               <DialogContent

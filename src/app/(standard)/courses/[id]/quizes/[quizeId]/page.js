@@ -27,12 +27,10 @@ export default async function CourseQuiz({ params: { id, quizeId } }) {
   if (!lessons || !course) notFound();
 
   const foundQuiz = lessons.find(finder);
-  console.log("currentQuize", currentQuize);
-  // if (!currentQuize) notFound();
 
   if (!foundQuiz || !currentQuize)
     return (
-      <main className="flex mx-4 md:container gap-7 mt-7 md:mx-auto">
+  <main className="flex mx-4 md:container gap-7 mt-7 md:mx-auto">
         No Quiz Found
       </main>
     );
@@ -46,7 +44,7 @@ export default async function CourseQuiz({ params: { id, quizeId } }) {
         </div>
 
         <div className="w-full">
-          <LessonsSidebarOpenBoxes lessons={lessons} course={course} />
+          <LessonsSidebarOpenBoxes sections={lessons} course={course} />
         </div>
       </div>
 

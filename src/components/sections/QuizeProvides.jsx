@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import QuizQuession from "./QuizQuession";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
@@ -9,8 +9,11 @@ import DynamicPagesApi from "@/api/dynamic";
 const QuizeProvides = ({ currentQuize }) => {
   const [answersForm, setAnswersForm] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const [quiz, setQuiz] = useState({});
+
   const handleAnswerSelection = (quizId, answerId) => {
     setAnswersForm((prev) => ({
       ...prev,
@@ -18,31 +21,40 @@ const QuizeProvides = ({ currentQuize }) => {
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
+  useEffect(() => {
+    const getQuiz = async () => (await DynamicPagesApi.checkQuiz(currentQuize.id)).data;
+    getQuiz().then((res) => {
+      setQuiz(res);
+      if (res.status) {
+        setAnswersForm(res.answers);
+        setSubmitted(true);
+        setScore(res.result);
+      }
+    });
+  }, [currentQuize]);
 
-    let correctAnswers = 0;
-    const answers = [];
-    console.log("answersForm", answersForm);
-
-    // Evaluate the answers and prepare the payload
+  const getCorrectAnswers = () => {
     currentQuize.questions.forEach((question) => {
       const selectedAnswer = answersForm[question.id];
       if (selectedAnswer === question.correctAnswerId) {
         correctAnswers++;
       }
-      answers.push({
-        questionId: question.id,
-        selectedAnswer,
-      });
     });
+  }
 
-    setScore(correctAnswers);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-    // Send the data to the API
+    let correctAnswers = 0;
+
+    // Evaluate the answers and prepare the payload
+    getCorrectAnswers();
+  
+    setScore(`${correctAnswers} / ${currentQuize?.quessions?.length}`);
+
     try {
-      await DynamicPagesApi.studentPassTheTest(currentQuize.id, answers).then(
+      await DynamicPagesApi.studentPassTheTest(currentQuize.id, answersForm).then(
         (res) => {
           setSubmitted(true);
           toast.success(res?.message || "Submission successful.");
@@ -74,16 +86,16 @@ const QuizeProvides = ({ currentQuize }) => {
       {submitted ? (
         <div className="flex justify-between items-center">
           <p className="text-lg font-bold">
-            {score}/{currentQuize.questions.length}
+            {score}
           </p>
           <Button
             className="w-fit px-16"
-            onClick={() => {
-              setAnswersForm({});
-              setSubmitted(false);
-              setScore(0);
-              alert("Quiz Ended");
-            }}
+            // onClick={() => {
+            //   setAnswersForm({});
+            //   setSubmitted(false);
+            //   setScore(0);
+            //   alert("Quiz Ended");
+            // }}
           >
             End
           </Button>

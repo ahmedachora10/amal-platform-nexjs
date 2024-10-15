@@ -45,9 +45,9 @@ export default async function CourseVideo({ params: { id, videoId } }) {
 
       <div className="grow-[4] flex flex-col gap-11">
         {currentVideo?.video ? (
-          <VideoPlayer src={lesson?.videos.video} poster={course.thumbnail} />
+          <VideoPlayer src={lesson?.videos[0]?.video} poster={course.thumbnail} />
         ) : (
-          <Image src={test3} />
+          <Image src={test3} alt="image" />
         )}
 
         <TextSection

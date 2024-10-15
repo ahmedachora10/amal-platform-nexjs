@@ -14,18 +14,14 @@ export default function CourseFeatures(features) {
   const [pending, setPending] = useState(false);
 
   const enrollCourse = () => {
+    if (!user) router().push('/login');
     setPending(true);
     User.enrollCourse({
       course_id: features.courseId,
-      price: features.price,
+      price: features.price.toFixed(2),
       student_id: user?.id,
     }).then((result) => {
       setPending(false);
-      if (result?.status) {
-        toast.success(result?.message || "Your Request has been sent");
-      } else {
-        toast.error(result?.message || "Failed To Enroll Course");
-      }
     });
   };
 

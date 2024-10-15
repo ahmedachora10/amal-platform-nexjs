@@ -7,19 +7,17 @@ import LessonVideoSidebarOpenBox from "./LessonVideoSidebarOpenBox";
  * @param {{sections: import("@/types/static/global").Lesson[], course: import("@/types/static/global").Course}} param0
  */
 export default function LessonsSidebarOpenBoxes({ sections = [], course }) {
-  console.log("course.id", course.id);
-
   return (
     <>
       {sections?.map((section) =>
-        section?.videos?.length ? (
-          <OpenBox title={section.name} openClassName="n" key={section.id}>
+          (<OpenBox title={section.name} openClassName="n" key={section.id}>
             {section.videos.map((video) => (
-              <LessonVideoSidebarOpenBox video={video} courseId={course.id} />
+              <LessonVideoSidebarOpenBox video={video} courseId={course.id} key={video.id} />
             ))}
             <div className="py-4 divide-x" />
             {section?.quizzes.map((quize) => (
               <LessonQuizBox
+                key={quize.id}
                 noProgress
                 title={quize.name}
                 unitName={"Q"}
@@ -32,8 +30,7 @@ export default function LessonsSidebarOpenBoxes({ sections = [], course }) {
               />
             ))}
           </OpenBox>
-        ) : null
-      )}
+      ))}
     </>
   );
 }

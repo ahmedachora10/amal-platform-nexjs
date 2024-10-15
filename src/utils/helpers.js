@@ -20,6 +20,7 @@ export function getCookie(name) {
 export function CSRFHeader() {
     return {
         'X-CSRF-TOKEN': getCookie('XSRF-TOKEN'),
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        // 'Accept': 'application/json'
     }
 }

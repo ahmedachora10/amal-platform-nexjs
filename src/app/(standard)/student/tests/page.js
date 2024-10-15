@@ -21,7 +21,7 @@ export default function StudentTestPage() {
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-xl font-semibold">Your Tests</h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {isPending
           ? Array.from({ length: 4 }).map(() => <CourseSkeleton />)
           : null}

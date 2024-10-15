@@ -4,6 +4,7 @@ import DynamicPagesApi from "@/api/dynamic";
 import CourseSkeleton from "@/components/ui/skeletons/course";
 import { CalendarIcon, FileTextIcon } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function StudentCoursesPage() {
@@ -21,12 +22,12 @@ export default function StudentCoursesPage() {
   return (
     <div className="flex flex-col gap-4">
       <h3 className="text-xl font-semibold">Your Courses</h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {isPending
-          ? Array.from({ length: 4 }).map(() => <CourseSkeleton />)
+          ? Array.from({ length: 4 }).map((value,index) => <CourseSkeleton key={index} />)
           : null}
         {!isPending &&
-          data?.map((course) => <CourseCard key={course.id} course={course} />)}
+          data?.map((course) => <CourseCard key={course.id + Math.random()} course={course} />)}
 
         {!data?.length && !isPending ? (
           <h4 className="text-xl text-center">You don't have any tests</h4>
@@ -37,36 +38,26 @@ export default function StudentCoursesPage() {
 }
 
 const CourseCard = ({ course }) => {
-  // NOTE
-  //  course?.createdAt Not in API
-  // NOTE
-  // const courseDate = new Date(course?.createdAt).toLocaleDateString("en-US", {
-  //   weekday: "short",
-  //   month: "numeric",
-  //   day: "numeric",
-  //   year: "numeric",
-  // });
-  const courseDate = "Thu, 10/10/2024";
-
   return (
-    <div className="flex w-full gap-2 p-4 transition-shadow border rounded-lg shadow-sm hover:shadow-md">
+    <Link href={`/courses/${course.id}`} className="flex w-full gap-2 p-2 transition-shadow border rounded-lg shadow-sm hover:shadow-md">
       <div className="flex gap-4">
         <Image
-          width={60}
-          height={60}
+          width={70}
+          height={70}
+          style={{'height': '70px'}}
           src={course?.thumbnail}
           className="bg-cover"
-          alt="Course Image"
+          alt={course.name}
           loading="lazy"
         />
-        <div className="flex flex-col justify-between">
-          <p className="text-sm text-gray-600">
-            {course?.category?.name} Language | {course?.name}
+        <div className="flex flex-col justify-start py-2">
+          <p className="text-sm text-gray-900 font-bold">
+            {course?.category?.name} | {course?.name}
           </p>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-sm text-gray-500">
+          <div className="flex items-center justify-start mt-3">
+            <div className="flex items-center gap-2 text-sm text-gray-500 me-5">
               <CalendarIcon size={16} />
-              <span>{courseDate}</span>
+              <span>{course.createdAt}</span>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-gray-500">
@@ -76,6 +67,6 @@ const CourseCard = ({ course }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

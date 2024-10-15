@@ -26,6 +26,11 @@ export interface VideoAttachment {
     url: string;
 }
 
+export interface Setting {
+    name: string;
+    value: string;
+}
+
 export interface Video {
     id: number;
     description: string;

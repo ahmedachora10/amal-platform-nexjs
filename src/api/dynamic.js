@@ -1,4 +1,4 @@
-import { CSRFHeader } from "@/utils/helpers";
+import { CSRFHeader, getCookie } from "@/utils/helpers";
 import { axios } from "./axios";
 
 export default class DynamicPagesApi {
@@ -40,9 +40,6 @@ export default class DynamicPagesApi {
     try {
       return (await axios.get(`/api/courses/${id}/details`)).data;
     } catch (Err) {
-      console.log("error while get a course data with course id");
-      console.log("course id was:", id);
-      console.log("error was:", Err);
       return null;
     }
   }
@@ -86,8 +83,8 @@ export default class DynamicPagesApi {
         await axios.post(
           `/api/student/pass-the-test`,
           {
-            quizeId,
-            answers: answers,
+            'quiz_id' :quizeId,
+            questions : answers
           },
           { headers: CSRFHeader() }
         )
@@ -102,6 +99,16 @@ export default class DynamicPagesApi {
       const data = (await axios.get("/api/student/passed-exams", { headers: CSRFHeader() })).data;
       return data?.data || [];
     } catch (err) {
+      return [];
+    }
+  }
+  static async checkQuiz(quizId) {
+    try {
+      const data = await axios.get(`/api/student/test-result/${quizId}`, { headers: CSRFHeader() });
+      return data || [];
+    } catch (err) {
+      console.log(err);
+      
       return [];
     }
   }

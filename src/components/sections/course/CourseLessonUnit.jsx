@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
  * @param {{icon: "file" | "quession",icon2: "time" | "none", name: string, unit: number, unitName: string}} param0 
  * @returns 
  */
-export default function CourseLessonUnit({ icon = "file", icon2 = "time", name = "", unit = 0, unitName = "min", url = "" }) {
+export default function CourseLessonUnit({ icon = "file", icon2 = "time", name = "", unit = 0, unitName = "min", url = "", isSubscribed = false }) {
     const router = useRouter();
     return (
         <div className="text-sm flex gap-3 items-center justify-between grow p-4">

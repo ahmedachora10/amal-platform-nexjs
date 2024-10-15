@@ -10,11 +10,13 @@ import { useSearchParams } from "next/navigation";
 import { getCourses } from "@/app/_actions/getCourses";
 import Modal from "@/components/Modal";
 import CourseSkeleton from "@/components/ui/skeletons/course";
+import useAuth from "@/app/_hook/useAuth";
 
 export default function CoursesPage() {
     const [filterOpen, setFilterOpen] = useState(false);
     const params = useSearchParams();
     const [pending, setPending] = useState(true);
+    const { isStudentSubscripted } = useAuth();
     /**
      * @type {import("@/types/CourseFilter").CourseFilter}
      */
@@ -91,15 +93,15 @@ export default function CoursesPage() {
                     <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
                         {courses?.map((course, index) => (
                             <div className="p-4 mx-auto" key={index}>
-                                <Course isSubscribed={course.isSubscribed} title={course.name} category={course.category.name} image={icon} subscriptions={3} link={`/courses/${course.id}`} price={course.price} rating={4.4} courseId={course.id} />
+                                <Course isSubscribed={isStudentSubscripted(course.id)} title={course.name} category={course.category.name} image={icon} subscriptions={3} link={`/courses/${course.id}`} price={course.price} rating={4.4} courseId={course.id} />
                             </div>
                         ))}
 
                         {
                             (courses.length === 0 && pending) ? (
                                 <>
-                                    {Array.from({ length: 9 }).map(() => (
-                                        <CourseSkeleton />
+                                    {Array.from({ length: 9 }).map((index) => (
+                                        <CourseSkeleton key={index} />
                                     ))}
                                 </>
                             ) : null

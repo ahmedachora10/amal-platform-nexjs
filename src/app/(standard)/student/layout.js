@@ -19,13 +19,13 @@ export default function StudentLayout({ children }) {
         disableTransitionOnChange
       >
         <div className="container mx-auto bg-white mt-[4rem] pb-[4rem]">
-          <div className="grid grid-cols-4">
-            <div className="col-span-1">
-              <div className="m-6 border-r-2 border-gray-200">
+          <div className="grid grid-cols-8">
+            <div className="lg:col-span-2 md:col-span-3 col-span-full">
+              <div className="m-6 md:border-r-2 md:border-b-0 border-b-4 border-gray-200">
                 <StudentLinks />
               </div>
             </div>
-            <div className="col-span-3">
+            <div className="lg:col-span-6 md:col-span-5 col-span-full">
               <div className="m-6">
                 {children}
               </div>

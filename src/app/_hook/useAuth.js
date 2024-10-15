@@ -19,19 +19,7 @@ export default function useAuth() {
   };
 
   return {
-    user: {
-      id: 5,
-      name: "user name",
-      email: "user email",
-      phone: "user phone",
-      emailVerifiedAt: new Date(),
-      role: "Student",
-      isBlocked: false,
-      image:
-        "https://www.shutterstock.com/shutterstock/photos/1883859943/display_1500/stock-photo-the-word-example-is-written-on-a-magnifying-glass-on-a-yellow-background-1883859943.jpg",
-    },
-    // TODO:
-    // user: data,
+    user: data,
     login: async (username, password) => {
       const result = await User.login(username, password);
       if (result.status) {
@@ -49,5 +37,6 @@ export default function useAuth() {
     changeImage,
     changePassword: User.changePassword,
     isLoading,
+    isStudentSubscripted : (courseId) => data?.subscriptions?.find(id => id === courseId) !== undefined || false,
   };
 }

@@ -59,23 +59,18 @@ export class StaticPagesApi {
             return (await axios.get("/api/levels")).data?.data || []
         }
         catch (err) {
-            console.error("error while trying to fetch levels");
-            console.error("error was:", err);
             return [];
         }
-        // return [
-        //     {
-        //         id: 1,
-        //         name: "Biggener",
-        //     },
-        //     {
-        //         id: 2,
-        //         name: "Intermediate",
-        //     },
-        //     {
-        //         id: 3,
-        //         name: "Advanced",
-        //     },
-        // ]
+    }
+    /**
+     * @returns {Promise<import("@/types/static/global").Setting[]>}
+     */
+    static async getSettings() {
+        try {
+            return (await axios.get("/api/settings")).data?.data || []
+        }
+        catch (err) {
+            return [];
+        }
     }
 }

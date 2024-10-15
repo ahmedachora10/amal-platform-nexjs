@@ -36,6 +36,7 @@ export default function Course(props) {
   } = course;
 
   const enrollCourse = () => {
+    if (!user) router().push('/login');
     setPending(true);
 
     const enrollData = {
@@ -46,11 +47,6 @@ export default function Course(props) {
 
     User.enrollCourse(enrollData).then((res) => {
       setPending(false);
-      if (res.status) {
-        toast.success(res?.message || "your request has been sent");
-      } else {
-        toast.error(res?.message || "Failed To Enroll Course");
-      }
     });
   };
 

@@ -1,6 +1,7 @@
 import { CSRFHeader, getCookie } from "@/utils/helpers";
-import FormData from "form-data";
+import FormData, { from } from "form-data";
 import { axios } from "./axios";
+import { toast } from "sonner";
 
 export class User {
   /**
@@ -22,7 +23,6 @@ export class User {
         await axios.post("/login", formData, {
           headers: {
             "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
-            // 'Referer': 'http://localhost:3000'
           },
         })
       ).data;
@@ -43,7 +43,8 @@ export class User {
   static async logout() {
     try {
       localStorage.removeItem("token");
-      return await axios.post("/logout", { headers: CSRFHeader() });
+      const response = await axios.post("/logout", { headers: CSRFHeader() });
+      return response;
     } catch (err) {
       return null;
     }
@@ -79,9 +80,8 @@ export class User {
     if (!image) return;
     const formData = new FormData();
     formData.append("image", image);
-    // TODO: API IMAGE
     return (
-      await axios.post("/api/student/change-image", formData, {
+      await axios.post("/api/student/avatar", formData, {
         headers: CSRFHeader(),
       })
     ).data;
@@ -110,11 +110,10 @@ export class User {
         })
       ).data;
     } catch (err) {
-      console.log("An Error Occured When Trying to change the password");
-      console.log(err);
+      const response = err.response?.data;
       return {
-        message:
-          "there is unknown problem with this change password method, please try again",
+        message: response.message,
+        errors: response.errors,
         status: false,
       };
     }
@@ -133,9 +132,13 @@ export class User {
       formData.append("password_confirmation", data.password_confirmation);
       formData.append("name", data.name);
       formData.append("phone", data.phone);
-
+      
       return (
-        await axios.post("/register", formData, { headers: CSRFHeader() })
+        await axios.post("/register", formData, {
+          headers: {
+            "X-XSRF-TOKEN": getCookie("XSRF-TOKEN"),
+          },
+        })
       ).data;
     } catch (err) {
       console.log("An unknown error occured when trying to register new user");
@@ -175,15 +178,25 @@ export class User {
     formdata.append("price", data.price);
 
     try {
-      return (
+
+      const response = (
         await axios.post("/api/student/enroll", formdata, {
           headers: CSRFHeader(),
         })
       ).data;
+
+      if (response.status?.name == null) {
+        toast.success('please wait, your request in review');
+      } else if (response.status?.name == 'Pending') {
+        toast.warning('please wait, your request in review');
+        
+      } else {
+        toast.error("Failed To Enroll Course");
+      }
+      
+      return response;
     } catch (err) {
-      console.log("error while enrolling the course");
-      console.log("data was:", data);
-      console.log("error was:", err);
+      toast.error("Something went wrong");
       return {
         status: false,
         message: "Failed To Enroll Course",
