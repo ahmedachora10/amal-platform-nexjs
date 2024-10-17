@@ -62,9 +62,17 @@ export default async function Home() {
 
 
         <section className="bg-[#EBF3FF] p-7 flex flex-col gap-4">
-          <div className="flex justify-between">
-            {/* <h1 className="text-3xl font-bold"></h1> */}
+          <div className="flex justify-between mb-4">
             <Headline title="Our Top Online Courses" />
+            <ViewAllCoursesButton />
+          </div>
+
+          <Courses data={data.topOfListCourses || []} />
+        </section>
+        
+        <section className="p-7 flex flex-col gap-4">
+          <div className="flex justify-between mb-4">
+            <Headline title="Best selling courses" />
             <ViewAllCoursesButton />
           </div>
 

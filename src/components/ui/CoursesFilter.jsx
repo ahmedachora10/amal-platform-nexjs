@@ -29,7 +29,8 @@ export default function CoursesFilter({ onChange }) {
     const defaultFilter = {
         categoryId: params.get("categoryId"),
         levelId: params.get("level") || levels[0],
-        search: params.get("search") || ""
+        search: params.get("search") || "",
+        page: params.get('page') || null
     }
 
 
@@ -55,10 +56,12 @@ export default function CoursesFilter({ onChange }) {
         if (filterData.categoryId) newParams.set("categoryId", filterData.categoryId);
         if (filterData.search) newParams.set("search", filterData.search);
         if (filterData.levelId) newParams.set("levelId", filterData.levelId);
+        if (filterData.page) newParams.set("page", filterData.page);
 
         if (!filterData.categoryId) newParams.delete("categoryId");
         if (!filterData.search) newParams.delete("search");
         if (!filterData.levelId) newParams.delete("levelId");
+        if (!filterData.page) newParams.delete("page");
 
         replace(`${pathname}?${newParams}`)
     }, [filterData]);
@@ -75,17 +78,17 @@ export default function CoursesFilter({ onChange }) {
     return (
         <div className="sticky h-fit top-0 left-0 w-full p-7 border border-[#F0F4F9] flex flex-col gap-8">
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
-                <h1 className="text-3xl">Search</h1>
+                <h1 className="text-xl">Search</h1>
                 <div className="flex gap-3 items-center justify-center h-11">
-                    <Input placeholder="Search Here  ..." className="h-full" value={filterData.search} onChange={(e) => setFilterData({ ...filterData, search: e.target.value })} />
+                    <Input placeholder="Search Here  ..." className="h-full px-4 py-2 text-sm" value={filterData.search} onChange={(e) => setFilterData({ ...filterData, search: e.target.value })} />
                     <div className="bg-[#0D45C5] p-3 rounded-md text-white cursor-pointer hover:bg-[#4d74ce] transition-colors"><Search /></div>
                 </div>
             </section>
 
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
-                <h1 className="text-3xl">Category</h1>
+                <h1 className="text-xl">Category</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
-                    <select value={filterData.categoryId || null} className="w-full p-4 border-[#F0F4F9] border-2" onChange={e => changeCategory(e.target.value)}>
+                    <select value={filterData.categoryId || null} className="w-full px-4 py-2 text-sm border-[#F0F4F9] border-2" onChange={e => changeCategory(e.target.value)}>
                         {
                             categories.map(category => (
                                 <option key={category.id} value={category.id} title={category.description}>{category.name}</option>
@@ -102,10 +105,10 @@ export default function CoursesFilter({ onChange }) {
             </section>
 
             <section className="flex flex-col gap-4 [&_input]:min-h-11">
-                <h1 className="text-3xl">Level</h1>
+                <h1 className="text-xl">Level</h1>
                 <div className="flex flex-col gap-3 items-center justify-center">
                     {levels.map((level) => (
-                        <div key={level.id} onClick={() => setFilterData({ ...filterData, levelId: level.id })} className={"w-full p-4 border-2 hover:shadow-md transition-all cursor-help " + (level.id == filterData.levelId ? "border-sky-600" : "border-[#F0F4F9]")}>{level.name}</div>
+                        <div key={level.id} onClick={() => setFilterData({ ...filterData, levelId: level.id })} className={"w-full px-4 py-2 text-sm border-2 hover:shadow-md transition-all cursor-help " + (level.id == filterData.levelId ? "border-sky-600" : "border-[#F0F4F9]")}>{level.name}</div>
                     ))}
                 </div>
             </section>

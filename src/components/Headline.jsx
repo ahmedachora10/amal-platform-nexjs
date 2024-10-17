@@ -4,7 +4,7 @@ export default function Headline({ title = '', subTitle = '' }) {
     return (
         <div>
             <span className="text-black-300 text-md font-medium">{subTitle}</span>
-            <h1 className="text-3xl text-black-800 font-extrabold mt-3">{title}</h1>
+            <h1 className="text-3xl text-black-800 font-extrabold">{title}</h1>
         </div>
     );
 }

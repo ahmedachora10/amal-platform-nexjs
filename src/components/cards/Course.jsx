@@ -36,7 +36,7 @@ export default function Course(props) {
   } = course;
 
   const enrollCourse = () => {
-    if (!user) router().push('/login');
+    if (!user) router.push('/login');
     setPending(true);
 
     const enrollData = {

@@ -6,7 +6,7 @@ export default function MainLinks({ noContainer = false }) {
         noContainer ? (
             <Links />
         ) : (
-            <ul className={"flex items-center justify-center"}>
+            <ul className={"hidden md:flex items-center justify-center"}>
                 <Links />
             </ul>
         )

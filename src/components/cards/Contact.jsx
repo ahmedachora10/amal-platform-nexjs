@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Contact({logo, description}) {
     return (
-        <div className={"p-7 shadow bg-white border-t-[5px] border-[#010B1F] flex flex-col gap-7 justify-center lg:max-w-[19.27vw] min-w-96"}>
+        <div className={"p-7 shadow bg-white border-t-[5px] border-[#010B1F] flex flex-col gap-7 justify-center w-full md:max-w-[300px]"}>
             <div className="text-center text-lg flex flex-col justify-center items-center gap-1">
                 <Image src={logo} alt="logo" width={70} height={70} />
             </div>

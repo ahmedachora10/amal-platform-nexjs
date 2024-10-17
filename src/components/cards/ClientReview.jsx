@@ -10,7 +10,7 @@ export default function ClientReview({
   profession = ''
 }) {
   return (
-    <div className="bg-white p-[3rem] col-span-3 drop-shadow-lg rounded-md">
+    <div className="bg-white p-[3rem] drop-shadow-lg rounded-md">
       <div className="grid grid-cols-6 items-center">
         <div className="col-span-1">
           <Image src={image} width={60} height={60} style={{'height': '60px'}} alt='image' className="rounded-full drop-shadow-md" />
