@@ -30,7 +30,7 @@ export default function StudentCoursesPage() {
           data?.map((course) => <CourseCard key={course.id + Math.random()} course={course} />)}
 
         {!data?.length && !isPending ? (
-          <h4 className="text-xl text-center">You don't have any tests</h4>
+          <h4 className="text-xl text-center">You don't have any courses</h4>
         ) : undefined}
       </div>
     </div>

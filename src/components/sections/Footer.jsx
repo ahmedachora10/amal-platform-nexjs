@@ -5,7 +5,7 @@ import FooterGroup from "../ui/footer_group";
 import IconCover from "../ui/icon_cover";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { StaticPagesApi } from "@/api/static";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
   const { settings } = useSettings();
@@ -14,7 +14,11 @@ export default function Footer() {
     description: settings("app_description"),
   };
   const [categories, setCategories] = useState([]);
-  StaticPagesApi.getCategories().then((res) => setCategories(res));
+
+  useEffect(() => {
+        StaticPagesApi.getCategories().then(setCategories);
+  }, []);
+
   return (
     <footer className="px-4 sm:py-[3rem] mt-52 bg-blue-50">
       <div className="container mx-auto">
