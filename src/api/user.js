@@ -210,6 +210,25 @@ export class User {
     formdata.append("email", data.email);
     formdata.append("message", data.message);
     formdata.append("phone", data.phone);
-    return (await axios.post("/api/contact-us", formdata)).data;
+    
+    try {
+      const response = (await axios.post("/api/contact-us", formdata)).data;
+
+      console.log('contact response', response);
+
+      if (!response.status)
+        return toast.error(response.message);
+
+      toast.success(response.message);
+
+      return response;
+    } catch (e) {
+      const errors = e.response.data.errors;
+      for (let key in errors) {
+        const message = errors[key][0];
+        toast.error(message)
+      }
+      return false;
+    }
   }
 }

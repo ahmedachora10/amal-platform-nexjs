@@ -9,6 +9,7 @@ import TitleWithLine from "@/components/title_with_line";
 import { User } from "@/api/user";
 import { useState } from "react";
 import FormError from "@/components/FormError";
+import { toast } from "sonner";
 
 export default function ContactPage() {
     const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +20,9 @@ export default function ContactPage() {
     const contact = (e) => {
         setIsLoading(true);
         e.preventDefault();
-        console.log("Contact form submitted");
-        const formData = new FormData(e.target);
+        console.log(e.target);
+        const formElement = e.target;
+        const formData = new FormData(formElement);
         const
             name = formData.get("name"),
             phone = formData.get("phone"),
@@ -32,13 +34,11 @@ export default function ContactPage() {
          * @type {import("@/types/static/contact").ContactTeamData}
          */
         const contactInfo = { name, phone, email, subject, message };
-        console.log("contact info:", contactInfo);
 
         User.contactTeam(contactInfo).then((result) => {
             setIsLoading(false);
-            if (!result.status) {
-                setErr(result.message);
-            }
+
+            if(result.status) return formElement.reset();
         })
     }
 

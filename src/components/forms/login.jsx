@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 export default function LoginForm() {
     const [err, setErr] = useState("");
-    const { login } = useAuth();
+    const { login, csrf } = useAuth();
     const router = useRouter();
 
     /**

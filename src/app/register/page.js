@@ -29,6 +29,8 @@ export default function Register() {
         if (!password) return setErr("password is required");
         if (password !== passwordConfirmation) return setErr("password not match password confirmation");
 
+        await User.csrf();
+
         const res = await User.register({
             name,
             email,
